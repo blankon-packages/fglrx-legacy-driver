@@ -1,0 +1,68 @@
+# Galician translations for fglrx-driver package.
+# Copyright (C) 2012 THE fglrx-driver'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the fglrx-driver package.
+#
+# Jorge Barreiro Gonzalez <yortx.barry@gmail.com>, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: fglrx-driver\n"
+"Report-Msgid-Bugs-To: fglrx-legacy-driver@packages.debian.org\n"
+"POT-Creation-Date: 2012-10-12 14:32+0200\n"
+"PO-Revision-Date: 2012-06-22 01:32+0200\n"
+"Last-Translator: Jorge Barreiro <yortx.barry@gmail.com>\n"
+"Language-Team: Galician <proxecto@trasno.net>\n"
+"Language: gl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#. Type: note
+#. Description
+#: ../fglrx-driver.templates:1001
+msgid "Manual configuration required to enable fglrx driver"
+msgstr ""
+"Hai que realizar configuración manual para activar o controlador «fglrx»"
+
+#. Type: note
+#. Description
+#: ../fglrx-driver.templates:1001
+#, fuzzy
+#| msgid ""
+#| "The fglrx driver is not yet configured. Please consider /usr/bin/"
+#| "aticonfig to create a working xorg.conf configuration."
+msgid ""
+"The fglrx driver is not yet configured. Please consider using /usr/bin/"
+"aticonfig to create a working xorg.conf configuration."
+msgstr ""
+"O controlador «fglrx» inda non está configurado. Considere usar «/usr/bin/"
+"aticonfig» para crear un ficheiro de configuración «xorg.conf» funcional."
+
+#. Type: note
+#. Description
+#: ../fglrx-driver.templates:1001
+msgid ""
+"For example, \"sudo aticonfig --initial\" should be sufficient for most use "
+"cases."
+msgstr ""
+"Por exemplo, «sudo aticonfig --initial» debería chegar para a maioría dos "
+"casos."
+
+#. Type: note
+#. Description
+#: ../fglrx-driver.templates:3001
+msgid "Fglrx driver is still enabled in xorg.conf"
+msgstr "O controlador «fglrx» inda está activado no «xorg.conf»"
+
+#. Type: note
+#. Description
+#: ../fglrx-driver.templates:3001
+msgid ""
+"The fglrx driver was just removed, but it is still enabled in the Xorg "
+"configuration. X cannot be (re-)started successfully until fglrx is disabled "
+"in the following config file(s):"
+msgstr ""
+"O controlador «fglrx» acaba de ser eliminado, pero inda está activado na "
+"configuración de Xorg. As X non poderán reiniciarse con éxito ata que o "
+"«fglrx» se desactive nos seguintes ficheiros de configuración:"

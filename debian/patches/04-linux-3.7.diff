@@ -1,0 +1,18 @@
+# Fix module FTBFS with Linux 3.7. Thanks to Oxan van Leeuwen for this patch.
+# Closes: #697439
+
+diff -Naur fglrx-driver-12.11~beta11.orig/common/lib/modules/fglrx/build_mod/firegl_public.c fglrx-driver-12.11~beta11/common/lib/modules/fglrx/build_mod/firegl_public.c
+--- fglrx-driver-12.11~beta11.orig/common/lib/modules/fglrx/build_mod/firegl_public.c	2012-12-03 03:03:45.000000000 +0100
++++ fglrx-driver-12.11~beta11/common/lib/modules/fglrx/build_mod/firegl_public.c	2013-01-08 19:03:27.084640738 +0100
+@@ -203,6 +203,11 @@
+ #define VM_SHM 0
+ #endif
+ 
++// VM_RESERVED is replaced with VM_DONTEXPAND | VM_DONTDUMP in Linux 3.7+
++#ifndef VM_RESERVED
++#define VM_RESERVED (VM_DONTEXPAND | VM_DONTDUMP)
++#endif
++
+ #ifdef FGL_LINUX253P1_VMA_API
+ // Linux 2.5.3-pre1 and compatibles
+ #define FGL_VMA_API_TYPE        struct vm_area_struct *

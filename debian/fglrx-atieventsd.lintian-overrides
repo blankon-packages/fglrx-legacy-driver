@@ -1,0 +1,6 @@
+no-upstream-changelog
+[i386]: binary-file-built-without-LFS-support
+hardening-no-fortify-functions
+hardening-no-relro
+spelling-error-in-binary usr/sbin/atieventsd fuctions functions
+spelling-error-in-binary usr/sbin/atieventsd Sucessfully Successfully

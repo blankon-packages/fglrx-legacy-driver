@@ -1,0 +1,10 @@
+01-fglrx_kernel_3.5.0.diff
+02-dkms-arch_compat.diff
+03-authatieventsd.sh.diff
+04-linux-3.7.diff
+05-linux-3.8.diff
+06-stub-for-agpless-kernel.diff
+07-change-create_proc-to-proc_create-for-kernel-3.10.X.patch
+08-add-linux-seq_file.h-for-kernel-3.10.X.patch
+09-fix-support-for-linux-3.10.patch
+10-linux-3.14.patch

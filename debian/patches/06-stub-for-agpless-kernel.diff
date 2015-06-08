@@ -1,0 +1,20 @@
+Description: Add a stub for kernels built without CONFIG_AGP
+Author: Vasiliy Yeremeyev <vayerx@gmail.com>
+Origin: other, https://bugs.gentoo.org/show_bug.cgi?id=435322#c11
+Forwarded: no
+Last-Update: 2012-11-04
+
+--- fglrx-driver-13.1.orig/common/lib/modules/fglrx/build_mod/kcl_agp.c
++++ fglrx-driver-13.1/common/lib/modules/fglrx/build_mod/kcl_agp.c
+@@ -479,6 +479,11 @@ int ATI_API_CALL KCL_AGP_Enable(unsigned
+     return -EINVAL;
+ }
+ 
++int ATI_API_CALL KCL_AGP_FindCapsRegisters(KCL_PCI_DevHandle dev)
++{
++    return -EINVAL;
++}
++
+ int ATI_API_CALL KCL_AGP_ReadCapsRegisters(KCL_PCI_DevHandle dev, unsigned int *caps)
+ {
+     return -EINVAL;

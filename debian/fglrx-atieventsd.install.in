@@ -1,0 +1,2 @@
+common/etc/ati/authatieventsd.sh	etc/ati/
+arch/_ARCH_/usr/sbin/atieventsd		usr/sbin/

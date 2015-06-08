@@ -1,0 +1,17 @@
+_SIGDIR_/signature						etc/ati/
+common/etc/ati/control						etc/ati/
+common/etc/ati/atiogl.xml					etc/ati/
+common/etc/ati/amdpcsdb.default					etc/ati/
+#common/etc/ati/atiapfxx.blb					etc/ati/
+arch/_ARCH_/usr/X11R6/bin/aticonfig				usr/bin/
+arch/_ARCH_/usr/X11R6/bin/atiodcli				usr/bin/
+arch/_ARCH_/usr/X11R6/bin/atiode				usr/bin/
+arch/_ARCH_/usr/X11R6/bin/fgl_glxgears				usr/bin/
+arch/_ARCH_/usr/X11R6/bin/fglrxinfo				usr/bin/
+_XPIC_/usr/X11R6/_LIB_/modules/*.so				usr/lib/xorg/modules/
+_XPIC_/usr/X11R6/_LIB_/modules/drivers/fglrx_drv.so		usr/lib/fglrx/
+_XPIC_/usr/X11R6/_LIB_/modules/extensions/fglrx/fglrx-libglx.so	usr/lib/fglrx/
+_XPIC_/usr/X11R6/_LIB_/modules/linux/*.so			usr/lib/xorg/modules/linux/
+_FGLRX_.ids							usr/share/fglrx/
+debian/switchlibGL						usr/lib/fglrx/
+debian/switchlibglx						usr/lib/fglrx/

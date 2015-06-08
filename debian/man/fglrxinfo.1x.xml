@@ -1,0 +1,208 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+"/usr/share/xml/docbook/schema/dtd/4.4/docbookx.dtd" [
+
+<!--
+  Document  $WgDD: fglrx_man/fglrxinfo.1x.xml,v 1.26 2006-11-25 07:59:32 dleidert Exp $
+  Summary   Manpage for the fglrxinfo application.
+
+  Copyright (C) 2005-2006 Daniel Leidert <daniel.leidert@wgdd.de>.
+  All rights reserved.
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+	<!ENTITY dhname    "fglrxinfo">
+	<!ENTITY dhucname  "FGLRXINFO">
+	<!ENTITY dhsection "1x">
+	
+	<!ENTITY % _fglrx_man_entities SYSTEM "fglrx_man_entities.dtd">
+	%_fglrx_man_entities;
+
+]>
+
+<refentry id="fglrxinfo_1x" lang="en">
+	<refentryinfo>
+		<title>&dhpackage;</title>
+		<productname>&dhproduct;</productname>
+		<releaseinfo role="version">&dhversion;</releaseinfo>
+		<date>$Date: 2006-11-25 07:59:32 $</date>
+		<authorgroup>
+			<author>
+				<firstname>Daniel</firstname>
+				<surname>Leidert</surname>
+				<affiliation>
+					<address>
+						<email>daniel.leidert@wgdd.de</email>
+					</address>
+				</affiliation>
+			</author>
+		</authorgroup>
+		<copyright>
+			<year>2005</year>
+			<year>2006</year>
+			<holder>Daniel Leidert</holder>
+		</copyright>
+		<legalnotice>
+			<para>&dhlicense;</para>
+		</legalnotice>
+	</refentryinfo>
+	<refmeta>
+		<refentrytitle>&dhucname;</refentrytitle>
+		<manvolnum>&dhsection;</manvolnum>
+	</refmeta>
+	<refnamediv id="name">
+		<refname>&dhname;</refname>
+		<refpurpose>display info about a GLX extension and OpenGL renderer</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="synopsis">
+		<cmdsynopsis>
+			<command>&dhname;</command>
+			<group choice="opt">
+				<arg choice="plain"><option>-x</option></arg>
+				<arg choice="plain"><option>-n</option></arg>
+				<arg choice="plain"><option>-t</option></arg>
+				<arg choice="plain"><option>-v</option></arg>
+				<arg choice="plain"><option>-o</option></arg>
+			</group>
+			<arg choice="opt"><option>-display <replaceable class="option">display</replaceable></option></arg>
+		</cmdsynopsis>
+		<cmdsynopsis>
+			<command>&dhname;</command>
+			<group choice="opt">
+				<arg choice="plain"><option>-h</option></arg>
+				<arg choice="plain"><option>--help</option></arg>
+			</group>
+		</cmdsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="description">
+		<title>DESCRIPTION</title>
+		<para><command>&dhname;</command> is a tool similar to <citerefentry>
+				<refentrytitle>glxinfo</refentrytitle>
+				<manvolnum>1</manvolnum>
+			</citerefentry>. It lists information about the GLX extension, OpenGL
+			capable visuals, and the OpenGL renderer on an X server. The GLX and
+			renderer info includes the version and extension attributes. The visual
+			info lists the GLX visual attributes available for each OpenGL capable
+			visual (e.g. whether the visual is double buffered, the component sizes,
+			Z-buffering depth, etc).
+		</para>
+	</refsect1>
+	<refsect1 id="options">
+		<title>OPTIONS</title>
+		<para>Without an option, <command>&dhname;</command> prints a brief adapter
+			info. To get a more verbose output, you should make use of the following
+			command line options:
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term><option>-x</option></term>
+				<listitem>
+					<para>Print information about lib strings with extensions.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><option>-n</option></term>
+				<listitem>
+					<para>Print normal information.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><option>-t</option></term>
+				<listitem>
+					<para>Print wide table. By default the visual info is presented in a concise
+						80 character wide tabular format. Use this option to produce a wider,
+						more readable tabular format for the visual list.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><option>-v</option></term>
+				<listitem>
+					<para>Generate a verbose format output style for the visual list.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><option>-o</option></term>
+				<listitem>
+					<para>Print information on overlays.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><option>-display</option> <replaceable>display</replaceable></term>
+				<listitem>
+					<para>Specify the display to query. Use the <envar>DISPLAY</envar> environment variable
+						to get the default host, display number and screen.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><option>-h</option></term>
+				<term><option>--help</option></term>
+				<listitem>
+					<para>Print a short summary of options and their usage.</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="environment">
+		<title>ENVIRONMENT</title>
+		<variablelist>
+			<varlistentry>
+				<term><envar>DISPLAY</envar></term>
+				<listitem>
+					<para>To get the default host, display number and screen.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><envar>LIBGL_DEBUG</envar></term>
+				<listitem>
+					<para>Set this variable to <parameter>verbose</parameter> to print more
+						diagnostic messages, e.g. if the <acronym>DRI</acronym> driver fails to
+						load. This could be useful if you observe problems with your 3D
+						acceleration. Any error message printed should be (hopefully)
+						self-explanatory.
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="bugs">
+		<title>BUGS</title>
+		<para>Report any issues with the <command>&dhname;</command> program
+			to <ulink url="http://support.ati.com"/>.
+		</para>
+		<para>We currently know these bugs:
+			<itemizedlist>
+				<listitem>
+					<para><command>&dhname;</command> identifies itself as <quote>fireglinfo</quote>.</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</refsect1>
+	<refsect1 id="see_also">
+		<title>SEE ALSO</title>
+		<para><citerefentry>
+				<refentrytitle>glxinfo</refentrytitle>
+				<manvolnum>1x</manvolnum>
+			</citerefentry>
+		</para>
+	</refsect1>
+</refentry>
+

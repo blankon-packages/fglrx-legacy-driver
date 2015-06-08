@@ -1,0 +1,11 @@
+fglrx-atieventsd on SELinux
+===========================
+
+atieventsd will not work together with SELinux.
+You may disable it about `dpkg-reconfigure fglrx-atieventsd' or allow the
+following:
+
+	# setsebool -P allow_execmem 1
+	# setsebool -P allow_execstack 1
+
+But be careful, this will workaround some SELinux security features!

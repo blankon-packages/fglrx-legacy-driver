@@ -1,0 +1,14 @@
+# The fix from AMD does not work properly, if you are building fglrx without make.sh (like with dkms).
+# Fix it again..
+
+diff -Naur fglrx-driver-11-5.orig/common/lib/modules/fglrx/build_mod/2.6.x/Makefile fglrx-driver-11-5/common/lib/modules/fglrx/build_mod/2.6.x/Makefile
+--- fglrx-driver-11-5.orig/common/lib/modules/fglrx/build_mod/2.6.x/Makefile	2011-05-03 17:19:14.000000000 +0200
++++ fglrx-driver-11-5/common/lib/modules/fglrx/build_mod/2.6.x/Makefile	2011-05-11 19:22:41.000000000 +0200
+@@ -68,6 +68,7 @@
+                 -DFGL_GART_RESERVED_SLOT \
+                 -DFGL_LINUX253P1_VMA_API \
+                 -DPAGE_ATTR_FIX=$(PAGE_ATTR_FIX) \
++                -DCOMPAT_ALLOC_USER_SPACE=$(shell if grep -q compat_alloc_user_space /lib/modules/$(KERNELRELEASE)/build/Module.symvers ; then echo arch_compat_alloc_user_space ; else echo compat_alloc_user_space ; fi) \
+ 
+ ifeq ($(KERNELRELEASE),)
+ # on first call from remote location we get into this path

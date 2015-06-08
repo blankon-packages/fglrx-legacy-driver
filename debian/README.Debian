@@ -1,0 +1,64 @@
+Upstream Bug Tracker:
+=====================
+
+The recommended way to report non-packaging problems (e.g. graphics
+distortions, unsupported graphics cards, crashes, ...) directly to AMD
+is to use the Unofficial AMD Linux Bugzilla at
+
+    http://ati.cchtml.com/
+
+Please include a link to such an upstream bug report when filing the
+problem in your Linux distribution's bug tracking system.
+
+As of January 2013 there is also a new Support Ticket Process by AMD:
+
+    http://support.amd.com/us/kbarticles/Pages/ticketprocess.aspx
+
+
+This driver will replace parts of your X11/Mesa system:
+=======================================================
+If you encounter problems with the proprietary fglrx driver and want to
+switch back to a free driver, e.g. vesa or radeon, you have to re-enable
+the MESA libraries and corresponding Xorg modules by running
+
+    update-alternatives --config glx
+
+and selecting MESA.
+Don't forget to manually disable fglrx in your /etc/X11/xorg.conf, too.
+
+
+Installing fglrx with 3d acceleration support:
+==============================================
+First you have to install the "fglrx-modules-dkms" package with apt:
+	# apt-get install fglrx-modules-dkms
+Also the rest of the needed fglrx packages.
+
+Now you can create the initial config by typing:
+	# aticonfig --initial
+
+This will work for most simple driver/monitor setups, but you may have
+a look at
+	# aticonfig --help
+for all supported options (like dual head).
+
+Now you should reboot and have a fine running fglrx with 3d acceleration
+support.
+
+
+Unsupported combination: 32-bit Xserver with 64-bit kernel:
+===========================================================
+FGLRX does not work on a 64/32 mix architecture (i386 with an amd64 kernel).
+Upstream does not support it and we also do not want to.
+It is possible to patch the module so that it builds on 64/32, but it fails
+to work *at all*. This has been acknowledged by AMD.
+
+
+Screen flickering with VariBright enabled:
+==========================================
+fglrx contains a feature called "VariBright" which tries to automatically
+adjust screen brightness to screen content in order to save power.
+Under certain circumstances, this may exhibit a seemingly arbitrary
+"flickering" of the screen. You can disable this feature in the power
+options of amdcccle (Catalyst Control Center, included in fglrx-control).
+
+ -- Patrick Matthäi <pmatthaei@debian.org>  Tue, 24 Mar 2009 12:49:21 +0200

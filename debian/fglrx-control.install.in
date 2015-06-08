@@ -1,0 +1,4 @@
+debian/amdcccle.desktop			usr/share/applications/
+common/usr/sbin/atigetsysteminfo.sh	usr/sbin/
+common/usr/share/icons/*		usr/share/icons/
+arch/_ARCH_/usr/X11R6/bin/amdcccle	usr/bin/

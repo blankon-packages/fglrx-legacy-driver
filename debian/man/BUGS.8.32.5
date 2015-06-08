@@ -1,0 +1,43 @@
+BUGS observed in 8.32.5: 
+
+aticonfig:
+==========
+
+- aticonfig -i /etc/X11/xorg.conf -o ~/test/xorg.conf
+	No need to back up anything.
+	Misses a newline after this phrase.
+
+- typo in --tv-overscan: "and" should be "an" in the note
+
+- using --tv-geometry says:
+
+  failed to set tv geometry.
+  check help for possible causes.
+  
+  But help doesn't tell anything useful to determine the cause of this failure. Does it
+  check, if TV is connected? Why could it fail?
+
+- trying to use --tv-geometry option only giving width and height results in a broken
+  entry Option "TVVSizeAdj" "--tv-geometry=value" in aticonfig(1x). Also the leading
+  sign of the given pixels offsets from centre are not preserved (I guess, this should
+  be preserved, but I'm not sure), when creating the entries for Option "TVHPosAdj" and TVVPosAdj
+
+- following the -h output, aticonfig should support reading from stdin and writing to stdout
+  when using the --input or --output options - but it doesn't work as expected and you will
+  receive error messages or a file named "-"
+
+- --dw and similar is still accpeted, but not longer documented (seems obsolete) and not checked
+  for its option value
+
+- in --help output "Dynamic Display Management Options" it is written, that these options will
+  not affect the config file, but this is not true:
+  `aticonfig --enable-monitor=string1,string2 -i ~/test.conf -o ~/test2.conf' disproves the
+  statement (an entry is made for EnableMonitors).
+
+
+fglrxinfo:
+==========
+
+- `fglrxinfo --help' says "Usage: fireglinfo [Options]", but it should be
+  "Usage: fglrxinfo [Options]" instead
+

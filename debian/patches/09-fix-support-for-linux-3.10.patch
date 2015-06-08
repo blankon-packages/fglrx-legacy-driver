@@ -1,0 +1,43 @@
+From 6b258e7e7a344a8b3ad4089085bce7cf3e9eedc9 Mon Sep 17 00:00:00 2001
+From: Lukas Anzinger <lukas@lukasanzinger.at>
+Date: Fri, 9 May 2014 12:19:54 +0200
+Subject: [PATCH] Fix support for Linux 3.10.
+Bug-Debian: https://bugs.debian.org/747510
+
+---
+ common/lib/modules/fglrx/build_mod/firegl_public.c | 10 ++++++++--
+ 1 file changed, 8 insertions(+), 2 deletions(-)
+
+diff --git a/common/lib/modules/fglrx/build_mod/firegl_public.c b/common/lib/modules/fglrx/build_mod/firegl_public.c
+index c33de6d..08ee543 100644
+--- a/common/lib/modules/fglrx/build_mod/firegl_public.c
++++ b/common/lib/modules/fglrx/build_mod/firegl_public.c
+@@ -191,6 +191,10 @@
+ #include <asm/fpu-internal.h>
+ #endif
+ 
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,4,0)
++#include <asm/fpu-internal.h>
++#endif
++
+ #include "firegl_public.h"
+ #include "kcl_osconfig.h"
+ #include "kcl_io.h"
+@@ -529,10 +533,12 @@ static int firegl_debug_proc_write_wrap(void* file, const char *buffer, unsigned
+ #else
+ static int firegl_debug_proc_read_wrap(struct seq_file *m, void* data)
+ {
+-    return firegl_debug_proc_read(m->buf, m->from, m->index, m->size, m->size - m->count, data);
++    char *start = m->buf + m->from;
++    int eof = m->size - m->count;
++    return firegl_debug_proc_read(m->buf, &start, m->index, m->size, &eof, data);
+ }
+ 
+-static ssize_t firegl_debug_proc_write_wrap(struct file *file, const char *buffer, size_t count, void *data)
++static kcl_ssize_t firegl_debug_proc_write_wrap(struct file *file, const char *buffer, kcl_size_t count, kcl_off_t *data)
+ #endif
+ {
+ 	return firegl_debug_proc_write(file, buffer, count, data);
+-- 
+1.9.1
+

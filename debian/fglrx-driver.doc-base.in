@@ -1,0 +1,9 @@
+Document: _FGLRX_-driver
+Title: fglrx driver manuals
+Author: AMD
+Abstract: fglrx driver user manuals
+Section: System/Hardware
+
+Format: HTML
+Index: /usr/share/doc/_FGLRX_-driver/user-manual/index.html
+Files: /usr/share/doc/_FGLRX_-driver/*.html

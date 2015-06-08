@@ -1,0 +1,11 @@
+no-upstream-changelog
+[i386]: binary-file-built-without-LFS-support
+hardening-no-fortify-functions
+hardening-no-relro
+no-symbols-control-file usr/lib*/libOpenCL.so.1
+
+# There are multiple vendors providing this library.
+package-name-doesnt-match-sonames libOpenCL1
+
+# A single symbolic link does not justify the creation of a new package.
+non-dev-pkg-with-shlib-symlink

@@ -1,0 +1,64 @@
+/*
+ * Document  $WgDD: fglrx_man/fglrx_man.css,v 1.3 2006-04-22 18:01:18 dleidert Exp $
+ * Summary   CSS stylesheet for the HTML formatted fglrx manpages.
+ *
+ * Copyright (C) 2006 Daniel Leidert <daniel.leidert@wgdd.de>.
+ *
+ * This file is free software. The copyright owner gives unlimited
+ * permission to copy, distribute and modify it.
+ */
+
+html {
+	font-size: 100.01%;
+}
+
+h2 {
+	font-size: 1.3em;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+a > .option {
+	font-weight: normal;
+	color: blue;
+}
+
+/*
+div.refnamediv p,
+div.cmdsynopsis,
+pre.synopsis,
+div.refsect1 p,
+div.refsect1 div {
+	padding-left: 3em;
+}
+*/
+
+div.important,
+div.note,
+div.tip {
+	padding: 0.1em 0 1.5em 0;
+}
+
+div.segmentedlist {
+	padding: 0.3em 0 1.5em 0;
+}
+
+span.errortext {
+	color: red;
+}
+
+span.refentrytitle,
+.command,
+.envar,
+.option,
+.type {
+	font-weight: bold;
+	color: black;
+}
+
+.replaceable,
+.parameter {
+	font-weight: normal;
+	text-decoration: underline;
+} 
+

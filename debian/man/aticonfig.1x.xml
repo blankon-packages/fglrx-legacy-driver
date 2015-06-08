@@ -1,0 +1,1179 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+"/usr/share/xml/docbook/schema/dtd/4.4/docbookx.dtd" [
+
+<!--
+  Document  $WgDD: fglrx_man/aticonfig.1x.xml,v 1.39 2007-06-02 12:51:31 dleidert Exp $
+  Summary   Manpage for the aticonfig application.
+
+  Copyright (C) 2005-2007 Daniel Leidert <daniel.leidert@wgdd.de>.
+  Copyright (C) 2005-2006 Flavio Stanchina <flavio@stanchina.net>.
+  All rights reserved.
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+	<!ENTITY dhname    "aticonfig">
+	<!ENTITY dhucname  "ATICONFIG">
+	<!ENTITY dhsection "1x">
+	
+	<!ENTITY % _fglrx_man_entities SYSTEM "fglrx_man_entities.dtd">
+	%_fglrx_man_entities;
+
+]>
+
+<refentry id="aticonfig_1x" lang="en">
+	<refentryinfo>
+		<title>&dhpackage;</title>
+		<productname>&dhproduct;</productname>
+		<releaseinfo role="version">&dhversion;</releaseinfo>
+		<date>$Date: 2007-06-02 12:51:31 $</date>
+		<authorgroup>
+			<author>
+				<firstname>Daniel</firstname>
+				<surname>Leidert</surname>
+				<affiliation>
+					<address>
+						<email>daniel.leidert@wgdd.de</email>
+					</address>
+				</affiliation>
+			</author>
+			<author>
+				<firstname>Flavio</firstname>
+				<surname>Stanchina</surname>
+				<affiliation>
+					<address>
+						<email>flavio@stanchina.net</email>
+					</address>
+				</affiliation>
+				<contrib>Author and Debian package maintainer.</contrib>
+			</author>
+			<othercredit>
+				<firstname>Matthijs</firstname>
+				<surname>Kooijman</surname>
+				<affiliation>
+					<address>
+						<email>m.kooijman@student.utwente.nl</email>
+					</address>
+				</affiliation>
+				<contrib>Debian Bug report #360822.</contrib>
+			</othercredit>
+		</authorgroup>
+		<copyright>
+			<year>2005</year>
+			<year>2006</year>
+			<year>2007</year>
+			<holder>Daniel Leidert</holder>
+		</copyright>
+		<copyright>
+			<year>2005</year>
+			<year>2006</year>
+			<holder>Flavio Stanchina</holder>
+		</copyright>
+		<legalnotice>
+			<para>&dhlicense;</para>
+		</legalnotice>
+	</refentryinfo>
+	<refmeta>
+		<refentrytitle>&dhucname;</refentrytitle>
+		<manvolnum>&dhsection;</manvolnum>
+	</refmeta>
+	<refnamediv id="name">
+		<refname>&dhname;</refname>
+		<refpurpose>
+			parse an existing X-Server configuration file and modify it to operate with ATI products
+		</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="synopsis">
+		<cmdsynopsis>
+			<command>&dhname;</command>
+			<arg choice="opt" rep="repeat"><option>OPTIONS</option></arg>
+		</cmdsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="description">
+		<title>DESCRIPTION</title>
+		<para><command>&dhname;</command> is a tool which should help you to create an
+			(initial) X-server configuration file using the <citerefentry>
+				<refentrytitle>fglrx</refentrytitle>
+				<manvolnum>4x</manvolnum>
+			</citerefentry> video driver. You can enable or disable special driver options.
+		</para>
+	</refsect1>
+	<refsect1 id="options">
+		<title>OPTIONS</title>
+		<para><command>&dhname;</command> currently supports the following options:
+		</para>
+		<refsect2 id="options_initial">
+			<title>ATI Initial Configuration</title>
+			<variablelist>
+				<varlistentry id="option_initial">
+					<term><option>--initial<parameter class="option">[=dual-head]</parameter></option></term>
+					<listitem>
+						<para>If this option is given without any parameter, a default ATI device
+							section is generated in the configuration file which is capable of
+							loading the <package>fglrx</package> driver.
+						</para>
+						<para>If this option is used with the <parameter class="option">dual-head</parameter>
+							parameter, it further generates a dual head setup configuration. See <citerefentry>
+								<refentrytitle>fglrx</refentrytitle>
+								<manvolnum>4x</manvolnum>
+							</citerefentry> for an explanation of a dual head setup. 
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</refsect2>
+		<refsect2 id="options_tv">
+			<title>TV Options</title>
+			<variablelist>
+				<varlistentry id="option_tv_format_type">
+					<term><option>--tvf <replaceable class="parameter">string</replaceable></option></term>
+					<term><option>--tv-format-type=<replaceable class="parameter">string</replaceable></option></term>
+					<listitem>
+						<para>Change the TV signal format. <replaceable class="parameter">string</replaceable> can be one of:
+							<simplelist type="inline">
+								<member><parameter class="option">NTSC-JPN</parameter></member>
+								<member><parameter class="option">NTSC-M</parameter></member>
+								<member><parameter class="option">NTSC-N</parameter></member>
+								<member><parameter class="option">PAL-B</parameter></member>
+								<member><parameter class="option">PAL-COMB-N</parameter></member>
+								<member><parameter class="option">PAL-D</parameter></member>
+								<member><parameter class="option">PAL-G</parameter></member>
+								<member><parameter class="option">PAL-H</parameter></member>
+								<member><parameter class="option">PAL-I</parameter></member>
+								<member><parameter class="option">PAL-K</parameter></member>
+								<member><parameter class="option">PAL-K1</parameter></member>
+								<member><parameter class="option">PAL-L</parameter></member>
+								<member><parameter class="option">PAL-M</parameter></member>
+								<member><parameter class="option">PAL-N</parameter></member>
+								<member><parameter class="option">PAL-SECAM-D</parameter></member>
+								<member><parameter class="option">PAL-SECAM-K</parameter></member>
+								<member><parameter class="option">PAL-SECAM-K1</parameter></member>
+								<member><parameter class="option">PAL-SECAM-L</parameter></member>
+							</simplelist>. Using this option affects <option>Option "TVFormat"</option>
+							of <citerefentry>
+								<refentrytitle>fglrx</refentrytitle>
+								<manvolnum>4x</manvolnum>
+							</citerefentry>.
+						</para>
+						<note>
+							<para>Not all graphics cards support every mode. Regional
+								settings are applicable.</para>
+						</note>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="option_tv_standard_type">
+					<term><option>--tvs <replaceable class="parameter">string</replaceable></option></term>
+					<term><option>--tv-standard-type=<replaceable class="parameter">string</replaceable></option></term>
+					<listitem>
+						<para>Change the TV standard for TV output. 
+							<replaceable class="parameter">string</replaceable>	can be one of:
+							<simplelist type="inline">
+								<member><parameter class="option">VIDEO</parameter></member>
+								<member><parameter class="option">SCART</parameter></member>
+								<member><parameter class="option">YUV</parameter></member>
+							</simplelist>. Using this option affects <option>Option "TVStandard"</option>
+							of <citerefentry>
+								<refentrytitle>fglrx</refentrytitle>
+								<manvolnum>4x</manvolnum>
+							</citerefentry>.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="option_tv_overscan">
+					<term><option>--tv-overscan=<replaceable class="parameter">boolean</replaceable></option></term>
+					<listitem>
+						<para>Enable or disable overscan mode for TV-Out.
+							<replaceable class="parameter">boolean</replaceable> can be one of:
+							<simplelist type="inline">
+								<member><parameter class="option">yes</parameter></member>
+								<member><parameter class="option">no</parameter></member>
+							</simplelist>. Using this option affects <option>Option "TVOverscan"</option>
+							of <citerefentry>
+								<refentrytitle>fglrx</refentrytitle>
+								<manvolnum>4x</manvolnum>
+							</citerefentry>.
+						</para>
+						<note>
+							<para>Not all TV formats support overscan. Try to toggle overscan
+								"<parameter class="option">off</parameter>" before changing the TV format if
+								an error occurs.
+							</para>
+						</note>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="option_tv_info">
+					<term><option>--tv-info</option></term>
+					<listitem>
+						<para>Print out the current TV geometry, TV format and if the TV is physically
+							connected.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="option_tv_geometry">
+					<term>
+						<option>--tv-geometry=<replaceable class="parameter">width</replaceable>x<replaceable class="parameter">height</replaceable>{+|-}<replaceable class="parameter">vertical_offset</replaceable>{+|-}<replaceable class="parameter">horizontal_offset</replaceable></option>
+					</term>
+					<listitem>
+						<para>Change the size and position of the TV-Out display. The <emphasis>integer</emphasis>
+							values for <replaceable class="parameter">width</replaceable> and
+							<replaceable class="parameter">height</replaceable> are given in
+							percentage units. Please note that the valid range for these values depends
+							on the TV format, but as a rule of thumb they are valid in the range
+							of <parameter class="option">[1..100]</parameter>. You can further specify
+							the <replaceable class="parameter">vertical_offset</replaceable>
+							and <replaceable class="parameter">horizontal_offset</replaceable> values as
+							offset from the center of the screen in <emphasis>pixels</emphasis>.
+							Their ranges depend on the <acronym>ASIC</acronym> and you
+							should use <xref linkend="option_tv_info"/> to get valid ranges for these
+							values. Using this option affects <option>Option "TVHSizeAdj"</option>,
+							<option>Option "TVVSizeAdj"</option> and - if given - <option>Option "TVHPosAdj"</option>
+							and <option>Option "TVVPosAdj"</option> of <citerefentry>
+								<refentrytitle>fglrx</refentrytitle>
+								<manvolnum>4x</manvolnum>
+							</citerefentry>. If you invoke this option only with height and width, the offset
+							values are automatically set to "<parameter class="option">0</parameter>".
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</refsect2>
+		<refsect2 id="options_firegl">
+			<title>FireGL Workstation Board Features</title>
+			<variablelist>
+				<varlistentry id="option_use_app_profile">
+					<term><option>--app <replaceable class="parameter">string</replaceable></option></term>
+					<term><option>--use-app-profile=<replaceable class="parameter">string</replaceable></option></term>
+					<listitem>
+						<para>Change the application profile for a FireGL workstation board.
+							<replaceable class="parameter">string</replaceable> can be one of:
+							<simplelist type="inline">
+								<member><parameter class="option">default</parameter></member>
+								<member><parameter class="option">maya</parameter></member>
+								<member><parameter class="option">softimage-xsi</parameter></member>
+								<member><parameter class="option">softimage-3d</parameter></member>
+								<member><parameter class="option">houdini4.0</parameter></member>
+								<member><parameter class="option">houdini5.0</parameter></member>
+								<member><parameter class="option">houdini5.5</parameter></member>
+							</simplelist>. Using this option affects <option>Option "Capabilities"</option>
+							of <citerefentry>
+								<refentrytitle>fglrx</refentrytitle>
+								<manvolnum>4x</manvolnum>
+							</citerefentry>.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</refsect2>
+		<refsect2 id="options_fsaa">
+			<title>FSAA Options</title>
+			<variablelist>
+				<varlistentry id="option_fsaa">
+					<term>
+						<option>--fsaa=<replaceable class="parameter">boolean</replaceable></option>
+					</term>
+					<listitem>
+						<para>Enable or disable full scene anti-aliasing (<acronym>FSAA</acronym>).
+							Enable this option to enhance photo-realism in 3D rendering. Disable
+							it to get the most accurate 3D image.
+							<replaceable class="parameter">boolean</replaceable> can be one of:
+							<simplelist type="inline">
+								<member><parameter class="option">on</parameter></member>
+								<member><parameter class="option">off</parameter></member>
+							</simplelist>. Using this option affects <option>Option "FSAAEnable"</option>
+							of <citerefentry>
+								<refentrytitle>fglrx</refentrytitle>
+								<manvolnum>4x</manvolnum>
+							</citerefentry>.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="option_fsaa_samples">
+					<term><option>--fs <replaceable class="parameter">integer</replaceable></option></term>
+					<term><option>--fsaa-samples=<replaceable class="parameter">integer</replaceable></option></term>
+					<listitem>
+						<para>Set the number of <acronym>FSAA</acronym> samples per pixel.
+							<replaceable class="parameter">integer</replaceable> can be one of:
+							<simplelist type="inline">
+								<member><parameter class="option">0</parameter></member>
+								<member><parameter class="option">2</parameter></member>
+								<member><parameter class="option">4</parameter></member>
+								<member><parameter class="option">6</parameter></member>
+								<member><parameter class="option">off</parameter></member>
+							</simplelist>. <parameter class="option">off</parameter> is the same
+							as <parameter class="option">0</parameter>. Using this option
+							affects <option>Option "FSAAScale"</option> of <citerefentry>
+								<refentrytitle>fglrx</refentrytitle>
+								<manvolnum>4x</manvolnum>
+							</citerefentry>.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="option_fsaa_gamma">
+					<term><option>--fsg <replaceable class="parameter">boolean</replaceable></option></term>
+					<term><option>--fsaa-gamma=<replaceable class="parameter">boolean</replaceable></option></term>
+					<listitem>
+						<para>Enable or disable <acronym>FSAA</acronym> gamma.
+							<replaceable class="parameter">boolean</replaceable> can be one of:
+							<simplelist type="inline">
+								<member><parameter class="option">on</parameter></member>
+								<member><parameter class="option">off</parameter></member>
+							</simplelist>. Using this option affects <option>Option "FSAADisableGamma"</option>
+							of <citerefentry>
+								<refentrytitle>fglrx</refentrytitle>
+								<manvolnum>4x</manvolnum>
+							</citerefentry>.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="option_fsaa_ms_positions">
+					<term><option>--fmsp <replaceable class="parameter">real,real,...,real</replaceable></option></term>
+					<term><option>--fsaa-ms-positions=<replaceable class="parameter">real,real,...,real</replaceable></option></term>
+					<listitem>
+						<para>Change the <acronym>FSAA</acronym> Multi-Sample Positions for x0,y0 to x5,y5.
+							You must specify exactly 12 real number values separated by commas. Using this
+							option affects <option>Option "FSAAMSPosX0..5"</option>, <option>Option
+							"FSAAMSPosY0..5"</option> and <option>Option "FSAACustomizeMSPos"</option>
+							of <citerefentry>
+								<refentrytitle>fglrx</refentrytitle>
+								<manvolnum>4x</manvolnum>
+							</citerefentry>.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</refsect2>
+		<refsect2 id="options_screen">
+			<title>Screen-Related Options</title>
+			<variablelist>
+				<varlistentry id="option_overlay_type">
+					<term><option>--ovt <replaceable class="parameter">string</replaceable></option></term>
+					<term><option>--overlay-type=<replaceable class="parameter">string</replaceable></option></term>
+					<listitem>
+						<para>Change the overlay for the X server.
+							<replaceable class="parameter">string</replaceable> can be one of:
+							<simplelist type="inline">
+								<member><parameter class="option">opengl</parameter></member>
+								<member><parameter class="option">Xv</parameter></member>
+								<member><parameter class="option">disable</parameter></member>
+							</simplelist>. <note>
+								<para>Affects <option>Option "OpenGLOverlay"</option>
+									and <option>Option "VideoOverlay"</option>. See <citerefentry>
+										<refentrytitle>fglrx</refentrytitle>
+										<manvolnum>4x</manvolnum>
+									</citerefentry>.
+								</para>
+							</note>
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="option_overlay_on">
+					<term><option>--ovon <replaceable class="parameter">boolean</replaceable></option></term>
+					<term><option>--overlay-on=<replaceable class="parameter">boolean</replaceable></option></term>
+					<listitem>
+						<para>Choose which head the hardware overlay should be visible on. The hardware
+							overlay can be used for either OpenGL, video, pseudo-color or stereo.
+							<replaceable class="parameter">boolean</replaceable> can be one of:
+							<simplelist type="inline">
+								<member><parameter class="option">0</parameter></member>
+								<member><parameter class="option">1</parameter></member>
+							</simplelist>.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="option_lcd_mode">
+					<term><option>--lcd <replaceable class="parameter">string</replaceable></option></term>
+					<term><option>--lcd-mode=<replaceable class="parameter">string</replaceable></option></term>
+					<listitem>
+						<para>Change the LCD mode. <replaceable class="parameter">string</replaceable> can be one of:
+							<simplelist type="inline">
+								<member><parameter class="option">center</parameter></member>
+								<member><parameter class="option">full</parameter></member>
+							</simplelist>. <note>
+								<para>Affects <option>Option "CenterMode"</option>. See <citerefentry>
+										<refentrytitle>fglrx</refentrytitle>
+										<manvolnum>4x</manvolnum>
+									</citerefentry>.
+								</para>
+							</note>
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="option_desktop_setup">
+					<term><option>--dtop <replaceable class="parameter">string</replaceable></option></term>
+					<term><option>--desktop-setup=<replaceable class="parameter">string</replaceable></option></term>
+					<listitem>
+						<para>Change the desktop setup for multiple display adapters.
+							<replaceable class="parameter">string</replaceable> can be one of:
+							<simplelist type="inline">
+								<member><parameter class="option">single</parameter></member>
+								<member><parameter class="option">clone</parameter></member>
+								<member><parameter class="option">mirror</parameter></member>
+								<member><parameter class="option">horizontal</parameter></member>
+								<member><parameter class="option">horizontal,reverse</parameter></member>
+								<member><parameter class="option">vertical</parameter></member>
+								<member><parameter class="option">vertical,reverse</parameter></member>
+							</simplelist>. <note>
+								<para>Affects <option>Option "DesktopSetup"</option>. See <citerefentry>
+										<refentrytitle>fglrx</refentrytitle>
+										<manvolnum>4x</manvolnum>
+									</citerefentry>.
+								</para>
+							</note>
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="option_sync_vsync">
+					<term><option>--vs <replaceable class="parameter">boolean</replaceable></option></term>
+					<term><option>--sync-vsync=<replaceable class="parameter">boolean</replaceable></option></term>
+					<listitem>
+						<para>Enable or disable sync buffer swaps with vsync. Enable this option to
+							prevent tearing during 3D rendering.
+							<replaceable class="parameter">boolean</replaceable> can be one of:
+							<simplelist type="inline">
+								<member><parameter class="option">on</parameter></member>
+								<member><parameter class="option">off</parameter></member>
+							</simplelist>. <note>
+								<para>Affects <option>Option "Capabilities"</option>. See <citerefentry>
+										<refentrytitle>fglrx</refentrytitle>
+										<manvolnum>4x</manvolnum>
+									</citerefentry>.
+								</para>
+							</note>
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="option_pseudo_color">
+					<term><option>--psc <replaceable class="parameter">boolean</replaceable></option></term>
+					<term><option>--pseudo-color=<replaceable class="parameter">boolean</replaceable></option></term>
+					<listitem>
+						<para>Enable or disable pseudo-color visuals. Enable this option to get 8-bit
+							color support. <replaceable class="parameter">boolean</replaceable> can be one of:
+							<simplelist type="inline">
+								<member><parameter class="option">on</parameter></member>
+								<member><parameter class="option">off</parameter></member>
+							</simplelist>. <note>
+								<para>Affects <option>Option "PseudoColorVisuals"</option>. See <citerefentry>
+										<refentrytitle>fglrx</refentrytitle>
+										<manvolnum>4x</manvolnum>
+									</citerefentry>.
+								</para>
+							</note>
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="option_stereo">
+					<term>
+						<option>--stereo=<replaceable class="parameter">boolean</replaceable></option>
+					</term>
+					<listitem>
+						<para>Enable or disable quad-buffer stereo support. Enable this option only for
+							using applications that support the use of hardware 3D shutter
+							glasses. <replaceable class="parameter">boolean</replaceable> can be one of:
+							<simplelist type="inline">
+								<member><parameter class="option">on</parameter></member>
+								<member><parameter class="option">off</parameter></member>
+							</simplelist>. <note>
+								<para>Affects <option>Option "Stereo"</option>. See <citerefentry>
+										<refentrytitle>fglrx</refentrytitle>
+										<manvolnum>4x</manvolnum>
+									</citerefentry>.
+								</para>
+							</note>
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="option_stereo_sync">
+					<term><option>--ss <replaceable class="parameter">boolean</replaceable></option></term>
+					<term><option>--stereo-sync=<replaceable class="parameter">boolean</replaceable></option></term>
+					<listitem>
+						<para>Enable or disable quad-buffer stereo sync. Enable this option to get 3D
+							glasses to synchronize with the infrared transmitter.
+							<replaceable class="parameter">boolean</replaceable> can be one of:
+							<simplelist type="inline">
+								<member><parameter class="option">on</parameter></member>
+								<member><parameter class="option">off</parameter></member>
+							</simplelist>. <note>
+								<para>Affects <option>Option "StereoSyncEnable"</option>. See <citerefentry>
+										<refentrytitle>fglrx</refentrytitle>
+										<manvolnum>4x</manvolnum>
+									</citerefentry>.
+								</para>
+							</note>
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="option_resolution">
+					<term>
+						<option>--resolution=<replaceable class="parameter">resolution1[,resolution2,...]</replaceable></option>
+					</term>
+					<listitem>
+						<para>Set the modes for the first screen. You may specify several resolutions
+							separated by commas. <note>
+								<para>Affects <option>Modes</option>
+									in <option>SubSection "Display"</option> (<option>Section "Screen"</option>).
+									See <citerefentry>
+										<refentrytitle>&dhxserverconf;</refentrytitle>
+										<manvolnum>5x</manvolnum>
+									</citerefentry>.
+								</para>
+							</note>
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="option_hsync">
+					<term>
+						<option>--hsync=<replaceable class="parameter">frequency</replaceable></option>
+					</term>
+					<listitem>
+						<para>Change the horizontal sync range of the first monitor. Make sure you
+							know the capabilities of your monitor before changing this
+							option. <replaceable class="parameter">frequency</replaceable> should be understood as a
+							range of frequencies. <note>
+								<para>Affects <option>HorizSync</option> in <option>Section "Monitor"</option>.
+									See <citerefentry>
+										<refentrytitle>&dhxserverconf;</refentrytitle>
+										<manvolnum>5x</manvolnum>
+									</citerefentry>.
+								</para>
+							</note>
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="option_vrefresh">
+					<term>
+						<option>--vrefresh=<replaceable class="parameter">frequency</replaceable></option>
+					</term>
+					<listitem>
+						<para>Change the vertical refresh range of the first monitor. Make sure you
+							know the capabilities of your monitor before changing this
+							option. <replaceable class="parameter">frequency</replaceable> should be understood as a
+							range of frequencies. <note>
+								<para>Affects <option>VertRefresh</option> in <option>Section "Monitor"</option>.
+									See <citerefentry>
+										<refentrytitle>&dhxserverconf;</refentrytitle>
+										<manvolnum>5x</manvolnum>
+									</citerefentry>.
+								</para>
+							</note>
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="option_resolution2">
+					<term>
+						<option>--resolution2=<replaceable class="parameter">resolution1[,resolution2,...]</replaceable></option>
+					</term>
+					<listitem>
+						<para>Set the modes for the second screen for dual head. You may specify
+							several resolutions separated by commas. <note>
+								<para>The secondary screen must exist.</para>
+							</note>
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="option_hsync2">
+					<term>
+						<option>--hsync2=<replaceable class="parameter">frequency</replaceable></option>
+					</term>
+					<listitem>
+						<para>Change the horizontal sync range of the second display. Make sure you
+							know the capabilities of your monitor before changing this
+							option. <replaceable class="parameter">frequency</replaceable> should be understood as a
+							range of frequencies.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="option_vrefresh2">
+					<term>
+						<option>--vrefresh2=<replaceable class="parameter">frequency</replaceable></option>
+					</term>
+					<listitem>
+						<para>Change the vertical refresh range of the second display. Make sure you
+							know the capabilities of your monitor before changing this
+							option. <replaceable class="parameter">frequency</replaceable> should be understood as a
+							range of frequencies.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="option_mode2">
+					<term>
+						<option>--mode2=<replaceable class="parameter">mode1[,mode2,...]</replaceable></option>
+					</term>
+					<listitem>
+						<para>Change the modes for the second display. You may specify several
+							resolutions separated by commas. This option is only valid for clone and big
+							desktop mode settings. <note>
+								<para>Affects <option>Option "Mode2"</option>. See <citerefentry>
+										<refentrytitle>fglrx</refentrytitle>
+										<manvolnum>4x</manvolnum>
+									</citerefentry>.
+								</para>
+							</note>
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="option_screen_layout">
+					<term>
+						<option>--screen-layout=<replaceable class="parameter">string</replaceable></option>
+					</term>
+					<listitem>
+						<para>Set the secondary screen position for dual head.
+							<replaceable class="parameter">string</replaceable> can be one of:
+							<simplelist type="inline">
+								<member><parameter class="option">left</parameter></member>
+								<member><parameter class="option">right</parameter></member>
+								<member><parameter class="option">above</parameter></member>
+								<member><parameter class="option">below</parameter></member>
+							</simplelist>.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="option_screen_overlap">
+					<term>
+						<option>--screen-overlap=<replaceable class="parameter">integer</replaceable></option>
+					</term>
+					<listitem>
+						<para>Set the screen overlap region in big desktop mode in pixels. <note>
+								<para>Affects <option>Option "ScreenOverlap"</option>. See <citerefentry>
+										<refentrytitle>fglrx</refentrytitle>
+										<manvolnum>4x</manvolnum>
+									</citerefentry>.
+								</para>
+							</note>
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="option_force_monitor">
+					<term>
+						<option>--force-monitor=<replaceable class="parameter">string[,string,...]</replaceable></option>
+					</term>
+					<listitem>
+						<para>Describe all displays that are to be enabled and/or disabled regardless of their
+							physical connection. <replaceable class="parameter">string</replaceable> can be one or
+							more of the following set, separated by commas: <simplelist type="inline">
+								<member><parameter class="option">crt1</parameter></member>
+								<member><parameter class="option">crt2</parameter></member>
+								<member><parameter class="option">lvds</parameter></member>
+								<member><parameter class="option">tv</parameter></member>
+								<member><parameter class="option">tmds1</parameter></member>
+								<member><parameter class="option">tmds2</parameter></member>
+								<member><parameter class="option">tmds2i</parameter></member>
+								<member><parameter class="option">nocrt1</parameter></member>
+								<member><parameter class="option">nocrt2</parameter></member>
+								<member><parameter class="option">nolvds</parameter></member>
+								<member><parameter class="option">notv</parameter></member>
+								<member><parameter class="option">notmds1</parameter></member>
+								<member><parameter class="option">notmds2</parameter></member>
+								<member><parameter class="option">notmds2i</parameter></member>
+							</simplelist>. <note>
+								<para>Affects <option>Option "ForceMonitors"</option>. See <citerefentry>
+										<refentrytitle>fglrx</refentrytitle>
+										<manvolnum>4x</manvolnum>
+									</citerefentry>.
+								</para>
+							</note>
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</refsect2>
+		<refsect2 id="options_powerplay">
+			<title>POWERplay Options</title>
+			<para>The following options will not change the configuration file and take
+				affect immediately. Other options given on the (same) command line will be ignored.
+			</para>
+			<variablelist>
+				<varlistentry id="option_list_powerstates">
+					<term><option>--lsp</option></term>
+					<term><option>--list-powerstates</option></term>
+					<listitem>
+						<para>Print information about power states and exit.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="option_set_powerstate">
+					<term>
+						<option>--set-powerstate=<replaceable class="parameter">state</replaceable></option>
+					</term>
+					<listitem>
+						<para>Set a power state listed by <xref linkend="option_list_powerstates"/>.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</refsect2>
+		<refsect2 id="options_advanced">
+			<title>Advanced Options</title>
+			<variablelist>
+				<varlistentry id="option_tls">
+					<term>
+						<option>--tls=<replaceable class="parameter">boolean</replaceable></option>
+					</term>
+					<listitem>
+						<para>Enable or disable fast thread local storage. Disable this option when
+							virtual machines or <package>Wine(X)</package> fail to work properly.
+							<replaceable class="parameter">boolean</replaceable> can be one of:
+							<simplelist type="inline">
+								<member><parameter class="option">on</parameter></member>
+								<member><parameter class="option">off</parameter></member>
+							</simplelist>. Using this option affects <option>Option "UseFastTLS"</option>
+							of <citerefentry>
+								<refentrytitle>fglrx</refentrytitle>
+								<manvolnum>4x</manvolnum>
+							</citerefentry>.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="option_signal_block">
+					<term><option>--sb <replaceable class="parameter">boolean</replaceable></option></term>
+					<term><option>--signal-block=<replaceable class="parameter">boolean</replaceable></option></term>
+					<listitem>
+						<para>Enable or disable signal blocking. Disable this option when debugging a
+							multi-threaded OpenGL application. <replaceable class="parameter">boolean</replaceable>
+							can be one of: <simplelist type="inline">
+								<member><parameter class="option">on</parameter></member>
+								<member><parameter class="option">off</parameter></member>
+							</simplelist>. Using this option affects <option>Option "BlockSignalsOnLock"</option>
+							of <citerefentry>
+								<refentrytitle>fglrx</refentrytitle>
+								<manvolnum>4x</manvolnum>
+							</citerefentry>.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="option_locked_userpages">
+					<term><option>--locked-userpages=<replaceable class="parameter">boolean</replaceable></option></term>
+					<listitem>
+						<para>Enable or disable locked user pages. Disable this option if the system
+							hangs when running <citerefentry>
+								<refentrytitle>fgl_glxgears</refentrytitle>
+								<manvolnum>1x</manvolnum>
+							</citerefentry>. <replaceable class="parameter">boolean</replaceable>
+							can be one of: <simplelist type="inline">
+								<member><parameter class="option">on</parameter></member>
+								<member><parameter class="option">off</parameter></member>
+							</simplelist>. Using this option affects <option>Option "KernelModuleParm"</option>
+							of <citerefentry>
+								<refentrytitle>fglrx</refentrytitle>
+								<manvolnum>4x</manvolnum>
+							</citerefentry>.
+						</para>
+						<important>
+							<para>As of version 8.28.8 of the ATI Linux Driver, user page lock is no longer
+								available on AGP systems.
+							</para>
+						</important>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="option_generic_cpu">
+					<term><option>--gcpu <replaceable class="parameter">boolean</replaceable></option></term>
+					<term><option>--generic-cpu=<replaceable class="parameter">boolean</replaceable></option></term>
+					<listitem>
+						<para>Enable or disable generic <acronym>CPU</acronym>. Use this option if the
+							<acronym>CPU</acronym> is being reported improperly. For example: If you have
+							an <acronym>AMD</acronym> <acronym>CPU</acronym> that is being reported as
+							Intel. <replaceable class="parameter">boolean</replaceable> can be one
+							of: <simplelist type="inline">
+								<member><parameter class="option">on</parameter></member>
+								<member><parameter class="option">off</parameter></member>
+							</simplelist>. Using this option affects <option>Option "ForceGenericCPU"</option>
+							of <citerefentry>
+								<refentrytitle>fglrx</refentrytitle>
+								<manvolnum>4x</manvolnum>
+							</citerefentry>.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="option_max_gart_size">
+					<term><option>--max-gart-size=<replaceable class="parameter">integer</replaceable></option></term>
+					<listitem>
+						<para>Set user-defined max GART size for <emphasis>non-AGP</emphasis> systems.
+							Possible <replaceable class="parameter">integer</replaceable> values are
+							<parameter class="option">[64..512]</parameter> MB. Using this option
+							affects <option>Option "MaxGARTSize"</option> of <citerefentry>
+								<refentrytitle>fglrx</refentrytitle>
+								<manvolnum>4x</manvolnum>
+							</citerefentry>.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</refsect2>
+		<refsect2 id="options_dynamic_display">
+			<title>Dynamic Display Management Options</title>
+			<para>The following options are used to query or set the driver, controller and
+				adaptor information. Changes will take effect immediately. Other options given
+				on the (same) command line will be ignored.
+			</para>
+			<variablelist>
+				<varlistentry id="option_enable_monitor">
+					<term><option>--enable-monitor=<replaceable class="parameter">string,string</replaceable></option></term>
+					<listitem>
+						<para>Setting current monitor to be enabled. Only 2 displays can be enabled at
+							the same time. Any displays that are not on the list will be disabled.
+							<replaceable class="parameter">string</replaceable> can be one of:
+							<simplelist type="inline">
+								<!-- ForceMonitors accepts more options. What about them? -->
+								<member><parameter class="option">none</parameter></member>
+								<member><parameter class="option">auto</parameter></member>
+								<member><parameter class="option">crt1</parameter></member>
+								<member><parameter class="option">crt2</parameter></member>
+								<member><parameter class="option">lvds</parameter></member>
+								<member><parameter class="option">tmds1</parameter></member>
+								<member><parameter class="option">tmds2</parameter></member>
+								<member><parameter class="option">tv</parameter></member>
+							</simplelist>. To use the default policy to enable the displays use
+							<parameter class="option">auto</parameter>. Using this option affects
+							<option>Option "EnableMonitor"</option> of <citerefentry>
+								<refentrytitle>fglrx</refentrytitle>
+								<manvolnum>4x</manvolnum>
+							</citerefentry>.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="option_query_monitor">
+					<term><option>--query-monitor</option></term>
+					<listitem>
+						<para>Return information about connected and enabled monitors.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="option_swap_monitor">
+					<term><option>--swap-monitor</option></term>
+					<listitem>
+						<para>Swap the contents on the two monitors.</para>
+						<note>
+							<para>Only effective to big desktop setups. See <citerefentry>
+									<refentrytitle>fglrx</refentrytitle>
+									<manvolnum>4x</manvolnum>
+								</citerefentry>
+							</para>
+						</note>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</refsect2>
+		<refsect2 id="options_pair_mode">
+			<title>Pair Mode Options</title>
+			<para>The following options are used to query, add and/or remove pair modes. Changes will
+				will take effect immediately. Other options given on the (same) command line will be ignored.
+			</para>
+			<variablelist>
+				<varlistentry id="option_list_pairmode">
+					<term><option>--list-pairmode</option></term>
+					<listitem>
+						<para>List all current existing pair modes the driver can use.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="option_add_pairmode">
+					<term><option>--add-pairmode=<replaceable class="parameter">width0</replaceable>x<replaceable class="parameter">height0</replaceable>+<replaceable class="parameter">width1</replaceable>x<replaceable class="parameter">height1</replaceable></option></term>
+					<listitem>
+						<para>Add one pair mode to the list.
+							<replaceable class="parameter">width0</replaceable>x<replaceable class="parameter">height0</replaceable>
+							specifies the size of primary and
+							<replaceable class="parameter">width1</replaceable>x<replaceable class="parameter">height1</replaceable>
+							the size of the secondary display. Using this option affects
+							<option>Option "PairModes"</option> of <citerefentry>
+								<refentrytitle>fglrx</refentrytitle>
+								<manvolnum>4x</manvolnum>
+							</citerefentry>.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="option_remove_pairmode">
+					<term><option>--remove-pairmode=<replaceable class="parameter">index-number</replaceable></option></term>
+					<listitem>
+						<para>Remove one pair mode from the list. The
+							<replaceable class="parameter">index-number</replaceable> can be get from
+							the <xref linkend="option_list_pairmode"/> option.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</refsect2>
+		<refsect2 id="options_atieventsd">
+			<title>External Events Daemon Options</title>
+			<para>The following options will not change the configuration file. Instead they are used
+				to send commands to <citerefentry>
+					<refentrytitle>atieventsd</refentrytitle>
+					<manvolnum>8</manvolnum>
+				</citerefentry>, ATI's external events daemon.
+			</para>
+			<variablelist>
+				<varlistentry id="option_set_policy">
+					<term><option>--set-policy=<replaceable class="parameter">string</replaceable></option></term>
+					<listitem>
+						<para>Sets the event policy for the daemon. <replaceable class="parameter">string</replaceable>
+							can be one of: <simplelist type="inline">
+								<member><parameter class="option">handle_lid</parameter></member>
+								<member><parameter class="option">ignore_lid</parameter></member>
+							</simplelist>. For more information see <citerefentry>
+								<refentrytitle>atieventsd</refentrytitle>
+								<manvolnum>8</manvolnum>
+							</citerefentry>.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</refsect2>
+		<refsect2 id="options_misc">
+			<title>Miscellaneous Options</title>
+			<variablelist>
+				<varlistentry id="option_verbose">
+					<term><option>-v</option></term>
+					<term><option>--verbose</option></term>
+					<listitem>
+						<para>Show what <application>&dhname;</application> is doing on a verbose level.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="option_quiet">
+					<term><option>-q</option></term>
+					<term><option>--quiet</option></term>
+					<listitem>
+						<para>Disable all information output except for errors.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="option_effective">
+					<term>
+						<option>--effective=<replaceable class="parameter">string</replaceable></option>
+					</term>
+					<listitem>
+						<para>Choose when the requested changes should take effect:</para>
+						<variablelist>
+							<varlistentry>
+								<term><parameter class="option">now</parameter></term>
+								<listitem>
+									<para>Changes take effect immediately. This change will affect the
+										running X session if applicable.
+										Only <link linkend="option_set_powerstate"><option>--set-powerstate</option></link>
+										and <link linkend="option_overlay_on"><option>--ovon</option></link>
+										options are applicable for now.
+									</para>
+								</listitem>
+							</varlistentry>
+							<varlistentry>
+								<term><parameter class="option">startup</parameter></term>
+								<listitem>
+									<para>Changes take effect on future X server startups. This change will
+										modify the X server configuration file if applicable.
+									</para>
+								</listitem>
+							</varlistentry>
+						</variablelist>
+						<para>The default is <parameter class="option">now,startup</parameter>,
+							i.e., do both as applicable.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="option_nobackup">
+					<term><option>--nobackup</option></term>
+					<listitem>
+						<para>Do not make an automatic backup of the configuration file.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="option_input">
+					<term><option>-i <replaceable class="parameter">file</replaceable></option></term>
+					<term><option>--input=<replaceable class="parameter">file</replaceable></option></term>
+					<listitem>
+						<para>Select a <replaceable class="parameter">file</replaceable> to input as the
+							configuration file. Without this option, <command>&dhname;</command> will
+							search <filename>/etc/X11</filename> for the default configuration file.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="option_output">
+					<term><option>-o <replaceable class="parameter">file</replaceable></option></term>
+					<term><option>--output=<replaceable class="parameter">file</replaceable></option></term>
+					<listitem>
+						<para>Select a <replaceable class="parameter">file</replaceable> to output
+							the new configuration file to. Without this option, <command>&dhname;</command>
+							will replace the input file with the newly generated file.
+						</para>
+						<note>
+							<para>If the (given) file is already existing, it will be backuped as
+								<filename>file.fglrx-<replaceable>integer</replaceable></filename>. To suppress
+								this behavior, use the <xref linkend="option_nobackup"/> option.
+							</para>
+						</note>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="option_help">
+					<term><option>-h</option></term>
+					<term><option>--help</option></term>
+					<listitem>
+						<para>Display the help screen.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="option_force">
+					<term><option>-f</option></term>
+					<term><option>--force</option></term>
+					<listitem>
+						<para>Force <command>&dhname;</command> to generate default Monitor, Device and
+							Screen sections even if the original configuration file has invalid settings
+							in these sections. Only valid with
+							the <link linkend="option_initial"><option>--initial</option></link> option.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</refsect2>
+	</refsect1>
+	<refsect1 id="examples">
+		<title>EXAMPLES</title>
+		<para>This paragraph should show you some examples, how you can use
+			the <application>&dhname;</application> application.
+		</para>
+		<refsect2 id="examples_initial_single">
+			<title>Initial single-head X</title>
+			<para>To set up a configuration for a single headed X server, you can use the following command.
+				Note, that only giving an input file will overwrite this file. If you want to save your
+				original file, you should also use the <xref linkend="option_force"/> option.
+			</para>
+			<cmdsynopsis>
+				<command>&dhname;</command>
+				<arg choice="plain"><option>--initial</option></arg>
+				<arg choice="plain"><option>--input=/etc/X11/&dhxserverconf;</option></arg>
+			</cmdsynopsis>
+		</refsect2>
+		<refsect2 id="examples_initial_dual">
+			<title>Initial dual-head X</title>
+			<para>To set up a configuration for a dual-head X server, you can use the following command.
+				The resulting dual-head will give you one monitor upon the other.
+			</para>
+			<cmdsynopsis>
+				<command>&dhname;</command>
+				<arg choice="plain"><option>--initial=dual-head</option></arg>
+				<arg choice="plain"><option>--screen-layout=above</option></arg>
+				<arg choice="plain"><option>--input=/etc/X11/&dhxserverconf;</option></arg>
+			</cmdsynopsis>
+		</refsect2>
+		<refsect2 id="examples_desktop_modes">
+			<title>Desktop modes</title>
+			<para>The following command will set up the big desktop to horizontal and overlay
+				on secondary display.
+			</para>
+			<cmdsynopsis>
+				<command>&dhname;</command>
+				<arg choice="plain"><option>--dtop=horizontal</option></arg>
+				<arg choice="plain"><option>--overlay-on=1</option></arg>
+			</cmdsynopsis>
+		</refsect2>
+		<refsect2 id="examples_primary_display">
+			<title>Primary display modes</title>
+			<para>To set up the modes for the primary display, use:</para>
+			<cmdsynopsis>
+				<command>&dhname;</command>
+				<arg choice="plain"><option>--resolution=1600x1200,1280x1024,1024x768</option></arg>
+			</cmdsynopsis>
+		</refsect2>
+		<refsect2 id="examples_monitor_layout">
+			<title>Monitor layout</title>
+			<para>Force CRT on primary display with TV-Out disabled.</para>
+			<cmdsynopsis>
+				<command>&dhname;</command>
+				<arg choice="plain"><option>--force-monitor=crt1,notv</option></arg>
+			</cmdsynopsis>
+		</refsect2>
+		<refsect2 id="examples_tv_geometry">
+			<title>TV Geometry</title>
+			<para>Change the TV geometry to 85% width (where 100% == overscan) and 90% height.
+				Shift 10 pixels right and 10 pixels down from the center of the screen.
+			</para>
+			<cmdsynopsis>
+				<command>&dhname;</command>
+				<arg choice="plain"><option>--tv-geometry=85x90+10-10</option></arg>
+			</cmdsynopsis>
+			<para>This command sets </para>
+		</refsect2>
+	</refsect1>
+	<refsect1 id="bugs">
+		<title>BUGS</title>
+		<para>Report any issues with the <command>&dhname;</command> program
+			to <ulink url="http://support.ati.com"/>.
+		</para>
+		<para>We currently know these bugs:
+			<itemizedlist>
+				<listitem>
+					<para>Trying to use <link linkend="option_tv_geometry"><option>--tv-geometry</option></link>
+						option only giving width and height results in a broken entry <option>Option "TVVSizeAdj"
+						"<parameter>--tv-geometry=value</parameter>"</option> in <citerefentry>
+							<refentrytitle>aticonfig</refentrytitle>
+							<manvolnum>1x</manvolnum>
+						</citerefentry>. Also the leading sign of the given pixels offsets from center
+						are not preserved, when creating the entries for <option>Option "TVHPosAdj"</option>
+						and <option>TVVPosAdj</option>.
+					</para>
+					<para>Using this option may also output the following error:
+						<quote><errortext>failed to set tv geometry. check help for possible
+						causes.</errortext></quote> But <option>--help</option> doesn't
+						tell anything useful here. Possible reasons for this issue are:
+						<remark>needs to be written - maybe TV needs to be
+						connected?</remark></para>
+				</listitem>
+				<listitem>
+					<para>The options <option>--dw</option> and <option>--disable-workstation</option> are
+						still accepted, but it seems, they are obsolete and they always result in a
+						<option>Option "Capabilities" "<parameter>0x00000000</parameter>"</option>
+						entry in <citerefentry>
+							<refentrytitle>fglrx</refentrytitle>
+							<manvolnum>4x</manvolnum>
+						</citerefentry>. So just don't use it.
+					</para>
+				</listitem>
+				<listitem>
+					<para>Following the <xref linkend="option_help"/> output, <command>&dhname;</command>
+						should support reading from <filename class="devicefile">stdin</filename>
+						and writing to <filename class="devicefile">stdout</filename> when using
+						the <link linkend="option_input"><option>--input</option></link>
+						or <link linkend="option_output"><option>--output</option></link> options.
+						But it doesn't work as expected and you will receive error messages or a file
+						named <filename>-</filename>.
+					</para>
+				</listitem>
+				<listitem>
+					<para>Following the <xref linkend="option_help"/> output, the options described in
+						<xref linkend="options_dynamic_display"/> will not affect the config file. This is
+						of course wrong. The <xref linkend="option_enable_monitor"/> has an affect to
+						<citerefentry>
+							<refentrytitle>&dhxserverconf;</refentrytitle>
+							<manvolnum>5x</manvolnum>
+						</citerefentry>.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</refsect1>
+	<refsect1 id="see_also">
+		<title>SEE ALSO</title>
+		<para><citerefentry>
+				<refentrytitle>atieventsd</refentrytitle>
+				<manvolnum>8</manvolnum>
+			</citerefentry>, <citerefentry>
+				<refentrytitle>fglrx</refentrytitle>
+				<manvolnum>4x</manvolnum>
+			</citerefentry>, <citerefentry>
+				<refentrytitle>&dhxserverconfig;</refentrytitle>
+				<manvolnum>1x</manvolnum>
+			</citerefentry>, <citerefentry>
+				<refentrytitle>&dhxserverconf;</refentrytitle>
+				<manvolnum>5x</manvolnum>
+			</citerefentry>
+		</para>
+	</refsect1>
+</refentry>
+

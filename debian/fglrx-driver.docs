@@ -1,0 +1,4 @@
+debian/README.Debian
+common/usr/share/doc/fglrx/articles
+common/usr/share/doc/fglrx/user-manual
+common/usr/share/doc/fglrx/*.html

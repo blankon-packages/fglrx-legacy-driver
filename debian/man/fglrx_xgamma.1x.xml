@@ -1,0 +1,225 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+"/usr/share/xml/docbook/schema/dtd/4.4/docbookx.dtd" [
+
+<!--
+  Document  $WgDD: fglrx_man/fglrx_xgamma.1x.xml,v 1.25 2006-11-25 07:59:32 dleidert Exp $
+  Summary   Manpage for the fglrx_xgamma application.
+
+  Copyright (C) 2005-2006 Daniel Leidert <daniel.leidert@wgdd.de>.
+  Copyright (C) 2005-2006 Flavio Stanchina <flavio@stanchina.net>.
+  All rights reserved.
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+	<!ENTITY dhname    "fglrx_xgamma">
+	<!ENTITY dhucname  "FGLRX_XGAMMA">
+	<!ENTITY dhsection "1x">
+	
+	<!ENTITY % _fglrx_man_entities SYSTEM "fglrx_man_entities.dtd">
+	%_fglrx_man_entities;
+
+]>
+
+<refentry id="fglrx_xgamma_1x" lang="en">
+	<refentryinfo>
+		<title>&dhpackage;</title>
+		<productname>&dhproduct;</productname>
+		<releaseinfo role="version">&dhversion;</releaseinfo>
+		<date>$Date: 2006-11-25 07:59:32 $</date>
+		<authorgroup>
+			<author>
+				<firstname>Daniel</firstname>
+				<surname>Leidert</surname>
+				<affiliation>
+					<address>
+						<email>daniel.leidert@wgdd.de</email>
+					</address>
+				</affiliation>
+			</author>
+			<author>
+				<firstname>Flavio</firstname>
+				<surname>Stanchina</surname>
+				<affiliation>
+					<address>
+						<email>flavio@stanchina.net</email>
+					</address>
+				</affiliation>
+				<contrib>Author and Debian package maintainer.</contrib>
+			</author>
+		</authorgroup>
+		<copyright>
+			<year>2005</year>
+			<year>2006</year>
+			<holder>Daniel Leidert</holder>
+		</copyright>
+		<legalnotice>
+			<para>&dhlicense;</para>
+		</legalnotice>
+	</refentryinfo>
+	<refmeta>
+		<refentrytitle>&dhucname;</refentrytitle>
+		<manvolnum>&dhsection;</manvolnum>
+	</refmeta>
+	<refnamediv id="name">
+		<refname>&dhname;</refname>
+		<refpurpose>alter a monitor's gamma correction</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="synopsis">
+		<cmdsynopsis>
+			<command>&dhname;</command>
+			<arg choice="opt">
+				<group choice="req">
+					<arg choice="plain"><option>-d</option></arg>
+					<arg choice="plain"><option>-display</option></arg>
+				</group>
+				<replaceable class="option">display</replaceable>
+			</arg>
+			<group choice="opt">
+					<arg choice="plain"><option>-q</option></arg>
+					<arg choice="plain"><option>-quiet</option></arg>
+			</group>
+			<arg choice="opt">
+				<group choice="req">
+					<arg choice="plain"><option>-c</option></arg>
+					<arg choice="plain"><option>-controller</option></arg>
+				</group>
+				<group choice="req">
+					<arg choice="plain"><replaceable class="option">0</replaceable></arg>
+					<arg choice="plain"><replaceable class="option">1</replaceable></arg>
+				</group>
+			</arg>
+			<arg choice="opt">
+				<group choice="req">
+					<arg choice="plain"><option>-s</option></arg>
+					<arg choice="plain"><option>-screen</option></arg>
+				</group>
+				<replaceable class="option">screen</replaceable>
+			</arg>
+			<group choice="opt">
+				<group choice="req">
+					<arg choice="plain"><option>-rgamma <replaceable class="option">value</replaceable></option></arg>
+					<arg choice="plain"><option>-ggamma <replaceable class="option">value</replaceable></option></arg>
+					<arg choice="plain"><option>-bgamma <replaceable class="option">value</replaceable></option></arg>
+				</group>
+				<arg choice="req"><option>-gamma <replaceable class="option">value</replaceable></option></arg>
+			</group>
+		</cmdsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="description">
+		<title>DESCRIPTION</title>
+		<para><command>&dhname;</command> is a program similar to <citerefentry>
+				<refentrytitle>xgamma</refentrytitle>
+				<manvolnum>1x</manvolnum>
+			</citerefentry>. It allows one to query and alter the gamma correction of a monitor.
+		</para>
+	</refsect1>
+	<refsect1 id="options">
+		<title>OPTIONS</title>
+		<para>Without an option or gamma value, <command>&dhname;</command> returns the
+			current setting. It further supports the following options:
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term><option>-d</option></term>
+				<term><option>-display</option> <replaceable>display</replaceable></term>
+				<listitem>
+					<para>Specify the display. Use the <envar>DISPLAY</envar> environment
+						variable to get the default host, display number and screen.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><option>-q</option></term>
+				<term><option>-quiet</option></term>
+				<listitem>
+					<para>Silence the normal output.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><option>-c</option></term>
+				<term><option>-controller</option> <replaceable>0|1</replaceable></term>
+				<listitem>
+					<para>Select the controller.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><option>-s</option></term>
+				<term><option>-screen</option> <replaceable>screen</replaceable></term>
+				<listitem>
+					<para>Select the screen you wish to change.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><option>-gamma</option> <replaceable>value</replaceable></term>
+				<listitem>
+					<para>The gamma correction can either be defined as a single value with
+						this option or separately for the red, green and blue components
+						with the <option>-rgamma</option>, <option>-ggamma</option>
+						and <option>-bgamma</option> options.
+						The <replaceable>value</replaceable> argument specifies the gamma
+						correction as a single value.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><option>-rgamma</option> <replaceable>value</replaceable></term>
+				<listitem>
+					<para>Specify the red component of the gamma correction.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><option>-ggamma</option> <replaceable>value</replaceable></term>
+				<listitem>
+					<para>Specify the green component of the gamma correction.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><option>-bgamma</option> <replaceable>value</replaceable></term>
+				<listitem>
+					<para>Specify the blue component of the gamma correction.</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="environment">
+		<title>ENVIRONMENT</title>
+		<variablelist>
+			<varlistentry>
+				<term><envar>DISPLAY</envar></term>
+				<listitem>
+					<para>To get the default host, display number and screen.</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="see_also">
+		<title>SEE ALSO</title>
+		<para><citerefentry>
+				<refentrytitle>xgamma</refentrytitle>
+				<manvolnum>1x</manvolnum>
+			</citerefentry>, <citerefentry>
+				<refentrytitle>fireglcontrol</refentrytitle>
+				<manvolnum>1x</manvolnum>
+			</citerefentry>
+		</para>
+	</refsect1>
+</refentry>
+

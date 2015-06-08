@@ -1,0 +1,1874 @@
+# Document  $WgDD: fglrx_man/ChangeLog,v 1.143 2007-06-26 11:58:22 dleidert Exp $
+# Summary   File changelog for fglrx_man project.
+
+2007-06-26 Daniel Leidert <daniel.leidert@wgdd.de>
+
+	* fglrx_man_history.xml: Fixed invalid syntax. Thanks to Romain
+	Beauxis for reporting.
+
+2007-06-02 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* COPYING:
+	* README:
+	* Makefile.am:
+	* configure.ac:
+	* aticonfig.1x.xml:
+	* fgl_glxgears.1x.xml:
+	* fglrx.4x.xml:
+	* fglrx_html.xsl:
+	* fglrx_man.xsl: Updated copyright.
+
+	* Makefile.am: Added some comment for implementing spell checks.
+
+	* autogen.sh:
+	* Makefile.am (AUTOMAKE_OPTIONS): Added option to require automake 1.7
+	or newer. So the additional test in autogen.sh could be dropped.
+
+	* aticonfig.1x.xml (OPTIONS, BUGS): Fixed several typos and markup.
+	(BUGS): Updated. Removed fixed bugs and added newly detected ones.
+
+	* configure.ac (AC_INIT): Updated to new version 8.32.5 (I know, 8.36
+	is new, this is just the last commit).
+
+	* fgl_glxgears.1x.xml (DIAGNOSTICS): Added more error descriptions.
+	Improved the 'Error: couldn't get fbconfig' description.
+
+	* fglrx.4x.xml (SUPPORTED HARDWARE): Removed the no longer supported
+	chipsets.
+	(OPTIONS): Added some more (documented and undocumented) options
+	AGP8XDisableFix, ASICClock, BackingStore, BusType, CapabilitiesEx,
+	Dac6Bit, DefaultVisualTrueColor, DisableOvScaler<, DRM_bufsize,
+	DRM_nbufs, EnableLogo, EnableMonitor, EnableOpaqueOverlayVisual and
+	SilkenMouse options. Fixed the TVOverscan options default value.
+	Replaced all '...' with 'Needs to be documented.' phrases. Fixed typos
+	in TVHPosAdj and TVVPosAdj options. Removed obsolete EnablePageFlip
+	option.
+	(DIAGNOSTICS): Fixed typos and improved markup. Added the AIGLX
+	related error description.
+	(BUGS): Improved markup and fixed release notes location.
+
+	* fglrx_html.xsl (variablelist.term.break.after)
+	(variablelist.term.separator): Improved xpath expression.
+	(refentryinfo[mode=authorsect]): Replaced tags output via CDTATA
+	section by normal tags.
+
+	* fglrx_man.xsl (variablelist.term.break.after)
+	(variablelist.term.separator): Improved xpath expression.
+
+	* fglrx_man_history.xml: Added a new entry for the 8.32.5 release.
+
+	* BUGS.8.32.5: Added. Contains a summary of the bugs observed with
+	these tools.
+
+2006-12-15 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* acinclude.m4 (MP_PATH_DOCBOOK_XSL): Fixed a small typo.
+
+2006-12-15 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* fglrx_man_history.xml: Fixed missing anchors. Thanks to Flavio
+	Stanchina.
+
+2006-12-15 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* fglrx_man_history.xml (revision_8_28_8): Fixed URL. Thanks to Flavio
+	Stanchina.
+
+2006-11-25 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* acinclude.m4: Added "coded" brackets for default values. Replaced
+	all `echo' calls with `AC_MSG_*' macros. Set strings into double
+	quotation marks.
+	(MP_PATH_DOCBOOK_XSL): Added `xmlcatalog' based check for XSL
+	directory. Added general system paths to list of possible installation
+	directories.
+	(MP_PROG_XSERVER, MP_PATH_XSERVER_MAN): Fixed macro description. Fixed
+	`AC_HELP_STRING' macro usage.
+	(MP_PROG_XMLLINT, MP_PROG_XSLTPROC, MP_PROG_MAN): Fixed line
+	formatting. Make `xmllint' and `man' necessary applications according
+	to the newly introduced `--enable-build-checks' configure option.
+
+	* autogen.sh: Complete rewrite with many improvements.
+
+	* CHIPLIST: Added many newly supported chipsets and reorganized them
+	in some kind of structure.
+
+	* COPYING: Changed to MIT License.
+
+	* INSTALL: Added newly introduced `--enable-build-checks' configure
+	option description. Added newly introduced `LICENSE_FILE',
+	`XMLCATALOG', `XML_CATALOG_FILE' configure variable description.
+	Improved explanations and formatting.
+
+	* NEWS: Removed. Only created for distributed tarball.
+
+	* README: Adjusted to inform about new requirement situation. Removed
+	obsolete docbook-xsl Debian-hint.
+
+	* TODO: Removed items related to `fglrxconfig'. Removed item related
+	to fglrx_man_history.xml (done!). Added some new items.
+
+	* configure.ac: Fixed brackets usage in configure options/variables.
+	Added `--enable-build-checks' configure option. Added `LICENSE_FILE'
+	configure variable. Replaced all `echo' with their equivalent
+	`AC_MSG_*' macros. 
+	(AC_PACKAGE_VERSION): Bump to 8.28.8.
+
+	* fglrx_html.xsl: Removed comments and empty lines. Fixed output
+	(changed to HTML 4.01 Transitional).
+	(html.stylesheet): Implemented solution depending on the processed
+	document, so that the revision history table does not have a
+	stylesheet.
+	(index.on.type, make.single.year.ranges, variablelist.as.table):
+	Added.
+	(variablelist.term.break.after, variablelist.term.separator):
+	Improved.
+
+	* fglrx_man.xsl: Removed comments and empty lines.
+	(make.single.year.ranges, make.year.ranges, man.charmap.use.subset):
+	Added.
+	(variablelist.term.break.after, variablelist.term.separator):
+	Improved.
+	(caution/para|important/para|note/para|tip/para|warning/para)
+	(caution|important|note|tip|warning): Removed template.
+	(command|application|package): Reduced template to match only
+	`application|package'. Improved to fit upstream code.
+
+	* fglrx_man_entities.dtd.in (dhlicense): Added new entity `dhlicense',
+	that holds just a paragraph, where to find the license. So we don't
+	need to put the whole license into the manpage.
+
+	* fireglcontrol.1.xml: Changed license statement. Removed revision
+	history as part of the document. Changed source formatting. Small
+	markup fix (<edition> becomes <releaseinfo role="version">).
+	(legalnotice): Replaced with dhlicense entity.
+
+	* aticonfig.1x.xml: Changed license statement. Removed revision
+	history as part of the document. Changed source formatting. Small
+	markup fix (<edition> becomes <releaseinfo role="version">). Added
+	id-attributes to all <varlistentry>-elements to allow xref-linking.
+	Fixed admonition tags usage, so my custom templates can be dropped.
+	Fixed several typos. Fixed several markup issues.
+	(legalnotice): Replaced with dhlicense entity.
+	(copyright): Small markup fix. Splitted into two entries.
+	(OPTIONS): Added some section descriptions. Added descripton for the
+	new `--add-pairmode', `--enable-monitor', `--list-pairmode',
+	`--locked-userpages', `--max-gart-size', `--nobackup',
+	`--query-monitor', `--remove-pairmode', `--set-policy',
+	`--swap-monitor', `--tv-geometry', `--tv-info' and `-tv-overscan'
+	options. Improved and updated description for the `--initial', `--tvf'
+	and `-o' options. Removed obsolete `--agpl, --agp-locked-userpages',
+	`--dw,--disable-workstation` and `--iagp, --internal-agp' options.
+	(EXAMPLES): Added an example for setting the TV geometry.
+	(BUGS): Updated. Found new bugs. Other were fixed. See NEWS.
+	(SEE ALSO): Added reference to atievenetsd(8).
+
+	* fgl_glxgears.1x.xml: Changed license statement. Removed revision
+	history as part of the document. Changed source formatting. Small
+	markup fix (<edition> becomes <releaseinfo role="version">).
+	(legalnotice): Replaced with dhlicense entity.
+	(SYNOPSIS, OPTIONS): Fixed manpages format issues - replaceable values
+	should be lower-case too.
+	(DIAGNOSTICS): Fixed minor markup issues.
+
+	* fglrxinfo.1x.xml: Changed license statement. Removed revision
+	history as part of the document. Changed source formatting. Small
+	markup fix (<edition> becomes <releaseinfo role="version">).
+	(legalnotice): Replaced with dhlicense entity.
+	(SYNOPSIS, OPTIONS): Fixed manpages format issues - replaceable values
+	should be lower-case too.
+	(ENVIRONMENT, BUGS): Fixed minor markup issues.
+
+	* fglrx_xgamma.1x.xml: Changed license statement. Removed revision
+	history as part of the document. Changed source formatting. Small
+	markup fix (<edition> becomes <releaseinfo role="version">).
+	(legalnotice): Replaced with dhlicense entity.
+	(SYNOPSIS, OPTIONS): Fixed manpages format issues - replaceable values
+	should be lower-case too.
+
+	* fglrx.4x.xml: Changed license statement. Removed revision history as
+	part of the document. Changed source formatting. Small markup fix
+	(<edition> becomes <releaseinfo role="version">). Several trademark
+	fixes. Fixed admonition tags usage, so my custom templates can be
+	dropped. Fixed several typos.
+	(legalnotice): Replaced with dhlicense entity.
+	(authorgroup): Small markup fix.
+	(copyright): Ditto. Splitted into two entries.
+	(SUPPORTED HARDWARE): Reorganized, structured and completed.
+	(CONFIGURATION DETAILS): Added ATI vendor-ID list. Added new
+	information about cards, that do not support the "Mirror Mode". Fixed
+	option value order for `ForceMonitors' and `TVFormat'. Added
+	information to `TVHPosAdj', `TVVPosAdj', `TVHSizeAdj' and `TVVSizeAdj'
+	option descriptions. Introduced new `MaxGARTSize' and `TVOverscan'
+	option descriptions.
+
+	* fglrxrc.5x.xml: Changed license statement. Removed revision history
+	as part of the document. Changed source formatting. Small markup fix
+	(<edition> becomes <releaseinfo role="version">).
+	(legalnotice): Replaced with dhlicense entity.
+	(FILES): Added information about related configuration files.
+
+	* Makefile.am (EXTRA_DIST): Added CHIPLIST and NEWS.html.
+	(CLEANFILES): Replaced fglrxhtml_DATA with it's equivalent.
+	(MAINTAINERCLEANFILES): Added NEWS and NEWS.html.
+	(DISTCHECK_CONFIGURE_FLAGS): Added `--enable-build-checks' configure
+	option.
+	(fglrxhtmldir, fglrxhtml_DATA, fglrxcssdir, fglrxcss_DATA)
+	(fglrxdocsdir, fglrxdocs_DATA): Replaced fglrxhtml{dir,_DATA} and
+	fglrxcss{dir,_DATA} with fglrxdoc{dir,_DATA}.
+	(NEWS.html, NEWS): Added new rules for the `NEWS' and `NEWS.html'
+	targets.
+	(check-local): Replaced obsolete `HAVE_*' conditonals with the new
+	`ENABLE_BUILD_CHECKS' conditional. Merged check commands.
+
+	* fglrx_man_history.xml (revision_8_28_8): Updated the information for
+	the 8.28.8 release (I hope, I didn't forget anything). Ready for Etch
+	I hope (more information is still welcome).
+
+2006-05-22 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* Makefile.am (DISTCHECK_CONFIGURE_FLAGS): Use the online resource
+	(mapped to the local docbook-xsl installation).
+
+2006-05-22 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* acinclude.m4 (MP_PATH_DOCBOOK_DTD): Removed macro. This is handled
+	via catalog locally, so we don't need it.
+
+	* configure.ac: Ditto.
+
+	* Makefile.am: Ditto. Removed --dtdvalid option.
+
+	* INSTALL: Ditto. Removed reference to --with-docbook-dtd-dir=DIR.
+
+	* README: Fixed. After release 1.70.0 of docbook-xsl we do not longer
+	need the snapshots. Added version information for packages, where this
+	is necessary.
+
+2006-05-20 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* Makefile.am (DISTCHECK_CONFIGURE_FLAGS): Now we can use the latest
+	docbook-xsl release 1.70.0 from the local installation.
+
+	* fglrx.4x.xml: one cosmetic fix. Added explanation for
+	EnablePageFlip. Fixed an invalidity in the XML source. Removed
+	obsolete MonitorLayout option.
+
+2006-05-06 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* TODO: Added one more nice source of information.
+
+	* fglrx.4x.xml (CONFIGURATION DETAILS): Added information for
+	EnablePageFlip, IgnoreEDID, no_accel, no_dri and NoDDC option. Fixed a
+	few markup issues for mtrr option.
+
+2006-05-06 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* Makefile.am (EXTRA_DIST, fglrx_man1, fglrx_man1x, fglrx_man4x)
+	(fglrx_man5x, fglrx_man_src): Removed obsolete variables and added the
+	general src-varaible.
+	(MAINTAINERCLEANFILES): Added archives created by 'dist' target.
+	(XMLLINT_FLAGS, XSLTPROC_FLAGS): Small code change.
+	(fglrxman1_DATA, fglrxman1x_DATA, fglrxman4x_DATA, fglrxman5x_DATA)
+	(fglrxhtml_DATA): Express all these variables just using the general
+	src-variable.
+	(check-local): Fixed man and xmllint usage.
+
+	* README: Mention the new requirement after changing the
+	MP_PROG_XMLLINT macro.
+
+	* acinclude.m4 (MP_PROG_XMLLINT): Added one more check to make sure,
+	the xmllint-version we use does not contain the valid-bug, I reported
+	months ago to libxml2's upstream.
+
+2006-04-22 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* fglrx_man.css (h2): Added fix to transform text to uppercase
+	letters.
+
+2006-04-22 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* CHIPLIST: Added chipsets newly supported by driver version 8.24.8.
+
+	* acinclude.m4 (MP_PATH_XSERVER_MAN): Changed default locations and
+	location suffixes.
+
+	* configure.ac: VERSION bump. Removed possibility to customize
+	DRIVER_VERSION.
+
+	* INSTALL (DRIVER_VERSION): Removed after removing the appropriate
+	part of configure.ac.
+	(--with-xserver-app-man-dir, --with-xserver-driver-man-dir): Fixed
+	after changing the defaults of the MP_PATH_XSERVER_MAN macro in
+	acinclude.m4.
+	(--with-xserver-file-man-dir): Added missing documentation.
+
+	* Makefile.am (fglrx_man1x): Removed fglrx_pplay.1x.xml and
+	fglrxconfig.1x.xml from this list completely.
+
+	* NEWS (8.24.8): News update.
+
+	* fglrx_man_history.xml (8.24.8): Ditto.
+
+	* README: Added short command to get docbook-xsl-snapshot.zip.
+
+	* fgl_glxgears.1x.xml (refentryinfo): Commented out copyright and
+	legalnotice elements. Fixed usage of meta-information elements.
+
+	* fglrx_xgamma.1x.xml: Ditto.
+
+	* fglrxinfo.1x.xml: Ditto.
+
+	* fglrxrc.5x.xml: Ditto.
+
+	* fireglcontrol.1.xml: Ditto.
+
+	* aticonfig.1x.xml (refentryinfo): Ditto.
+	(SEE ALSO): Removed fglrxconfig(1x) reference.
+
+	* fglrx.4x.xml (refentryinfo): Ditto.
+	(refnamediv): Fixed short description.
+	(refentryinfo, CONFIGURATION DETAILS): Fixed XML bugs.
+	(SUPPORTED HARDWARE): Added chipsets newly supported by driver version
+	8.24.8. Added information for chipsets, where only 2D is supported.
+	(CONFIGURATION DETAILS): Added missing information for the
+	DesktopSetup option.
+	(SEE ALSO): Ditto.
+
+	* fglrx_pplay.1x.xml: Removed (obsolete since 8.20.8).
+
+	* fglrxconfig.1x.xml: Removed (obsolete since 8.24.8).
+
+	* fglrx_man.xsl (man.base.dir, man.subdirs.enabled): Added parameters
+	to suppress output of manpages into './man/man$section/'.
+
+	* fglrx_man_entities.dtd.in: Added just a bit of information.
+
+2006-04-14 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* AUTHORS: Moved contributors to THANKS.
+
+	* THANKS: Initially added. Contributors were moved from AUTHORS to
+	this file.
+
+2006-04-10 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* AUTHORS: Update authors information.
+
+	* aticonfig.1x.xml (authorgroup/author/othercredit): Ditto.
+
+	* fglrx_xgamma.1x.xml (authorgroup/author/othercredit): Ditto.
+
+	* fglrxconfig.1x.xml (authorgroup/author/othercredit): Ditto.
+
+	* fglrx.4x.xml (authorgroup/author/othercredit): Ditto.
+	(CONFIGURATION DETAILS): Fixed alphabetical order of options (moved
+	SWCursor to the right place).
+
+	* fglrx_man.xsl (refentryinfo, author|editor|othercredit, contrib)
+	(personblurb|authorblurb): Removed customized AUTHOR(S) template,
+	which is better handled via docbook-xsl (snapshots).
+
+2006-04-09 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* aticonfig.1x.xml (OPTIONS, BUGS): Fixed information about piping
+	from/to stdin/stdout (see
+	http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=360822). Thanks to
+	Matthijs Kooijman.
+
+	* fglrx.4x.xml (CONFIGURATION DETAILS): Added information about
+	SWCursor option (see
+	http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=360819). Thanks to
+	Matthijs Kooijman.
+
+	* fgl_glxgears.1x.xml (OPTIONS): Markup fix.
+
+2006-03-24 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* TODO: Added some bits regarding the driver history.
+
+	* fglrx.4x.xml (DESCRIPTION): Rephrased.
+
+2006-03-24 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* CHIPLIST: Added (for a better overview of supported chipsets).
+
+2006-03-24 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* TODO: Added some more bits.
+
+	* fglrx.4x.xml (SUPPORTED HARDWARE): Small order fix. Synchronised
+	list with latest driver.
+	(CONFIGURATION DETAILS): Typo fix. Minor infomation change for pci.ids
+	file.
+
+2006-03-19 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* TODO: Added some stuff regarding fglrxrc(.5x.xml).
+
+	* fglrx.4x.xml (CONFIGURATION DETAILS): Typo-fix.
+
+	* fglrx_man.xsl (refentry.manual.profile.enabled)
+	(refentry.manual.profile): Readded manpage title.
+	(caution/para|important/para|note/para|tip/para|warning/para): Fixed a
+	buggy output code.
+
+	* fglrxrc.5x.xml (DESCRIPTION, FORMAT): Added more content based on
+	the information found at
+	http://dri.freedesktop.org/wiki/ConfigurationInfrastructure.
+	(EXAMPLES): Added a sample.
+	(SEE ALSO): Added reference to xdriinfo.
+
+2006-03-19 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* fglrxrc.5x.xml: Added initially (manpage about the configuration
+	file).
+
+	* Makefile.am (EXTRA_DIST, CLEANFILES, fglrx_man5x, fglrxman5xdir)
+	(fglrxman5x_DATA, fglrxhtml_DATA, check-local): Added
+	fglrxrc.5x{.html|xml}.
+
+	* acinclude.m4 (MP_PATH_XSERVER_MAN): Added capability to get the
+	directory to install file-manpages (PATH_XSERVER_MAN_FILE).
+
+	* fglrx.4x.xml (NAME): Removed markup.
+
+	* fglrx_man.xsl (variablelist.term.break.after)
+	(variablelist.term.separator): Changed to easier XPath expression.
+	(tag|sgmltag): Added capabilities to handle the tag/sgmltag element.
+
+2006-03-16 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* Makefile.am (check-local): Tightening man check.
+
+	* aticonfig.1x.xml: Added IDs to every (sub-)section.
+
+	* fglrx_xgamma.1x.xml: Ditto.
+
+	* fglrx.4x.xml: Ditto.
+	(refnamediv): Changes driver description back.
+
+	* fgl_glxgears.1x: Ditto. Further markup changes.
+
+	* fglrx_pplay.1x.xml: Ditto.
+
+	* fglrxinfo.1x.xml: Ditto.
+
+	* fireglcontrol.1.xml: Ditto.
+
+	* fglrxconfig.1x.xml: Ditto.
+	(DESCRIPTION): Added a note regarding the disadvantage of using this
+	tool and a note about aticonfig.
+
+	* fglrx_man.css: Added a possible idea for a better styling.
+
+2006-03-15 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* aticonfig.1x.xml (BUGS): Fixed a markup issue.
+
+	* Makefile.am (EXTRA_DIST, fglrxcssdir, fglrxcss_DATA): Added handling
+	and installation of the CSS stylesheet added yesterday.
+
+2006-03-14 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* fglrx_html.xsl (refentryinfo): Fixed to output a valuable AUTHOR(S)
+	section.
+
+2006-03-14 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* Makefile.am (DISTCHECK_CONFIGURE_FLAGS): Fixed 'make distcheck'
+	target by changing the path to the XSL stylesheets to an online
+	resource.
+
+	* acinclude.m4 (MP_PATH_DOCBOOK_XSL): Only return the basic directory
+	of N. Walsh's stylesheets.
+
+	* fglrx_html_stylesheet.xsl.in: Ditto.
+	(admon.graphics.path): Ditto.
+
+	* fglrx_man_stylesheet.xsl.in: Ditto.
+
+	* fglrx_html.xsl: Fixed comments (apply to docbook-xsl doc).
+	(admon.style, html.stylesheet): Adding fglrx_man.css stylesheet info.
+	(variablelist.term.break.after, variablelist.term.separator): Fixed
+	output of variablelist elements. Value depends on processed document.
+
+	* fglrx_man.xsl: Ditto.
+	(variablelist.term.break.after, variablelist.term.separator): Ditto.
+
+	* aticonfig.1x.xml (OPTIONS): Markup fixes.
+
+	* fgl_glxgears.1x.xml (DIAGNOSTICS): Ditto.
+
+	* fglrx.4x.xml (refnamediv, DESCRIPTION, SUPPORTED HARDWARE)
+	(CONFIGURATION DETAILS, DIAGNOSTICS): Ditto.
+
+	* fglrx_xgamma.1x.xml (OPTIONS): Ditto.
+
+	* fglrx_man.css: Initially added.
+
+2006-03-13 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* aticonfig.1x.xml (OPTIONS, BUGS): Fixed markup issues.
+
+	* fgl_glxgears.1x.xml (DIAGNOSTICS): Ditto.
+
+	* fglrx_xgamma.1x.xml (OPTIONS): Ditto.
+
+	* fglrxinfo.1x.xml (OPTIONS): Ditto.
+
+	* fglrx.4x.xml (SUPPORTED HARDWARE, CONFIGURATION DETAILS)
+	(DIAGNOSTICS): Ditto. Removed a typo.
+
+	* fglrx_pplay.1x.xml (refsynopsisdiv, OPTIONS): Changed variable
+	parameters to uppercase letters.
+	(DESCRIPTION): Added info, when it became obsolete.
+
+	* fglrx_man.xsl (variablelist.term.break.after): Changed to not break
+	after a term element. This is because we changed to use \n(ewline) for
+	using several lines in one term.
+	(refentryinfo): Removed a typo.
+
+2006-03-12 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* ChangeLog: Fixed summary.
+
+	* README: Fixed typo.
+
+	* fglrx_html_stylesheet.xsl.in: Ditto.
+
+	* TODO: Ditto. Added URL for the manpage improvements suggested by
+	docbook-xsl upstream.
+
+2006-03-12 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* AUTHORS: Fixed a typo.
+
+	* README: Added info about XSL snapshots.
+
+	* acinclude.m4 (MP_PATH_DOCBOOK_XSL): The macro changed to search for
+	the basic directory of the XSL stylesheets, which can be specified by
+	the user using the --with-docbook-xsl-dir option. It now outputs the
+	basic directory, the HTML and manpage stylesheets. Also fixed the
+	macro description.
+	(MP_PATH_DOCBOOK_DTD, MP_PROG_XSERVER): Changed test(1) syntax.
+
+	* INSTALL (--with-docbook-xsl-dir): Fixed description of the changed
+	--with-docbook-xsl-dir option.
+
+	* NEWS: Added info about new release 8.23.7 of ATI's linux drivers.
+
+	* fglrx_man_history.xml (revision_8_23_7): Ditto.
+
+	* fglrx_html.xsl: Added HTML stylesheet.
+
+	* fglrx_html_stylesheet.xsl.in: Ditto.
+
+	* configure.ac: Added check for datadir.
+	(AC_PACKAGE_VERSION): Update to latest 8.23.7 release.
+	(AC_CONFIG_FILES): Added HTML stylesheet.
+
+	* Makefile.am (EXTRA_DIST, DISTCLEANFILES): Added files necessary to
+	produce HTML output.
+	(fglrxhtmldir, fglrxhtml_DATA): Produce manpages in HTML format.
+	(fglrxman1*, fglrxman1x*, fglrxman4x, CLEANFILES, check-local): Minor
+	rename for a cleaner naming scheme.
+	(DISTCHECK_CONFIGURE_FLAGS): Added default XSL stylesheet dir for
+	'make distcheck'.
+
+	* aticonfig.1x.xml: Added 'lang' and 'id' attributes to root element.
+	(DESCRIPTION): Added missing citerefentry element to refer to the
+	related manpages.
+
+	* fgl_glxgears.1x.xml: Ditto.
+	(DESCRIPTION): Minor order change.
+
+	* fglrx.4x.xml: Ditto.
+	(refnamediv, DESCRIPTION, SUPPORTED HARDWARE, CONFIGURATION DETAILS)
+	(DIAGNOSTICS): Markup fixes (hardware -> productname) where necessary.
+	(CONFIGURATION DETAILS, DIAGNOSTICS): Commented out all title elements
+	of segmentedlist. Moving the ID's of varnames back to option to create
+	the link at the beginning of an option. To avoid re-raising issues
+	with 'xref to option', we now use the link element, where option is a
+	valid children.
+
+	* fglrx_pplay.1x.xml: Ditto.
+
+	* fglrx_xgamma.1x.xml: Ditto.
+	(DESCRIPTION): Added missing citerefentry element to refer to the
+	related manpages.
+
+	* fglrxconfig.1x.xml: Ditto.
+
+	* fglrxinfo.1x.xml: Ditto.
+
+	* fireglcontrol.1.xml: Ditto.
+
+	* fglrx_man.xsl: Changed for better reading. Removed stuff now handled
+	by the latest snapshots XSL stylesheets.
+	(man.charmap.enabled, man.hyphenate.urls, man.hyphenate.filenames)
+	(man.hyphenate.computer.inlines, man.segtitle.suppress)
+	(variablelist.term.break.after, variablelist.term.separator): Added
+	parameters available via the latest XSL snapshots.
+	(refentryinfo, author, editor, othercreadit, personblurb, authorblurb)
+	(contrib): Fixed my custom template to fit the latest snapshot
+	stylesheets.
+
+	* fglrx_man_stylesheet.xsl.in: Ditto.
+
+2006-03-08 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* fglrx_man.xsl (xref): Removed leading space for option
+	cross-references.
+
+	* fglrx.4x.xml (CONFIGURATION DETAILS): Removed the leading space for
+	"Option ..." terms. Fixed a few optical "issues". Added information
+	for Capabilities, KernelModuleParm (added comments) and changed
+	DesktopSetup.
+	(DIAGNOSTICS): Added one more warning regarding Xinerama and disabled
+	direct rendering. Fixed the "No matching device section ..." warning.
+
+2006-03-08 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* fglrx.4x.xml (refpurpose): Fixed missing markup.
+	(CONFIGURATION DETAILS): For mentioned applications and commands refer
+	to their manpage. Added information for the AGPMask and AGPv3Mask
+	options (info was taken from rage3d.com).
+	(DIAGNOSTICS): For mentioned applications and commands refer to their
+	manpage.
+
+2006-02-21 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* acinclude.m4: Change macro names (follows autoconf documentation).
+	Adjust variable names. Added MP_PROG_MAN to determine man binary.
+
+	* Makefile.am: Ditto.
+
+	* fglrx_man_entities.dtd.in: Ditto.
+
+	* fglrx_man_stylesheet.xsl.in: Ditto.
+
+	* INSTALL: Ditto.
+
+	* README: Ditto.
+
+	* configure.ac: Ditto. Small clean-up.
+
+2006-02-21 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* Makefile.am (CLEANFILES, check-local): Small reordering.
+
+2006-02-21 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* aticonfig.1x.xml (BUGS): Fixed 'can't find numbered character'
+	warning thrown by man.
+
+	* Makefile.am (check-local): Added an lintian-like
+	"manpage-has-errors-from-man" check.
+
+2006-02-20 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* aticonfig.1x.xml (refsynopsisdiv, EXAMPLES): Markup fixes.
+	(DESCRIPTION): Added a missing reference.
+
+	* fgl_glxgears.1x.xml (refsynopsisdiv): Markup fixes.
+	(refsynopsisdiv, OPTIONS): Style fixes.
+	(DESCRIPTION): Added a missing reference.
+
+	* fglrx_xgamma.1x.xml (refsynopsisdiv): Markup fixes. Further fixed an
+	issue with {r,g,b}gamma options.
+	(refsynopsisdiv, OPTIONS): Style fixes.
+	(OPTIONS): Improved -gamma option description.
+
+	* fglrxinfo.1x.xml (refsynopsisdiv): Markup fixes.
+	(refsynopsisdiv, OPTIONS): Style fixes.
+	(DESCRIPTION): Added a missing reference.
+
+2006-02-20 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* Makefile.am: Minor reordering.
+
+	* configure.ac: Fixed prefix=NONE.
+
+2006-02-20 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* autogen.sh (autogen_help): Fixed help message.
+	(autogen_copy, autogen_copy_if_missing): Fixed condition for the
+	manual run.
+	(autogen_link, autogen_link_if_missing): Ditto.
+
+2006-02-19 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* Makefile.am (VPATH, XMLLINT_FLAGS, XSLTPROC_FLAGS): Better style.
+	Extending VPATH instead of defining it. Thanks to Daniel Veillard for
+	pointing out the right usage of the --path option with space separated
+	path lists.
+
+2006-02-19 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* Makefile.am (fglrx_man1x): Fixed comment usage. Seems, that automake
+	1.7 ignores the line completely, which we cannot accept. Define the
+	XSLTPROC_FLAGS earlier.
+
+2006-02-18 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* NEWS: Added a new release entry for driver release 8.22.5.
+
+2006-02-18 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* COPYING: Remove the all-permissive license stuff.
+
+	* Makefile.am: Changed license.
+
+	* autogen.sh: Changed license.
+
+	* fglrx_man.xsl: Changed license.
+
+	* fglrx_man_stylesheet.xsl.in: Changed license.
+
+	* configure.ac: Fixed copyright.
+
+2006-02-18 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* autogen.sh (autogen_copy_if_missing, autogen_link_if_missing): Fixed
+	an issue with automake-1.9.
+
+	* acinclude.m4 (AC_PROG_XMLLINT): If xmllint exists, make this info
+	available via a conditional HAVE_XMLLINT. Further fixed a bug
+	exporting XMLLINT_FLAGS.
+
+	* configure.ac: Small clean-up. Remove obsolete stuff.
+	(__XMLLINT__, __XMLLINT_FLAGS__, __XSLTPROC__, __XSLTPROC_FLAGS__):
+	Use the variables derived from AC_PROG_XMLLINT and AC_PROG_XSLTPROC.
+
+	* Makefile.am (fglrx_man1x): Fixed comment for fglrx_pplay.1.xml.
+	(fglrxappman_DATA, fglrxdriverman_DATA, fglrxguiman_DATA): Be more
+	informative using styled output.
+	(check-local): Ditto. Further make use of the HAVE_XMLLINT
+	conditional. Define the XMLLINT_FLAGS earlier.
+
+2006-02-15 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* Makefile.am (EXTRA_DIST): Cleaned. Removed all files automatically
+	put into the distribution.
+
+2006-02-13 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* aticonfig.1x.xml (OPTIONS): Fixed a format issue.
+
+	* fglrxinfo.1x.xml (BUGS): Ditto.
+
+2006-02-13 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* Makefile.am (EXTRA_DIST): Fixed to also copy fglrx_man_history.xml.
+	(VPATH): Both srcdir and builddir should be in VPATH.
+	(fglrx_man1, fglrx_man1x, fglrx_man4x): When create manpages, specify
+	the path, where to find DTDs, stylesheets, .... Further make the
+	implicit rule a bit easier. Fixes 'make distcheck' target.
+	(check-local): Ditto (still a problem, see Debian bug #352634. Further
+	move all static options we need from configure.ac to this file and fix
+	the sequence of options.
+
+	* configure.ac (__XMLLINT_FLAGS__): Moved all static options to
+	Makefile.am. See above.
+
+2006-02-12 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* acinclude.m4 (AM_DOCBOOK_XSL_MAN_DIR, AM_DOCBOOK_DTD_44_DIR)
+	(AM_XSERVER_PARAMS, AM_XSERVER_MAN_DIR): Fixed AC_HELP_STRING
+	descriptions. Adjust @version value.
+
+	* configure.ac (DRIVER_VERSION, DRIVER_PACKAGE): Fixed AC_ARG_VAR
+	descriptions (added more info about defaults).
+	(__DRIVER_PACKAGE__): Fixed a bug.
+
+2006-02-12 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* Makefile.am (fglrx_man1x): Small fix.
+
+2006-02-12 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* configure.ac (AC_PACKAGE_VERSION): Change to latest release 8.22.5.
+
+	* fglrx_man_history.xml: Added CVS header.
+	(revision_8_22_5): Added entry for latest release 8.22.5.
+
+	* fglrx_man_entities.dtd.in: Added CVS header.
+
+2006-02-09 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* Makefile.am: Reorder.
+	(DISTCLEANFILES): Fixed the wrong "DISTCLEAN".
+
+2006-02-01 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* acinclude.m4 (AM_XSERVER_PARAMS, AC_PROG_XMLLINT)
+	(AC_PROG_XSLTPROC): Forgot to fix date.
+
+2006-02-01 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* acinclude.m4 (AM_XSERVER_PARAMS): Removed useless tabs. Fixed the
+	AC_HELP_STRING string. Fixed a bug in AC_CHECK_PROGS, which leads to
+	an error message if the X-server cannot be determined.
+	(AC_PROG_XMLLINT): Small change to the test.
+	(AC_PROG_XSLTPROC): Ditto.
+
+2006-01-31 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* COPYING: Add license information for scripts used to build the
+	package.
+
+	* Makefile.am: Added all-permissive copying license.
+
+	* autogen.sh: Ditto.
+
+	* configure.ac: Ditto.
+
+	* fglrx_man.xsl: Ditto.
+
+	* fglrx_man_stylesheet.xsl.in: Ditto.
+
+	* acinclude.m4: Ditto.
+	(AM_XSERVER_MAN_DIR): Small fix to description.
+
+2006-01-31 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* COPYING: Hopefully last modification to the license.
+	
+	* aticonfig.1x.xml: Ditto.
+	
+	* fgl_glxgears.1x.xml: Ditto.
+	
+	* fglrx.4x.xml: Ditto.
+	
+	* fglrx_pplay.1x.xml: Ditto.
+	
+	* fglrx_xgamma.1x.xml: Ditto.
+	
+	* fglrxconfig.1x.xml: Ditto.
+	
+	* fglrxinfo.1x.xml: Ditto.
+	
+	* fireglcontrol.1.xml: Ditto.
+
+2006-01-30 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* COPYING: Small modification to the license.
+
+	* aticonfig.1x.xml: Ditto.
+	
+	* fgl_glxgears.1x.xml: Ditto.
+
+	* fglrx.4x.xml: Ditto.
+
+	* fglrx_pplay.1x.xml: Ditto.
+
+	* fglrx_xgamma.1x.xml: Ditto.
+
+	* fglrxconfig.1x.xml: Ditto.
+
+	* fglrxinfo.1x.xml: Ditto.
+
+	* fireglcontrol.1.xml: Ditto.
+
+2006-01-30 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* configure.ac (DRIVER_VERSION, DRIVER_PACKAGE): Added possibility to
+	overwrite the driver package header as already done for driver
+	version. Be more verbose and inform the user about their values.
+
+	* fglrx_man.xsl (command|application|package): Everything related to
+	commands, packages or applications shuld be bold.
+	(varname, replaceable[@class='option']): Customize the handling of
+	variables and replaceable sections inside options. It's a workaround
+	for a feature bug in the original stylesheet.
+	(articleinfo|bookinfo|refentryinfo, author|editor|othercredit)
+	(contrib): Change string for contributions and add possible stylesheet
+	code to add, what a contributor did.
+	(xref): Link options automatically (but now link to varnames and
+	create the string too).
+
+	* fglrx_man_history.xml: Added to contain the projecr history in XML
+	format.
+	
+	* aticonfig.1x.xml: Added license and copyright information. Fixed
+	mark-up issues (refer to changes in fglrx_man.xsl).
+	(refentryinfo): Added history and legal information.
+
+	* fglrx_pplay.1x.xml: Ditto.
+	(refentryinfo): Ditto.
+
+	* fglrx_xgamma.1x.xml: Ditto.
+	(refentryinfo): Ditto.
+
+	* fglrxconfig.1x.xml: Ditto.
+	(refentryinfo): Ditto.
+
+	* fglrxinfo.1x.xml: Ditto.
+	(refentryinfo): Ditto.
+
+	* fireglcontrol.1.xml: Ditto.
+	(refentryinfo): Ditto.
+
+	* fgl_glxgears.1x.xml: Ditto.
+	(refentryinfo): Ditto.
+	(DIAGNOSTICS): Added more diagnostics. Fixed mark-up issues.
+
+	* fglrx.4x.xml: Ditto.
+	(refentryinfo): Ditto.
+	(authorgroup): Mention credits from Gentoo ATI Radeon FAQ.
+	(DESCRIPTION): Small change. refer to manpage.
+	(CONFIGURATION DETAILS): Fixes and additions for DesktopSetup,
+	IgnoreEDID, KernelModuleParm, MonitorLayout, NoTV (moved to
+	alphabetical order), PBuffer and UseInternalAGPGART.
+	(DIAGNOSTICS): Added more information.
+	(BUGS): Added link to unofficial BTS.
+
+	* COPYING: Add license information.
+
+	* INSTALL: Added.
+
+	* NEWS: Update to latest news.
+
+	* README: Update with more recent information.
+
+	* TODO: Ditto.
+
+2006-01-28 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* AUTHORS: Thanks to Wedge_.
+
+2006-01-27 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* TODO (fglrx.4x.xml): There are a lot of options, the manpage
+	currently doesn't tell about.
+
+	* fglrx.4x.xml (CONFIGURATION DETAILS): More information about
+	KernelModuleParm.
+
+2006-01-27 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* fgl_glxgears.1x.xml (DIAGNOSTICS): Added DIAGNOSTICS section
+	initially. Added hint about POSIX shared memory.
+
+	* fglrx.4x.xml (CONFIGURATION DETAILS): Added a few more values for
+	KernelModuleParm.
+	(DIAGNOSTICS): Markup fixes and changes.
+
+2006-01-27 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* fglrx.4x.xml (BUGS): Fixed my own stupidity. Better control
+	copy&paste results.
+
+2006-01-27 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* fglrx.4x.xml (BUGS): Added BUGS section initially. Present a link to
+	the official Linux driver feedback form and the unofficial ATI driver
+	bugzilla.
+
+2006-01-27 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* AUTHORS: Add a note, that we also use information taken from the
+	Gentoo ATI Radeon FAQ.
+
+2006-01-27 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* fglrx.4x.xml (CONFIGURATION DETAILS): Added options AGPMask,
+	AGPv3Mask, ClientDriverName and RingSize. Further added possible
+	values for KernelModuleParm. Thanks to Mathieu Malaterre.
+
+	* TODO: Added a note about environment variables, which should be
+	mentioned.
+
+2006-01-26 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* acinclude.m4 (AM_DOCBOOK_XSL_MAN_DIR): Adjusted @version.
+	(AM_XSERVER_MAN_DIR): Fixed to again let the paths for
+	application-manpages and driver-manpages be determined separately.
+
+	* Makefile.am (fglrxappmandir, fglrxdrivermandir): Make use of the
+	reintroduced paths for application-manpages and driver-manpages
+	(__XSERVER_APP_MAN_DIR__, __XSERVER_DRIVER_MAN_DIR__).
+
+2006-01-26 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* acinclude.m4 (AM_DOCBOOK_XSL_MAN_DIR): Fixed a minor issue - make it
+	clear, that we found a path, not a file.
+
+2006-01-26 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* acinclude.m4 (AC_PROG_XMLLINT, AC_PROG_XSLTPROC): Add the macros
+	AC_PROG_XMLLINT and AC_PROG_XSLTPROC, which contain stuff, formerly
+	located in configure.ac.
+
+	* configure.ac: Add a bit more documentation of what we do.
+	(AC_PROG_XMLLINT, AC_PROG_XSLTPROC): Use the new macros and remove the
+	stuff now done by these macros.
+
+2006-01-26 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* fglrx.4x.xml (CONFIGURATION DETAILS): Added option PowerState.
+	(DIAGNOSTICS): Added more diagnostics.
+
+2006-01-26 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* fglrx.4x.xml (refpurpose): Changed driver description.
+
+2006-01-26 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* fglrx.4x.xml (DIAGNOSTICS): Added more diagnostics.
+
+2006-01-26 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* fglrx.4x.xml (DESCRIPTION, CONFIGURATION DETAILS): Added some
+	content to description, ChipID and options KernelModuleParm, mtrr,
+	no_accel, no_dri, NoDDC, OpenGLOverlay and VideoOverlay. Thanks to
+	Mathieu Malaterre.
+	(DIAGNOSTICS): Added this section inspired by content contributed by
+	Mathieu Malaterre.
+	(authorgroup): Added Mathieu Malaterre as author.
+	
+	* AUTHORS: Ditto.
+
+2006-01-26 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* Makefile.am (MAINTAINERCLEANFILES): Rmove all files produced with
+	autogen.sh in the maintainer-clean target.
+
+	* TODO: Fixed a typo.
+
+2006-01-25 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* ChangeLog: Fixed a typo in the summary.
+
+	* TODO: Remove things done.
+
+	* configure.ac: Minor clean-up.
+
+2006-01-25 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* configure.ac: Fixed summary.
+
+	* NEWS: Fixed summary.
+
+2006-01-25 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* configure.ac (XSLTPROC): Fixed a typo bug which leads to an error.
+
+	* Makefile.am (% : %.xml, check-local): Move the validation of
+	XML-files to the check-local target.
+
+2006-01-25 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* configure.ac (XMLLINT, __XMLLINT__, XSLTPROC, __XSLTPROC__): Add
+	possibility to allow definition of the xmllint and xsltproc binaries
+	via configure variable. Further fix the usage of AC_PATH_PROG(), so if
+	a binary is not found, configure should not return a "WARNING::
+	command not found" message.
+
+2006-01-25 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* aticonfig.1x.xml (BUGS): Replace the double angle quotation marks
+	with normal double quotation marks. Shall fix a lintian warning.
+
+	* fglrxinfo.1x.xml (BUGS): Ditto.
+	
+	* AUTHORS: Fixed summary.
+
+	* ChangeLog: Ditto.
+
+	* README: Ditto.
+
+	* TODO: Ditto.
+
+	* autogen.sh: Ditto.
+
+	* configure.ac: Ditto.
+
+	* fglrx_man.xsl: Ditto.
+
+	* fglrx_man_stylesheet.xsl.in: Ditto.
+
+2006-01-25 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* configure.ac (__XMLLINT__): Make xmllint optional.
+
+	* Makefile.am (% : %.xml): Ditto. Only run xmllint, if it is
+	available.
+
+2006-01-25 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* acinclude.m4 (AM_XSERVER_MAN_DIR): Fix the help-string for the
+	--with-xserver-man-dir option.
+
+2006-01-25 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* configure.ac (DRIVER_VERSION): Added. Can be used to overwrite the
+	ATI driver version string.
+	(XMLLINT_FLAGS, XSLTPROC_FLAGS): Fix the output of ./configure --help.
+
+2006-01-25 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* autogen.sh (autogen_help, autogen_copy, autogen_copy_if_missing)
+	(autogen_link, autogen_link_if_missing): The user can choose to copy
+	the files instead to link them.
+
+2006-01-24 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* fglrx.4x.xml (CONFIGURATION DETAILS): Added "mtrr", "no_accel",
+	"no_dri" and "NoDDC" options initially. Thanks to Mathieu Malaterre.
+
+2006-01-24 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* Makefile.am (fglrx_man1x): Fixed a bug, that results in an
+	"unportable" error.
+
+2006-01-24 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* configure.ac (VERSION, AC_PACKAGE_VERSION): Update to new release of
+	ATI's driver version 8.21.7.
+
+	* Makefile.am (fglrx_man1x): Removed fglrx_pplay.1x.xml from the list,
+	because the applications is not shipped with the ATI drivers since
+	8.20.8.
+
+	* aticonfig.1x.xml (OPTIONS): Markup fixes. Added --mode2 option,
+	which was fixed in 8.21.7. Add a few crosslinks to fglrx(4x).
+	(EXAMPLES): Added a few more examples.
+	(BUGS): The --mode2 bug was fixed in 8.21.7.
+
+	* fglrx.4x.xml (CONFIGURATION DETAILS): Added "ForceMonitors" and
+	"Mode2" options.
+
+	* fglrx_pplay.1x.xml (BUGS): Added, because it's also not open-source.
+
+	* fglrxinfo.1x.xml (BUGS): Added, because it's also not open-source.
+	Added bug info about wrong identification.
+
+2006-01-23 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* README: Added information about necessary and recommended packages
+	and programs.
+
+2006-01-23 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* acinclude.m4 (AM_DOCBOOK_XSL_MAN_DIR): Fixed URL of the directory
+	containing docbook.xsl. Thanks to Mathieu Malaterre.
+
+2006-01-22 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* Makefile.am (CLEANFILES): Do not list all items. Better use already
+	defined variables.
+
+2006-01-22 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* Makefile.am (% : %.xml): Remove the stuff necessary to pass
+	distcheck. Make it easy and simple.
+
+2006-01-22 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* fglrx_man_entities.dtd.in: Added. This file contains all variables
+	we need and define during configure process. So we can rename all
+	.xml.in files back to .xml.
+
+	* fglrx_man_stylesheet.xsl.in: Added. This file contains the path to
+	Norman Walsh's XSL stylesheet for manpages. So we can rename
+	fglrx_man.xsl.in back to fglrx_man.xsl.
+
+	* aticonfig.1x.xml.in: Removed and replaced by aticonfig.1x.xml.
+
+	* fgl_glxgears.1x.xml.in: Removed and replaced by fgl_glxgears.1x.xml.
+
+	* fglrx.4x.xml.in: Removed and replaced by fglrx.4x.xml.
+
+	* fglrx_pplay.1x.xml.in: Removed and replaced by fglrx_pplay.1x.xml.
+
+	* fglrx_xgamma.1x.xml.in: Removed and replaced by fglrx_xgamma.1x.xml.
+
+	* fglrxconfig.1x.xml.in: Removed and replaced by fglrxconfig.1x.xml.
+
+	* fglrxinfo.1x.xml.in: Removed and replaced by fglrxinfo.1x.xml.
+
+	* fireglcontrol.1.xml.in: Removed and replaced by fireglcontrol.1.xml.
+	
+	* aticonfig.1x.xml: Readded.
+	(DOCTYPE): Sourced out fglrx_man project entities. See also
+	fglrx_man_entities.dtd(.in).
+
+	* fgl_glxgears.1x.xml: Ditto.
+
+	* fglrx.4x.xml: Ditto.
+
+	* fglrx_pplay.1x.xml: Ditto.
+
+	* fglrx_xgamma.1x.xml: Ditto.
+
+	* fglrxconfig.1x.xml: Ditto.
+
+	* fglrxinfo.1x.xml: Ditto.
+
+	* fireglcontrol.1.xml: Ditto.
+
+	* fglrx_man.xsl.in: Removed and replaced by fglrx_man.xsl.
+
+	* fglrx_man.xsl: Readded.
+	(xsl:import): Sourced out import of Norman Walsh's stylesheet. See
+	fglrx_man_stylesheet.xsl(.in).
+
+	* configure.ac: Applied all changes as mentioned above. Additionally
+	fix the output.
+
+	* Makefile.am: Ditto. Fixed distcheck errors.
+
+	* acinclude.m4: Fixed a bug. The mandir variable was detected as
+	command.
+
+2006-01-21 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* AUTHORS: Use the more common "manpage(s)" term, instead of
+	"man-page(s)".
+
+	* Makefile.am: Ditto.
+
+	* aticonfig.1x.xml.in: Ditto.
+
+	* fgl_glxgears.1x.xml.in: Ditto.
+
+	* fglrx.4x.xml.in: Ditto.
+
+	* fglrx_man.xsl.in: Ditto.
+
+	* fglrx_pplay.1x.xml.in: Ditto.
+
+	* fglrx_xgamma.1x.xml.in: Ditto.
+
+	* fglrxconfig.1x.xml.in: Ditto.
+
+	* fglrxinfo.1x.xml.in: Ditto.
+
+	* fireglcontrol.1.xml.in: Ditto.
+
+	* acinclude.m4: Ditto.
+	(AM_XSERVER_MAN_DIR): Fixed description.
+
+	* TODO: Fixed and added notes.
+
+2006-01-20 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* Makefile.am (__XMLLINT_FLAGS__): Define all to-use xmllint options
+	via a variable, which is set by the configure script.
+	(__XSLTPROC_FLAGS__): Ditto for xsltproc options (if any).
+
+	* configure.ac: Change the order in which the macros are called.
+	(XMLLINT_FLAGS, XSLTPROC_FLAGS): Add these variables to let the user
+	define custom options.
+
+2006-01-20 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* AUTHORS: Add Flavio.
+
+	* Makefile.am (XMLLINT, __XMLLINT__, XSLTPROC, __XSLTPROC__): Replace
+	XMLLINT and XSLTPROC with __XMLLINT__ and __XSLTPROC__ to use a unique
+	scheme vor all variables.
+
+	* configure.ac: Label sub-parts.
+	(AC_INIT, AM_INIT_AUTOMAKE): Fix AC_PACKAGE_NAME and PACKAGE.
+	(XMLLINT, __XMLLINT__, XSLTPROC, __XSLTPROC__): Replace XMLLINT and
+	XSLTPROC with __XMLLINT__ and __XSLTPROC__ to use a unique scheme vor
+	all variables.
+
+2006-01-20 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* AUTHORS: Initially added.
+
+	* COPYING: Ditto.
+
+	* NEWS: Ditto.
+
+	* README: Ditto.
+
+	* autogen.sh: Ditto.
+
+	* configure.ac: Ditto.
+
+	* Makefile: Removed and replaced by Makefile.am.
+
+	* Makefile.am: Added.
+
+	* acinclude.m4 (AM_DOCBOOK_XSL_MAN_DIR, AM_DOCBOOK_DTD_44_DIR)
+	(AM_XSERVER_PARAMS, AM_XSERVER_MAN_DIR): Initially added.
+
+	* aticonfig.1x.xml: Removed and replaced by aticonfig.1x.xml.in.
+
+	* aticonfig.1x.xml.in: Initially added.
+
+	* fgl_glxgears.1x.xml: Removed and replaced by fgl_glxgears.1x.xml.in. 
+
+	* fgl_glxgears.1x.xml.in: Initially added.
+
+	* fglrx.4x.xml: Removed and replaced by fglrx.4x.xml.in.
+
+	* fglrx.4x.xml.in: Initially added.
+
+	* fglrx_pplay.1x.xml: Removed and replaced by fglrx_pplay.1x.xml.in.
+
+	* fglrx_pplay.1x.xml.in: Initially added.
+
+	* fglrx_xgamma.1x.xml: Removed and replaced by fglrx_xgamma.1x.xml.in.
+
+	* fglrx_xgamma.1x.xml.in: Initially added.
+
+	* fglrxconfig.1x.xml: Removed and replaced by fglrxconfig.1x.xml.in.
+
+	* fglrxconfig.1x.xml.in: Initially added.
+
+	* fglrxinfo.1x.xml: Removed and replaced by fglrxinfo.1x.xml.in.
+
+	* fglrxinfo.1x.xml.in: Initially added.
+
+	* fireglcontrol.1.xml: Removed and replaced by fireglcontrol.1.xml.in.
+
+	* fireglcontrol.1.xml.in: Initially added.
+
+	* fglrx_man.xsl.in (xsl:import): Fix the replacement-variable.
+
+2006-01-20 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* fglrx.4x.xml (SEE ALSO): Fix the man-volume for Xserver.
+
+2006-01-20 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* Makefile: Be more informative.
+
+2006-01-20 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* Makefile: Clean-up.
+
+2006-01-20 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* Makefile: Colored output should be bold.
+
+2006-01-20 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* Makefile: Clean up. Make it better readable. Color the output, so
+	also the output is better readable.
+
+2006-01-20 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* Makefile: Fix a recently introduced bug and rmove the SED variable.
+
+2006-01-20 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* aticonfig.1x.xml (__XSERVER_NAME__, __XSERVER_STRING__)
+	(__XSERVER_CONF__, __XSERVER_CONFIG__)
+	(dhxserver, dhxserverstring, dhxserverconf, dhxserverconfig): Replace
+	the variables in the source with entities, so we only need to replace
+	the variables once per source file.
+
+	* fgl_glxgears.1x.xml: Ditto. See above.
+
+	* fgl_glxgears.1x.xml: Ditto. See above.
+	
+	* fglrx.4x.xml: Ditto. See above.
+
+	* fglrx_pplay.1x.xml: Ditto. See above.
+
+	* fglrx_xgamma.1x.xml: Ditto. See above.
+
+	* fglrxconfig.1x.xml: Ditto. See above.
+
+	* fglrxinfo.1x.xml: Ditto. See above.
+
+	* fireglcontrol.1.xml: Ditto. See above.
+
+2006-01-19 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* fglrx_man.xsl: Renamed to fglrx_man.xsl.in. See last change in
+	Makefile.
+	
+	* fglrx_man.xsl.in: Added. See above.
+	(xsl:import): Change from a determined stylesheet to a variable
+	__XSL_PATH__, which is determined in and substituted by Makefile.
+
+2006-01-19 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* Makefile: Restructured. Work out more flexibility.
+	(XSERVER_NAME, DRIVER_NAME, DRIVER_VERSION, DRIVER_STRING): Be
+	flexible und unique when determine, for which X-server version we
+	build the man-pages and which man-pages we reference.
+	(XSERVER_STRING, XSERVER_CONF, XSERVER_CONFIG): Determine the
+	config-file name, the application name and the configuration utility
+	for both possible X-servers by reading the XSERVER_NAME variable, so
+	we can cleanly reference their man-pages.
+	(man): Removed man target.
+	($(OBJS), XSL_PATH): Add the fglrx_man.xsl target (because we renamed
+	this file) and allow a a dynamic definition of the full path to
+	manpages/docbook.xsl via XSL_PATH.
+	(% : %.xml, %.0.xml : %.xml, % : %.0.xml): Add a step, where the above
+	mentioned variables are set inside the XML sources.
+	(clean): Fix target so DESTDIR is not completely removed (we do not
+	want to maybe remove a system path). Also make sure, all created files
+	are removed.
+
+	* aticonfig.1x.xml: Fix entities to fit their meaning. Fix the
+	<citerefentry> usage and use variables __FOOBAR__ (see above).
+	(dhdate, dhulpackage, dhucpackage): Removed.
+	(dhversion, dhname, dhucname): Added.
+	(dhpackage, dhproduct): Changed their meaning.
+
+	* fgl_glxgears.1x.xml: Ditto. See above.
+
+	* fglrx.4x.xml: Ditto. See above.
+
+	* fglrx_pplay.1x.xml: Ditto. See above.
+
+	* fglrx_xgamma.1x.xml: Ditto. See above.
+
+	* fglrxconfig.1x.xml: Ditto. See above.
+
+	* fglrxinfo.1x.xml: Ditto. See above.
+
+	* fireglcontrol.1.xml: Ditto. See above.
+
+2006-01-13 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* Makefile (CURDIR): Define the full path of the current directory.
+
+2006-01-13 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* Makefile (BUILDDIR, DESTDIR): Replace the BUILDDIR variable with the
+	more common DESTDIR variable.
+
+2006-01-13 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* TODO: Add more things.
+
+2006-01-10 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* TODO: Fixed a file-name.
+
+2006-01-08 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* aticonfig.1x.xml: Move TODOs into new TODO file.
+
+	* fglrx.4x.xml: Ditto.
+
+	* fglrxconfig.1x.xml: Ditto.
+
+	* fireglcontrol.1.xml: Ditto.
+
+	* TODO: Added. See above.
+
+	* fglrx_man.xsl: Minor clean-up.
+
+2006-01-06 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* fglrx_man.xsl (articleinfo|bookinfo|refentryinfo)
+	(author|editor|othercredit): Automatically add contributors to
+	AUTHOR(S) section. If there is more than one editor, the separators
+	should be created the same way as for authors. Ditto for contributors.
+
+2006-01-03 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* ChangeLog: Fixed wrong date and typos.
+
+	* fglrx.4x.xml (DESCRIPTION): Added an intro for the description
+	(still not finished).
+
+2006-01-03 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* fglrx.4x.xml (SUPPORTED HARDWARE): Fixed verbal issue.
+	(CONFIGURATION DETAILS): Added more information to introduction.
+	(SEE ALSO): Removed pci.ids hint, because this is now mentioned at a
+	better place, where we talk about the ChipID option.
+
+2006-01-02 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* fglrx.4x.xml (SUPPORTED HARDWARE): Fix a sequence mistake.
+
+2006-01-02 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* ChangeLog: Changed local keyword.
+
+	* Makefile: Ditto.
+
+	* aticonfig.1x.xml: Ditto.
+
+	* fgl_glxgears.1x.xml: Ditto.
+
+	* fglrx.4x.xml: Ditto.
+
+	* fglrxconfig.1x.xml: Ditto.
+
+	* fglrxinfo.1x.xml: Ditto.
+
+	* fglrx_man.xsl: Ditto.
+
+	* fglrx_pplay.1x.xml: Ditto.
+
+	* fglrx_xgamma.1x.xml: Ditto.
+
+	* fireglcontrol.1.xml: Ditto.	
+
+2006-01-02 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* Makefile: Added Copyright info.
+
+	* fglrx_man.xsl: Ditto.
+	
+	* aticonfig.1x.xml (refentryinfo/copyright): Fixed Copyright info.
+	
+	* fgl_glxgears.1x.xml (refentryinfo/copyright): Ditto.
+	
+	* fglrxconfig.1x.xml (refentryinfo/copyright): Ditto.
+	
+	* fglrxinfo.1x.xml (refentryinfo/copyright): Ditto.
+	
+	* fglrx_pplay.1x.xml (refentryinfo/copyright): Ditto.
+	
+	* fglrx_xgamma.1x.xml (refentryinfo/copyright): Ditto.
+	
+	* fireglcontrol.1.xml (refentryinfo/copyright): Ditto.
+
+	* fglrx.4x.xml (refentryinfo/copyright): Ditto.
+	(SUPPORTED HARDWARE): Completed list of supported chipsets (fits
+	8.20.8).
+
+2005-12-31 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* ChangeLog: Fix new local keyword (fglrx_man variable didn't work).
+
+	* Makefile: Ditto.
+
+	* aticonfig.1x.xml: Ditto.
+
+	* fgl_glxgears.1x.xml: Ditto.
+
+	* fglrx.4x.xml: Ditto.
+
+	* fglrxconfig.1x.xml: Ditto.
+
+	* fglrxinfo.1x.xml: Ditto.
+
+	* fglrx_man.xsl: Ditto.
+
+	* fglrx_pplay.1x.xml: Ditto.
+
+	* fglrx_xgamma.1x.xml: Ditto.
+
+	* fireglcontrol.1.xml: Ditto.
+
+2005-12-31 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* ChangeLog: Adjust headers and replace the Id with the fglrx_man
+	keyword.
+
+	* Makefile: Ditto.
+
+	* aticonfig.1x.xml: Ditto.
+
+	* fgl_glxgears.1x.xml: Ditto.
+
+	* fglrx.4x.xml: Ditto.
+
+	* fglrxconfig.1x.xml: Ditto.
+
+	* fglrxinfo.1x.xml: Ditto.
+
+	* fglrx_man.xsl: Ditto.
+
+	* fglrx_pplay.1x.xml: Ditto.
+
+	* fglrx_xgamma.1x.xml: Ditto.
+
+	* fireglcontrol.1.xml: Ditto.
+
+2005-12-30 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* aticonfig.1x.xml (BUGS): Fixed a typo.
+
+2005-12-30 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* fglrx.4x.xml (CONFIGURATION DETAILS): Fixed dual-head mode value for
+	DesktopSetup option.
+
+2005-12-28 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* aticonfig.1x.xml (OPTIONS): Added several options and sections (e.g.
+	FSAA Options, Advanced Options). Added more cross-references and fixed
+	a few markup issues.
+	(BUGS): Added a few hints about existing bugs.
+
+	* fglrx.4x.xml (CONFIGURATION DETAILS): Added "KernelModuleParm"
+	option and fixed "TVStandard" option values.
+
+2005-12-23 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* fglrx.4x.xml (SUPPORTED HARDWARE): Markup changes.
+	(CONFIGURATION DETAILS): Added new and more infos about several
+	options and fixed a few markup issues.
+
+2005-12-21 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* aticonfig.1x.xml (OPTIONS): Began to add cross-references to
+	x.org/XF86Config-4 config file options. Fix a few markup issues
+	(simplelist, note/caution, option -> parameter).
+
+	* fglrx.4x.xml (CONFIGURATION DETAILS): Added a few new options. Added
+	new content.
+
+2005-12-21 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* fglrx_man.xsl: Only cleanup in the documenting comments.
+
+2005-12-20 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* aticonfig.1x.xml (OPTIONS/Screen-Related Options): Minor rephrase.
+
+	* fglrx.4x.xml (CONFIGURATION DETAILS): New content. Add an ID to
+	every option. Instead of mentioning an option, link them with an xref
+	tag, which automatically results in the Option string.
+
+	* fglrx_man.xsl (caution|important|note|tip|warning): Customize
+	admonition template. There should be no newline after the title.
+	(segmentedlist, segmentedlist/*): Added a template for segmented
+	lists, which result in tables.
+	(xref): Customize xref template to allow a direkt linking to an
+	Option.
+	
+2005-12-20 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* fgl_glxgears.1x.xml (DESCRIPTION): Typo fix.
+
+	* fglrx.4x.xml (CONFIGURATION DETAILS): Typo fix. Semantic fixes
+
+	* fireglcontrol.1.xml (BUGS): Fix linewrap.
+
+2005-12-20 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* fglrx_man.xsl (author|editor): Apply imports.
+	(articleinfo/author): Cleanup.
+
+2005-12-19 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* aticonfig.1x.xml (DESCRIPTION, Screen-Related Options): Typo fixes.
+
+2005-12-19 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* fglrx_man.xsl (articleinfo/author): Fix the usage of ',' and 'and'
+	in a list of authors.
+
+2005-12-19 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* fireglcontrol.1.xml: Initially added man-page for the fireglcontrol
+	application.
+
+	* Makefile (OBJS): ditto.
+
+	* fglrx_man.xsl (articleinfo/author): Added (overwriting) template to
+	automatically add the AUTHOR(S) strings I want. So the AUTHOR(S)
+	sections can be removed from all man-pages.
+
+	* fgl_glxgears.1x.xml (AUTHORS): Removed. See above.
+
+	* fglrx_pplay.1x.xml (AUTHORS): Ditto.
+
+	* fglrxinfo.1x.xml (AUTHORS): Ditto.
+	
+	* aticonfig.1x.xml (AUTHORS): Ditto. Fixed copyright (Flavios
+	contribution).
+
+	* fglrx.4x.xml (AUTHORS): Ditto.
+
+	* fglrx_xgamma.1x.xml (AUTHORS): Ditto.
+
+	* fglrxconfig.1x.xml (AUTHORS): Ditto. Fixed copyright (my
+	contribution).
+
+2005-12-18 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* fglrx_man.xsl: Import the template instead of a complete
+	redefinition.
+
+2005-12-18 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* fglrx.4x.xml: Removed the comment about the patch for lists.xsl,
+	because we do the trick with fglrx_man.xsl.
+
+2005-12-18 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* fglrx_man.xsl: Found the trick and readded the template.
+
+2005-12-18 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* fglrx_man.xsl: Comment out the template. It does not work as
+	expected.
+
+	* ChangeLog: Fixed date format.
+
+2005-12-18 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* fglrx_man.xsl: Initially added.
+	
+	* Makefile (XSL_DIR, XSL_MAN): Use the newly created fglrx_man.xsl,
+	which includes the stylesheets by Norm Walsh.
+	(XML_DTD, man): Use the DTD provided by docbook-xml by default.
+
+2005-12-04 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* ChangeLog: Fix a bad date.
+
+2005-12-04 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* aticonfig.1x.xml (DESCRIPTION, OPTIONS): Add at least a short
+	description and a preface.
+
+	* fglrx.4x.xml (CONFIGURATION DETAILS): Add cross-reference to
+	XFree86's configuration file man-page.
+
+2005-12-03 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* Makefile (man): Added the XML_DTD variable, which can be used to
+	define the path to the DTD xmllint should use for validation.
+	Hopefully this allows a more flexible usage.
+
+2005-12-02 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* aticonfig.1x.xml (OPTIONS, BUGS): Replace the application name with
+	the according system entity.
+	(EXAMPLES): Begin with a few initial examples.
+
+	* fglrxconfig.1x.xml (BUGS): Replace the application name with the
+	according system entity.
+
+2005-12-02 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* fglrx.4x.xml (CONFIGURATION DETAILS): Forgot one issue (ditto thanks
+	to Flavio).
+
+2005-12-02 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* fglrxconfig.1x.xml: Added (written by Flavio Stanchina - thanks to
+	him).
+
+	* Makefile (OBJS): Added fglrxconfig.1x to the list of man-pages to
+	build.
+
+	* fglrx.4x.xml (CONFIGURATION DETAILS): Fix a syntax issue (thanks to
+	Flavio Stanchina).
+
+	* fglrx_xgamma.1x.xml (DESCRIPTION): Typo fix (thanks to Flavio
+	Stanchina).
+
+2005-11-25 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* fglrx.4x.xml (SEE ALSO): Add note about pci.ids file, where you can
+	find the vendor and bus IDs for fot ATI products.
+
+2005-11-25 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* fgl_glxgears.1x.xml (ENVIRONMENT): Add info about LIBGL_DEBUG
+	environemnt variable.
+
+	* fglrxinfo.1x.xml (ENVIRONMENT): Ditto.
+
+2005-11-19 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* fgl_glxgears.1x.xml (DOCTYPE): Use a local copy of the DTD.
+
+	* fglrx_pplay.1x.xml (DOCTYPE): Ditto.
+
+	* fglrx_xgamma.1x.xml (DOCTYPE): Ditto.
+
+	* fglrxinfo.1x.xml (DOCTYPE): Ditto.
+
+	* fglrx.4x.xml (DOCTYPE): Ditto.
+	(SUPPORTED HARDWARE): Remove dingbat characters for the moment (are
+	not handled smoothly).
+
+	* aticonfig.1x.xml (DOCTYPE): Ditto.
+	(SEE ALSO): Fix indenting (thanks to Flavio Stanchina).
+
+2005-11-16 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* fgl_glxgears.1x.xml (DESCRIPTION): Fixed typo.
+
+2005-11-16 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* fgl_glxgears.1x.xml (SEE ALSO): Fixed indenting (thanks to Flavio
+	Stanchina).
+
+	* fglrx.4x.xml (CONFIGURATION DETAILS): Fixed typos (thanks to Flavio
+	Stanchina).
+
+2005-11-15 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* aticonfig.1x.xml (SEE ALSO): Fixed syntax.
+
+	* fgl_glxgears.1x.xml (SEE ALSO): Ditto.
+
+	* fglrx.4x.xml (SEE ALSO): Ditto.
+
+	* fglrx_pplay.1x.xml (SEE ALSO): Ditto.
+
+	* fglrx_xgamma.1x.xml (SEE ALSO): Ditto.
+
+	* fglrxinfo.1x.xml (SEE ALSO): Ditto.
+
+2005-11-15 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* aticonfig.1x.xml: Added short TODO notes.
+	(OPTIONS): Completed list of options from command-line output of
+	aticonfig.
+	(EXAMPLES): Added initial examples section made from the command-line
+	output of aticonfig.
+	(BUGS): Added.
+	(SEE ALSO): Added X configuration file references.
+
+2005-11-15 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* ChangeLog: Fixed dates (stupid mistake).
+	
+	* aticonfig.1x.xml: Added initial aticonfig man-page.
+	
+	* Makefile (OBJS): Added aticonfig.1x.xml.
+	(man): Use implicit rule. This allows the individual creation of
+	man-pages using 'make man_source.xml'.
+	(distclean): Added.
+
+	* fglrx.4x.xml: Added a short notice.
+
+2005-11-13 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* ChangeLog: Fixed formatting.
+
+2005-11-13 Daniel Leidert <daniel.leidert.spam@gmx.net>
+
+	* fgl_glxgears.1x.xml: Added document ID and a summary.
+
+	* fglrxinfo.1x.xml: ditto.
+
+	* fglrx_pplay.1x.xml: ditto.
+
+	* fglrx_xgamma.1x.xml: ditto.
+
+	* fglrx.4x.xml: ditto. Fixed an internal malformation.
+
+	* Makefile: Added short comment, that fglrx_pplay is obsolete since
+	8.19.10.
+
+2005-11-13 Daniel Leidert <daniel.leidert.spam@gmx.net>
+	
+	* Makefile: Imitial import.
+
+	* fgl_glxgears.1x.xml: Ditto.
+
+	* fglrx.4x.xml: Ditto.
+
+	* fglrxinfo.1x.xml: Ditto.
+
+	* fglrx_pplay.1x.xml: Ditto.
+
+	* fglrx_xgamma.1x.xml: Ditto.
+
+# UTF-8

@@ -1,0 +1,4 @@
+arch/_ARCH_/usr/_LIB_/libamdocl32.so		_LIBDIR_/
+arch/_ARCH_/usr/_LIB_/libSlotMaximizerAg.so	_LIBDIR_/
+arch/_ARCH_/usr/_LIB_/libSlotMaximizerBe.so	_LIBDIR_/
+arch/x86/etc/OpenCL/vendors/amdocl32.icd	etc/OpenCL/vendors/

@@ -1,0 +1,16 @@
+# Document  $WgDD: fglrx_man/AUTHORS,v 1.8 2006-04-14 14:52:01 dleidert Exp $
+# Summary   Authors of the fglrx_man project.
+
+Authors:
+
+  Daniel Leidert <daniel.leidert@wgdd.de>.
+  Flavio Stanchina <flavio@stanchina.net>.
+  Mathieu Malaterre <mathieu@malaterre.com>.
+  Michael Gilbert <michael.s.gilbert@gmail.com>.
+
+Every manpage XML source contains a <authorgroup> or <author> section. Please
+refer to this section to determine the author of a special manpage or have a
+look at the AUTHOR(S) section in the final manpage.
+
+Contributions are mentioned in THANKS.
+

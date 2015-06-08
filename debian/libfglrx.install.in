@@ -1,0 +1,7 @@
+arch/_ARCH_/usr/_LIB_/libatiuki.so.1.0			_LIBDIR_/
+arch/_ARCH_/usr/_LIB_/libaticaldd.so			_LIBDIR_/
+arch/_ARCH_/usr/_LIB_/libaticalcl.so			_LIBDIR_/
+arch/_ARCH_/usr/_LIB_/libaticalrt.so			_LIBDIR_/
+arch/_ARCH_/usr/X11R6/_LIB_/libatiadlxx.so		_LIBDIR_/
+arch/_ARCH_/usr/X11R6/_LIB_/libfglrx_dm.so.1.0		_LIBDIR_/
+arch/_ARCH_/usr/X11R6/_LIB_/modules/dri/fglrx_dri.so	_LIBDIR_/dri/

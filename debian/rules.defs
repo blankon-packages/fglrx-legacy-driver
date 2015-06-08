@@ -1,0 +1,8 @@
+MULTIARCH		 = yes
+SIGNATURE_VERSION	 =
+XORG_ABI_LIST		 = 19 12 11 10 8 6.0
+variant			 = -legacy
+variant_desc_suffix	 = $${Space}(legacy)
+INSTALLER_SUFFIX	 = legacy-linux-x86.x86_64
+URL_PATH		 = www2.ati.com/drivers/legacy
+REAL_UPSTREAM_VERSION	 = $(INTERNAL_VERSION)

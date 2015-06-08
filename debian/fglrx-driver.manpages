@@ -1,0 +1,7 @@
+debian/man/aticonfig.1x
+debian/man/fglrxinfo.1x
+debian/man/fglrx_xgamma.1x
+debian/man/fgl_glxgears.1x
+debian/man/fglrx.4x
+debian/man/atiode.1x
+debian/man/atiodcli.1x

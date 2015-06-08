@@ -1,0 +1,9 @@
+common/lib/modules/fglrx/build_mod/*.c			usr/src/modules/_FGLRX_/
+common/lib/modules/fglrx/build_mod/*.h			usr/src/modules/_FGLRX_/
+common/lib/modules/fglrx/build_mod/2.6.x/Makefile	usr/src/modules/_FGLRX_/
+arch/_ARCH_/lib/modules/fglrx/build_mod/libfglrx_ip.a	usr/src/modules/_FGLRX_/
+debian/changelog					usr/src/modules/_FGLRX_/debian/
+debian/copyright					usr/src/modules/_FGLRX_/debian/
+debian/compat						usr/src/modules/_FGLRX_/debian/
+debian/module/*						usr/src/modules/_FGLRX_/debian/
+debian/bug-script					usr/src/modules/_FGLRX_/debian/

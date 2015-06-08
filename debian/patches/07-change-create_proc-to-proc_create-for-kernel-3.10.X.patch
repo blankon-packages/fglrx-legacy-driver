@@ -1,0 +1,64 @@
+From 9cd3d917851adf5be745cbdad0d3d178994e122e Mon Sep 17 00:00:00 2001
+From: Krzysztof Kolasa <kkolasa@winsoft.pl>
+Date: Sun, 7 Jul 2013 14:52:26 +0200
+Subject: change create_proc* to proc_create for kernel >= 3.10.X
+Origin: other, https://github.com/kolasa/fglrx-8.97.100.7/commit/9cd3d917851adf5be745cbdad0d3d178994e122e
+
+---
+ drm_proc.h |   15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+
+diff --git a/common/lib/modules/fglrx/build_mod/drm_proc.h b/common/lib/modules/fglrx/build_mod/drm_proc.h
+index 1e3ab4a..3879352 100644
+--- a/common/lib/modules/fglrx/build_mod/drm_proc.h
++++ b/common/lib/modules/fglrx/build_mod/drm_proc.h
+@@ -95,22 +95,35 @@ struct proc_dir_entry *DRM(proc_init)(drm_device_t *dev, int minor,
+ 	int		      i, j;
+ 	char                  name[64];
+ 
++#if LINUX_VERSION_CODE < KERNEL_VERSION(3,10,0)
+ 	if (!minor) root = create_proc_entry("dri", S_IFDIR, NULL);
++#else
++	if (!minor) root = proc_mkdir("dri", NULL);
++#endif
+ 	if (!root) {
+ 		DRM_ERROR("Cannot create /proc/ati\n");
+ 		return NULL;
+ 	}
+ 
+ 	sprintf(name, "%d", minor);
++#if LINUX_VERSION_CODE < KERNEL_VERSION(3,10,0)
+ 	*dev_root = create_proc_entry(name, S_IFDIR, root);
++#else
++	*dev_root = proc_mkdir(name, root);
++#endif
+ 	if (!*dev_root) {
+ 		DRM_ERROR("Cannot create /proc/ati/%s\n", name);
+ 		return NULL;
+ 	}
+ 
+ 	for (i = 0; i < DRM_PROC_ENTRIES; i++) {
++#if LINUX_VERSION_CODE < KERNEL_VERSION(3,10,0)
+ 		ent = create_proc_entry(DRM(proc_list)[i].name,
+ 					S_IFREG|S_IRUGO, *dev_root);
++#else
++		ent = proc_create_data(DRM(proc_list)[i].name,
++					S_IFREG|S_IRUGO, *dev_root, &firegl_fops, dev);
++#endif
+ 		if (!ent) {
+ 			DRM_ERROR("Cannot create /proc/ati/%s/%s\n",
+ 				  name, DRM(proc_list)[i].name);
+@@ -121,8 +134,10 @@ struct proc_dir_entry *DRM(proc_init)(drm_device_t *dev, int minor,
+ 			if (!minor) remove_proc_entry("dri", NULL);
+ 			return NULL;
+ 		}
++#if LINUX_VERSION_CODE < KERNEL_VERSION(3,10,0)
+ 		ent->read_proc = DRM(proc_list)[i].f;
+ 		ent->data      = dev;
++#endif
+ 	}
+ 
+ 	return root;
+-- 
+1.7.10.4
+

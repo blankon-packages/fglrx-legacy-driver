@@ -1,0 +1,19 @@
+<!--
+  Document  $WgDD: fglrx_man/fglrx_man_entities.dtd.in,v 1.5 2006-11-25 07:59:32 dleidert Exp $
+  Summary   Template to define several X-server and driver strings we need for
+            all manpages.
+-->
+
+	<!-- ATI driver variables -->
+	<!ENTITY dhproduct "@ATI_DRIVER_NAME@">
+	<!ENTITY dhversion "@ATI_DRIVER_VERSION@">
+	<!ENTITY dhpackage "@ATI_DRIVER_PACKAGE@">
+	
+	<!-- Xserver variables -->
+	<!ENTITY dhxserver       "@PROG_XSERVER_NAME@">
+	<!ENTITY dhxserverstring "@PROG_XSERVER_STRING@">
+	<!ENTITY dhxserverconf   "@PROG_XSERVER_CONF@">
+	<!ENTITY dhxserverconfig "@PROG_XSERVER_CONFIG@">
+
+	<!-- Distribution variables -->
+	<!ENTITY dhlicense "See the file <filename>@PACKAGE_LICENSE_FILE@</filename> for license and warranty information.">

@@ -1,0 +1,4 @@
+# {De}activate the atieventsd ACPI daemon.
+# true: start
+# false: do not start
+START_ATIEVENTSD=true

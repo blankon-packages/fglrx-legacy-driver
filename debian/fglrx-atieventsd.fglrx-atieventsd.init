@@ -1,0 +1,78 @@
+#!/bin/sh
+
+#
+# init.d-style example script for controlling the ATI External Events Daemon
+#
+# Distro maintainers may modify this reference script as necessary to conform
+# to their distribution policies, or they may simply substitute their own script
+# instead.  This reference script is provided merely as a simple example.
+#
+# Copyright (c) 2006, ATI Technologies Inc.  All rights reserved.
+#
+
+### BEGIN INIT INFO
+# Provides:		fglrx-atieventsd
+# Required-Start:	$syslog $remote_fs
+# Required-Stop:	$syslog $remote_fs
+# X-Start-Before:   $x-display-manager
+# Should-Start:		$local_fs
+# Should-Stop:		$local_fs
+# Default-Start:	2 3 4 5
+# Default-Stop:		0 1 6
+# Short-Description:	control ATI external events daemon
+# Description:		Starts or stops the ATI external events daemon,
+#			which handles power management for fglrx-driver.
+### END INIT INFO
+
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+
+DAEMONPATH=/usr/sbin/atieventsd
+DAEMONNAME=atieventsd
+DAEMONOPTS=""
+DESC="AMD events daemon"
+
+# Check for default file of atieventsd.
+if [ -f /etc/default/fglrx-atieventsd ] ; then
+	. /etc/default/fglrx-atieventsd
+else
+	echo "Could not read file /etc/default/fglrx-atieventsd"
+	exit 1
+fi
+
+[ -f $DAEMONPATH ] || exit 0
+
+. /lib/lsb/init-functions
+
+case "$1" in
+    start)
+		if [ "$START_ATIEVENTSD" != "true" ] ; then
+			log_warning_msg "Not starting atieventsd, it is disabled in /etc/default/fglrx-atieventsd"
+			exit 0
+		fi
+        log_daemon_msg "Starting $DESC" "$DAEMONNAME"
+        start-stop-daemon --start --name $DAEMONNAME --oknodo \
+            --quiet --exec $DAEMONPATH -- $DAEMONOPTS
+	log_end_msg $?
+        ;;
+
+    stop)
+        log_daemon_msg "Stopping $DESC" "$DAEMONNAME"
+        start-stop-daemon --quiet --stop --exec $DAEMONPATH --oknodo
+	log_end_msg $?
+        ;;
+
+    restart|force-reload)
+        $0 stop
+        sleep 1
+        $0 start
+        ;;
+    status)
+		exit 4
+		;;
+    *)
+        echo "$0 {start|stop|restart|force-reload|status}"
+        exit 3
+        ;;
+esac
+
+exit 0

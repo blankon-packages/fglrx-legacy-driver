@@ -1,0 +1,68 @@
+# Document  $WgDD: fglrx_man/TODO,v 1.17 2006-11-25 07:59:32 dleidert Exp $
+# Summary   Things to do in the fglrx_man project.
+
+File TODOs
+----------
+
+* Rename stylesheets.
+
+
+fglrx.4x.xml:
+
+  * restructure the "CONFIGURATION DETAILS" section into logical parts
+  using the <refsect2> element
+
+  * options to verify: MemClock (mem clock, DDR speed / 2?), ASICClock
+  (core clock), SWcursor, AGPSpeed, ...
+  http://www.rage3d.com/board/printthread.php?t=33774712
+  http://www.abclinuxu.cz/forum/show/53112
+  http://wiki.ubuntuusers.de/ATI/Config
+
+  * diagnostics:
+  (WW) fglrx(0): Failed to set up write-combining range (0xe0000000,0x8000000) 
+  (WW) fglrx(0): could not detect XFree86 version (query_status=-3) 
+  (WW) fglrx(0): Cannot read colourmap from VGA.  Will restore with default
+
+  * obsoleted options: AGPMode, DDCMode
+  
+  * verify chipsets
+  http://rage3d.de/grafikkartendb.php
+  http://de.wikipedia.org/wiki/Radeon
+
+
+aticonfig.1x.xml:
+
+  * add cross-references, which driver options are supported
+
+  * add more examples (probably often requested usage examples found at the
+  web)
+
+
+acinclude.m4:
+
+  * AM_XSERVER_MAN_DIR: add an automatic detection of the manpage-dirs -
+  maybe analyze the result of 'Xorg|Xfree86 -version' and depending on the
+  version, set the path
+
+
+fglrx_man.xsl:
+
+  * I think about adding the revision history and the legalnotice as comments
+  to the manpage.
+  (https://sourceforge.net/tracker/index.php?func=detail&aid=1243027&group_id=21935&atid=373750)
+
+
+General TODOs
+-------------
+
+  * other suggested environment variables to mention:
+  LIBGL_ALWAYS_INDIRECT=0|1 and LIBGL_VERBOSE=0|1 (add these environment
+  variables also to fglrx.4x?)
+
+  * 8.26.18:
+  https://www2.ati.com/drivers/linux/linux_8.25.18.html
+  https://www2.ati.com/drivers/linux/linux_8.26.18.html
+  http://www.phoronix.com/scan.php?page=article&item=501&num=1
+  http://www.rage3d.com/board/showthread.php?t=33859654
+
+# UTF-8

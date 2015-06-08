@@ -1,0 +1,19 @@
+no-upstream-changelog
+[i386]: binary-file-built-without-LFS-support
+hardening-no-fortify-functions
+hardening-no-relro
+package-name-doesnt-match-sonames libSlotMaximizerAg libSlotMaximizerBe
+sharedobject-in-library-directory-missing-soname
+[i386]: shlib-with-non-pic-code usr/lib*/libSlotMaximizerAg.so
+[i386]: shlib-with-non-pic-code usr/lib*/libSlotMaximizerBe.so
+[i386]: spelling-error-in-binary usr/lib*/libamdocl32.so ment meant
+[i386]: spelling-error-in-binary usr/lib*/libamdocl32.so nam name
+[amd64]: spelling-error-in-binary usr/lib*/libamdocl64.so ment meant
+[amd64]: spelling-error-in-binary usr/lib*/libamdocl64.so teH the
+spelling-error-in-binary usr/lib*/libSlotMaximizerBe.so Fuction Function
+spelling-error-in-binary
+shlib-without-versioned-soname usr/lib*/libSlotMaximizerBe.so libSlotMaximizerBe.so
+shlib-without-versioned-soname usr/lib*/libSlotMaximizerAg.so libSlotMaximizerAg.so
+no-symbols-control-file usr/lib*/libSlotMaximizerBe.so
+no-symbols-control-file usr/lib*/libSlotMaximizerAg.so
+postinst-must-call-ldconfig usr/lib*/libSlotMaximizerBe.so

@@ -1,0 +1,4 @@
+common/lib/modules/fglrx/build_mod/*.c			usr/src/fglrx-_VERSION_/
+common/lib/modules/fglrx/build_mod/*.h			usr/src/fglrx-_VERSION_/
+common/lib/modules/fglrx/build_mod/2.6.x/Makefile	usr/src/fglrx-_VERSION_/
+arch/_ARCH_/lib/modules/fglrx/build_mod/libfglrx_ip.a	usr/src/fglrx-_VERSION_/

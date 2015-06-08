@@ -1,0 +1,1883 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+"/usr/share/xml/docbook/schema/dtd/4.4/docbookx.dtd" [
+
+<!--
+  Document  $WgDD: fglrx_man/fglrx.4x.xml,v 1.62 2007-06-02 12:51:31 dleidert Exp $
+  Summary   Manpage for the fglrx kernel module. Contains a
+            description of all available supported X.org/XFree86 options.
+
+  Copyright (C) 2005-2007 Daniel Leidert <daniel.leidert@wgdd.de>.
+  Copyright (C) 2005-2006 Flavio Stanchina <flavio@stanchina.net>.
+  All rights reserved.
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+	<!ENTITY dhname    "fglrx">
+	<!ENTITY dhucname  "FGLRX">
+	<!ENTITY dhsection "4x">
+	
+	<!ENTITY % _fglrx_man_entities SYSTEM "fglrx_man_entities.dtd">
+	%_fglrx_man_entities;
+	
+]>
+
+<refentry id="fglrx_4x" lang="en">
+	<refentryinfo>
+		<title>&dhpackage;</title>
+		<productname>&dhproduct;</productname>
+		<releaseinfo role="version">&dhversion;</releaseinfo>
+		<date>$Date: 2007-06-02 12:51:31 $</date>
+		<authorgroup>
+			<author>
+				<firstname>Daniel</firstname>
+				<surname>Leidert</surname>
+				<affiliation>
+					<address>
+						<email>daniel.leidert@wgdd.de</email>
+					</address>
+				</affiliation>
+			</author>
+			<author>
+				<firstname>Flavio</firstname>
+				<surname>Stanchina</surname>
+				<affiliation>
+					<address>
+						<email>flavio@stanchina.net</email>
+					</address>
+				</affiliation>
+				<contrib>Author and Debian package maintainer.</contrib>
+			</author>
+			<author>
+				<firstname>Mathieu</firstname>
+				<surname>Malaterre</surname>
+				<affiliation>
+					<address>
+						<email>mathieu@malaterre.com</email>
+					</address>
+				</affiliation>
+			</author>
+			<othercredit>
+				<firstname>Matthijs</firstname>
+				<surname>Kooijman</surname>
+				<contrib>Debian Bug report <ulink url="http://bugs.debian.org/360819"/>.</contrib>
+				<affiliation>
+					<address>
+						<email>m.kooijman@student.utwente.nl</email>
+					</address>
+				</affiliation>
+			</othercredit>
+			<othercredit>
+				<othername>Gentoo ATI Radeon FAQ</othername>
+				<contrib>Many things in DIAGNOSTICS. Information about several options.</contrib>
+			</othercredit>
+		</authorgroup>
+		<copyright>
+			<year>2005</year>
+			<year>2006</year>
+			<year>2007</year>
+			<holder>Daniel Leidert</holder>
+		</copyright>
+		<copyright>
+			<year>2005</year>
+			<year>2006</year>
+			<holder>Flavio Stanchina</holder>
+		</copyright>
+		<legalnotice>
+			<para>&dhlicense;</para>
+		</legalnotice>
+	</refentryinfo>
+	<refmeta>
+		<refentrytitle>&dhucname;</refentrytitle>
+		<manvolnum>&dhsection;</manvolnum>
+	</refmeta>
+	<refnamediv id="name">
+		<refname>&dhname;</refname>
+		<refpurpose>proprietary ATI RADEON and FireGL display driver</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="synopsis">
+		<synopsis>
+<option>Section "Device"</option>
+  <option>Identifier</option> "<replaceable>devname</replaceable>"
+  <option>Driver "fglrx"</option>
+  <option>...</option>
+<option>EndSection</option>
+		</synopsis>
+	</refsynopsisdiv>
+	<refsect1 id="description">
+		<title>DESCRIPTION</title>
+		<para><package>&dhname;</package> is a <citerefentry>
+				<refentrytitle>&dhxserver;</refentrytitle>
+				<manvolnum>7x</manvolnum>
+			</citerefentry> driver for
+			ATI (<trademark>MOBILITY</trademark>) <productname class="registered">RADEON</productname>
+			and (<trademark>MOBILITY</trademark>) <productname class="trade">FireGL</productname>
+			based video cards. The driver provides hardware acceleration for 3D graphics and video
+			playback. It includes support for dual displays, TV Output and as of version 8.21.7 also
+			OpenGL 2.0 (<acronym>GLSL</acronym>).
+		</para>
+	</refsect1>
+	<refsect1 id="supported_hardware">
+		<title>SUPPORTED HARDWARE</title>
+		<para>Radeon HD 2400 and later AGP or PCI Express cards, as well as the 
+			FireGL 2007 series and later.  Click on the 'See Release Notes' link
+			at http://support.amd.com/us/gpudownload/linux/Pages/radeon_linux.aspx
+			for the latest information on hardware supported by the ATI
+			Catalyst driver.
+		</para>
+	</refsect1>
+	<refsect1 id="configuration_details">
+		<title>CONFIGURATION DETAILS</title>
+		<para>Please refer to <citerefentry>
+				<refentrytitle>&dhxserverconf;</refentrytitle>
+				<manvolnum>5x</manvolnum>
+			</citerefentry> for general configuration details. This section only covers
+			configuration details specific to this driver. The driver auto-detects a lot of
+			device information necessary to initialize the card. However, if you have problems
+			with auto-detection, you can specify:
+		</para>
+		<segmentedlist>
+			<!-- <title>Application profiles</title> -->
+			<segtitle>Option</segtitle>
+			<segtitle>Value</segtitle>
+			<seglistitem>
+				<seg><option>VideoRam</option></seg>
+				<seg>in kilobytes</seg>
+			</seglistitem>
+			<seglistitem>
+				<seg><option>ChipID</option></seg>
+				<seg>PCI device ID</seg>
+			</seglistitem>
+		</segmentedlist>
+		<para>See <citerefentry>
+				<refentrytitle>&dhxserverconf;</refentrytitle>
+				<manvolnum>5x</manvolnum>
+			</citerefentry> for more information about these options. With the <option>ChipID</option>
+			option, you can force the driver to recognize your model as a different one by overriding
+			the Chip-ID. This could be useful, if your card is not supported by default.
+			Look up the PCI ID of your card with <command>lspci -n</command> (see <citerefentry>
+				<refentrytitle>lspci</refentrytitle>
+				<manvolnum>8</manvolnum>
+			</citerefentry>) and then search for the ID of a similar but supported model in the
+			file <filename path="/usr/share/misc/">pci.ids</filename> (<citerefentry>
+				<refentrytitle>update-pciids</refentrytitle>
+				<manvolnum>8</manvolnum>
+			</citerefentry>), which is also available online
+			at <ulink url="http://pciids.sourceforge.net/pci.ids"/>. ATI itself provides a similar list
+			at <ulink url="http://www.ati.com/developer/vendorid.html"/>.
+		</para>
+		<variablelist>
+			<para>In addition, the following driver options are supported:</para>
+			<varlistentry>
+				<term>
+					<option id="option_agpmask">Option
+						"<varname>AGPMask</varname>"
+						"<replaceable class="option">integer</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>This option applies to <acronym>AGP</acronym>v1/2. To
+						handle an <acronym>AGP</acronym>v3 interface, you will additionally
+						need <link linkend="option_agpv3mask"><option>Option
+						"<varname>AGPv3Mask</varname>"</option></link>.
+					</para>
+					<segmentedlist>
+						<!-- <title>Possible values for AGPMask</title> -->
+						<segtitle>Value</segtitle>
+						<segtitle>Effect</segtitle>
+						<seglistitem>
+							<seg>"<parameter class="option">0x00000001</parameter>"</seg>
+							<seg>Disable <acronym>AGP</acronym> 1x (forces 2x or 4x).</seg>
+						</seglistitem>
+						<seglistitem>
+							<seg>"<parameter class="option">0x00000002</parameter>"</seg>
+							<seg>Disable <acronym>AGP</acronym> 2x (forces 1x or 4x).</seg>
+						</seglistitem>
+						<seglistitem>
+							<seg>"<parameter class="option">0x00000004</parameter>"</seg>
+							<seg>Disable <acronym>AGP</acronym> 4x (forces 1x or 2x).</seg>
+						</seglistitem>
+						<seglistitem>
+							<seg>"<parameter class="option">0x00000010</parameter>"</seg>
+							<seg>Disable fast-writes.</seg>
+						</seglistitem>
+						<seglistitem>
+							<seg>"<parameter class="option">0x00000200</parameter>"</seg>
+							<seg>Disable sidebanding.</seg>
+						</seglistitem>
+					</segmentedlist>
+					<para>To combine several settings, only add the values. Let me show an
+						example: "<parameter class="option">0x00000216</parameter>"
+						means: force <acronym>AGP</acronym> 1x (disable <acronym>AGP</acronym>
+						2x and 4x), disable fast-writes and sidebanding.
+					</para>
+					<para>You can check, if fast-writes has been disabled by searching your kernel log
+						for '<errortext>AgpCommand = <replaceable>hex-integer</replaceable></errortext>'.
+						The second last hex digit should be <parameter>0</parameter> (zero) if
+						fast-writes is off, or <parameter>1</parameter> (one) if it is on.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_agpv3mask">Option
+						"<varname>AGPv3Mask</varname>"
+						"<replaceable class="option">integer</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>This option only applies to <acronym>AGP</acronym>v3.</para>
+					<important>
+						<para>It is used in addition to <link linkend="option_agpmask"><option>Option
+							"<varname>AGPMask</varname>"</option></link>. That means, that you
+							turn off fast-writes or sidebanding with <link linkend="option_agpmask">
+							<option>Option "<varname>AGPMask</varname>"</option></link>.
+						</para>
+					</important>
+					<segmentedlist>
+						<!-- <title>Possible option values for AGPv3Mask</title> -->
+						<segtitle>Value</segtitle>
+						<segtitle>Effect</segtitle>
+						<seglistitem>
+							<seg>"<parameter class="option">0x00000001</parameter>"</seg>
+							<seg>Disable <acronym>AGP</acronym> 4x (forces 8x).</seg>
+						</seglistitem>
+						<seglistitem>
+							<seg>"<parameter class="option">0x00000002</parameter>"</seg>
+							<seg>Disable <acronym>AGP</acronym> 8x (forces 4x).</seg>
+						</seglistitem>
+					</segmentedlist>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_agp8xdisablefix">Option
+						"<varname>AGP8XDisableFix</varname>"
+						"<replaceable class="option">boolean</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Needs to be documented.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_asicclock">Option
+						"<varname>ASICClock</varname>"
+						"<replaceable class="option">integer</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Needs to be documented.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_backingstore">Option
+						"<varname>BackingStore</varname>"
+						"<replaceable class="option">boolean</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Enable or disable the <quote>Backing store</quote> mechanism. If
+						this option is enabled, the X-server stores (parts of) the window
+						content. The default is: "<parameter class="option">off</parameter>".
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_blocksignalsonlock">Option
+						"<varname>BlockSignalsOnLock</varname>"
+						"<replaceable class="option">boolean</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>To allow the debugging
+						(using <citerefentry>
+							<refentrytitle>gdb</refentrytitle>
+							<manvolnum>1</manvolnum>
+						</citerefentry>, <citerefentry>
+							<refentrytitle>totalview</refentrytitle>
+							<manvolnum>1</manvolnum>
+						</citerefentry> and others) of multi-threaded OpenGL applications it can
+						become necessary to disable the blocking of task interruption signals.
+						The default is: "<parameter class="option">on</parameter>".
+					</para>
+					<variablelist>
+						<varlistentry>
+							<term>"<parameter class="option">off</parameter>"</term>
+							<listitem>
+								<para>The driver will not use signal blocking. This introduces the risk
+									of suffering memory leaks in combination with specific user
+									activity.
+								</para>
+								<caution>
+									<para>Only use it, if you really know what you are doing.</para>
+								</caution>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term>"<parameter class="option">on</parameter>"</term>
+							<listitem>
+								<para>The default value. The driver does not block signals for locking.</para>
+							</listitem>
+						</varlistentry>
+					</variablelist>
+					<para>As of now it is uncertain which is the real origin of the problem.
+						As of now it does look like the debugger application is getting in some
+						trouble because of not getting back the debugging control after the lock
+						condition was removed by the driver. This might be further investigated.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_buffertiling">Option
+						"<varname>BufferTiling</varname>"
+						"<replaceable class="option">boolean</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Needs to be documented.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_bustype">Option
+						"<varname>BusType</varname>"
+						"<replaceable class="option">string</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>This option allows one to overwrite the detected bus type. Use it,
+						when the drivers bus detection is incorrect or when you want to force
+						an <acronym>AGP</acronym> card to <acronym>PCI</acronym> bus. The
+						default situation is, that the driver <emphasis>auto-detects</emphasis>
+						the bus type. Possible values for this option are:
+					</para>
+					<segmentedlist>
+						<!-- <title>Possible option values for AGPv3Mask</title> -->
+						<segtitle>Value</segtitle>
+						<segtitle>Effect</segtitle>
+						<seglistitem>
+							<seg>"<parameter class="option">AGP</parameter>"</seg>
+							<seg><acronym>AGP</acronym> bus.</seg>
+						</seglistitem>
+						<seglistitem>
+							<seg>"<parameter class="option">PCI</parameter>"</seg>
+							<seg><acronym>PCI</acronym> bus.</seg>
+						</seglistitem>
+						<seglistitem>
+							<seg>"<parameter class="option">PCIE</parameter>"</seg>
+							<seg><acronym>PCI</acronym> Express bus
+								(fallback: <acronym>PCI</acronym>).</seg>
+						</seglistitem>
+					</segmentedlist>
+					<caution>
+						<para><emphasis role="bold">NEVER</emphasis> try to force a <acronym>PCI</acronym>
+							card to <acronym>AGP</acronym> bus.
+						</para>
+					</caution>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_capabilities">Option
+						"<varname>Capabilities</varname>"
+						"<replaceable class="option">integer</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>... hex ... Needs to be documented.</para>
+					<segmentedlist>
+						<!-- <title>Application profiles</title> -->
+						<segtitle>Parameter</segtitle>
+						<segtitle>Profile</segtitle>
+						<seglistitem>
+							<seg>"<parameter class="option">0x00000000</parameter>"</seg>
+							<seg>Default.</seg>
+						</seglistitem>
+						<seglistitem>
+							<seg>"<parameter class="option">0x00000800</parameter>"</seg>
+							<seg>Disable VSync.</seg>
+						</seglistitem>
+						<seglistitem>
+							<seg>"<parameter class="option">0x00008000</parameter>"</seg>
+							<seg>Maya, Houdini 4.0, Houdini 5.0, Houdini 5.5.</seg>
+						</seglistitem>
+						<seglistitem>
+							<seg>"<parameter class="option">0x20008000</parameter>"</seg>
+							<seg>SOFTIMAGE|XSI, SOFTIMAGE|3D.</seg>
+						</seglistitem>
+					</segmentedlist>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_capabilitiesex">Option
+						"<varname>CapabilitiesEx</varname>"
+						"<replaceable class="option">integer</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>... hex ... Needs to be documented.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_centermode">Option
+						"<varname>CenterMode</varname>"
+						"<replaceable class="option">boolean</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>The Center-Mode allows "real" screen display in non-"panel native modes"
+						(e.g. a resolution of 1280x1024 on a 1600x1200 LCD): one pixel of the frame
+						buffer is one pixel on the screen. The display is centered on the screen and
+						the surrounding screen area remains black.  Note that some panels may not
+						work in Center-Mode, so the screen remains black then. The default
+						is: "<parameter class="option">off</parameter>".
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_clientdrivername">Option
+						"<varname>ClientDriverName</varname>"
+						"<replaceable class="option">string</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Needs to be documented.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_dac6bit">Option
+						"<varname>Dac6Bit</varname>"
+						"<replaceable class="option">boolean</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Enables or disables the use of 6 bits per color component when in 8 bpp mode
+						(emulates VGA mode). By default, all 8 bits per color component are used. The
+						default is: "<parameter class="option">off</parameter>".
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_defaultvisualtruecolor">Option
+						"<varname>DefaultVisualTrueColor</varname>"
+						"<replaceable class="option">boolean</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Set the X-server to use a TrueColor visual as default. You can check
+						the result with <citerefentry>
+							<refentrytitle>xpdyinfo</refentrytitle>
+							<manvolnum>1</manvolnum>
+						</citerefentry>. The default is: "<parameter class="option">off</parameter>".
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_desktopsetup">Option
+						"<varname>DesktopSetup</varname>"
+						"<replaceable class="option">integer</replaceable>"
+					</option>
+				</term>
+				<term>
+					<option id="option_desktopsetup2">Option
+						"<varname>DesktopSetup</varname>"
+						"<replaceable class="option">string</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>This option defines the desktop setup. The driver can work with the
+						following modes:
+					</para>
+					<segmentedlist>
+						<!-- <title>DesktopSetup modes</title> -->
+						<segtitle>Parameter (integer)</segtitle>
+						<segtitle>Parameter (string)</segtitle>
+						<segtitle>Mode</segtitle>
+						<seglistitem>
+							<seg>"<parameter class="option">0x00000000</parameter>"</seg>
+							<seg>"<parameter class="option">single</parameter>"</seg>
+							<seg>Single head mode.</seg>
+						</seglistitem>
+						<seglistitem>
+							<seg>"<parameter class="option">0x00000100</parameter>"</seg>
+							<seg>"<parameter class="option">clone</parameter>"</seg>
+							<seg>Clone mode.</seg>
+						</seglistitem>
+						<seglistitem>
+							<seg>"<parameter class="option">0x00000101</parameter>"</seg>
+							<seg>"<parameter class="option">mirror</parameter>"</seg>
+							<seg>Mirror mode.</seg>
+						</seglistitem>
+						<seglistitem>
+							<seg>"<parameter class="option">0x00000200</parameter>"</seg>
+							<seg>"<parameter class="option">horizontal</parameter>"</seg>
+							<seg>Big Desktop mode.</seg>
+						</seglistitem>
+						<seglistitem>
+							<seg>"<parameter class="option">0x00000201</parameter>"</seg>
+							<seg>"<parameter class="option">horizontal,reverse</parameter>"</seg>
+							<seg>Big Desktop mode.</seg>
+						</seglistitem>
+						<seglistitem>
+							<seg>"<parameter class="option">0x00000300</parameter>"</seg>
+							<seg>"<parameter class="option">vertical,reverse</parameter>"</seg>
+							<seg>Big Desktop mode.</seg>
+						</seglistitem>
+						<seglistitem>
+							<seg>"<parameter class="option">0x00000301</parameter>"</seg>
+							<seg>"<parameter class="option">vertical</parameter>"</seg>
+							<seg>Big Desktop mode.</seg>
+						</seglistitem>
+						<seglistitem>
+							<seg>"<parameter class="option">0x00000000</parameter>"</seg>
+							<seg/>
+							<seg>Dual head mode.</seg>
+						</seglistitem>
+					</segmentedlist>
+					<para>The modes are:</para>
+					<variablelist>
+						<varlistentry>
+							<term><emphasis role="bold">Single head mode:</emphasis></term>
+							<listitem>
+								<para>Single monitor operation only. If a second monitor is connected, it remains dark.
+									Only in this mode a full overlay functionality is available.
+								</para>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><emphasis role="bold">Clone mode:</emphasis></term>
+							<listitem>
+								<para>The contents of the primary monitor are duplicated on the second
+									monitor. If one monitor cannot display the selected resolution, a lower
+									resolution is automatically selected for this monitor. The original
+									resolution is used then as it was specified as the virtual resolution.
+									This means the second screen will do panning when the mouse moves ahead.
+								</para>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><emphasis role="bold">Mirror mode:</emphasis></term>
+							<listitem>
+								<para>The contents of the primary monitor are duplicated on the second
+									monitor. Both monitors have an identical refresh rate and resolution.
+								</para>
+								<important>
+									<para>This mode is not supported on RADEON X1x00 and FireGL <simplelist type="inline">
+											<member>V3300</member>
+											<member>V3400</member>
+											<member>V5200</member>
+											<member>V7200</member>
+											<member>V7300</member>
+											<member>V7350</member>
+										</simplelist> cards.
+									</para>
+								</important>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><emphasis role="bold">Big Desktop mode(s):</emphasis></term>
+							<listitem>
+								<para>There is a single big frame buffer that gets split either
+									horizontally or vertically and each half is sent to a single monitor.
+									Both monitors have to operate with the same video mode settings and
+									only one window manager can be used. The orientation is set with:
+								</para>
+								<segmentedlist>
+									<!-- <title>Desktop modes</title> -->
+									<segtitle>Parameter (integer)</segtitle>
+									<segtitle>Mode</segtitle>
+									<seglistitem>
+										<seg>"<parameter class="option">0x00000200</parameter>"</seg>
+										<seg>Primary display is left.</seg>
+									</seglistitem>
+									<seglistitem>
+										<seg>"<parameter class="option">0x00000201</parameter>"</seg>
+										<seg>Primary display is right.</seg>
+									</seglistitem>
+									<seglistitem>
+										<seg>"<parameter class="option">0x00000300</parameter>"</seg>
+										<seg>Primary display is top.</seg>
+									</seglistitem>
+									<seglistitem>
+										<seg>"<parameter class="option">0x00000301</parameter>"</seg>
+										<seg>Primary display is bottom.</seg>
+									</seglistitem>
+								</segmentedlist>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><emphasis role="bold">Dual head mode:</emphasis></term>
+							<listitem>
+								<para>A dual head setup uses separate frame buffers, independent displays and
+									video modes for each monitor. Two window managers can be used.
+								</para>
+							</listitem>
+						</varlistentry>
+					</variablelist>
+					<note>
+						<para>A connected digital display is always the primary display. If two
+							display devices are connected, the primary head is: the bottom DVI port
+							on FireGL X1, LCD output on MOBILITY RADEON M9 and the only DVI port
+							on other cards. The secondary head is: the top DVI port on FireGL X1
+							and the VGA port on all other cards.
+						</para>
+					</note>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_disableovscaler">Option
+						"<varname>DisableOvScaler</varname>"
+						"<replaceable class="option">boolean</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Needs to be documented.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_drm_bufsize">Option
+						"<varname>DRM_bufsize</varname>"
+						"<replaceable class="option">integer</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Needs to be documented. (number of DRM buffers - default 100, max 127) </para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_drm_nbufs">Option
+						"<varname>DRM_nbufs</varname>"
+						"<replaceable class="option">integer</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Needs to be documented. (DRM buffer size, default 65536 Byte, value in Byte)</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_enabledepthmoves">Option
+						"<varname>EnableDepthMoves</varname>"
+						"<replaceable class="option">boolean</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Needs to be documented.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_enablehpv">Option
+						"<varname>EnableHPV</varname>"
+						"<replaceable class="option">boolean</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Needs to be documented.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_enablelogo">Option
+						"<varname>EnableLogo</varname>"
+						"<replaceable class="option">boolean</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Needs to be documented.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_enablemonitor">Option
+						"<varname>EnableMonitor</varname>"
+						"<replaceable class="option">string</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Needs to be documented.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_enableopaqueoverlayvisual">Option
+						"<varname>EnableOpaqueOverlayVisual</varname>"
+						"<replaceable class="option">boolean</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Enable a depth 8 PseudoColor visual in the overlay planes that does not reserve
+						index 255 for transparency.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_enableprivatebackz">Option
+						"<varname>EnablePrivateBackZ</varname>"
+						"<replaceable class="option">boolean</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Needs to be documented.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_forcegenericcpu">Option
+						"<varname>ForceGenericCPU</varname>"
+						"<replaceable class="option">boolean</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Needs to be documented.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_forcemonitors">Option
+						"<varname>ForceMonitors</varname>"
+						"<replaceable class="option">string[,string,...]</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>... Available values are: <simplelist type="inline">
+								<member><parameter class="option">crt1</parameter></member>
+								<member><parameter class="option">crt2</parameter></member>
+								<member><parameter class="option">lvds</parameter></member>
+								<member><parameter class="option">tmds1</parameter></member>
+								<member><parameter class="option">tmds2</parameter></member>
+								<member><parameter class="option">tmds2i</parameter></member>
+								<member><parameter class="option">tv</parameter></member>
+								<member><parameter class="option">nocrt1</parameter></member>
+								<member><parameter class="option">nocrt2</parameter></member>
+								<member><parameter class="option">nolvds</parameter></member>
+								<member><parameter class="option">notmds1</parameter></member>
+								<member><parameter class="option">notmds2</parameter></member>
+								<member><parameter class="option">notmds2i</parameter></member>
+								<member><parameter class="option">notv</parameter></member>
+							</simplelist>.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_fsaaenable">Option
+						"<varname>FSAAEnable</varname>"
+						"<replaceable class="option">boolean</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>...</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_fsaadisablegamma">Option
+						"<varname>FSAADisableGamma</varname>"
+						"<replaceable class="option">boolean</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>By default the Full scene Anti Aliasing (<acronym>FSAA</acronym>) gamma
+						is set to 2.2, which is typical for CRT displays. Use this option to
+						disable FSAA gamma. The default is: "<parameter class="option">no</parameter>".
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_fsaacustomizemspos">Option
+						"<varname>FSAACustomizeMSPos</varname>"
+						"<replaceable class="option">boolean</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Use this option, if you want to customize the sample points, set
+						with <link linkend="option_fsaascale"><option>Option
+						"<varname>FSAAScale</varname>"</option></link>. The default is:
+						"<parameter class="option">no</parameter>".
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_fsaamsposx0">Option
+						"<varname>FSAAMSPosX0</varname>"
+						"<replaceable class="option">real</replaceable>"
+					</option>
+				</term>
+				<term>
+					<option id="option_fsaamsposy0">Option
+						"<varname>FSAAMSPosY0</varname>"
+						"<replaceable class="option">real</replaceable>"
+					</option>
+				</term>
+				<term>
+					<option id="option_fsaamsposx1">Option
+						"<varname>FSAAMSPosX1</varname>"
+						"<replaceable class="option">real</replaceable>"
+					</option>
+				</term>
+				<term>
+					<option id="option_fsaamsposy1">Option
+						"<varname>FSAAMSPosY1</varname>"
+						"<replaceable class="option">real</replaceable>"
+					</option>
+				</term>
+				<term>
+					<option id="option_fsaamsposx2">Option
+						"<varname>FSAAMSPosX2</varname>"
+						"<replaceable class="option">real</replaceable>"
+					</option>
+				</term>
+				<term>
+					<option id="option_fsaamsposy2">Option
+						"<varname>FSAAMSPosY2</varname>"
+						"<replaceable class="option">real</replaceable>"
+					</option>
+				</term>
+				<term>
+					<option id="option_fsaamsposx3">Option
+						"<varname>FSAAMSPosX3</varname>"
+						"<replaceable class="option">real</replaceable>"
+					</option>
+				</term>
+				<term>
+					<option id="option_fsaamsposy3">Option
+						"<varname>FSAAMSPosY3</varname>"
+						"<replaceable class="option">real</replaceable>"
+					</option>
+				</term>
+				<term>
+					<option id="option_fsaamsposx4">Option
+						"<varname>FSAAMSPosX4</varname>"
+						"<replaceable class="option">real</replaceable>"
+					</option>
+				</term>
+				<term>
+					<option id="option_fsaamsposy4">Option
+						"<varname>FSAAMSPosY4</varname>"
+						"<replaceable class="option">real</replaceable>"
+					</option>
+				</term>
+				<term>
+					<option id="option_fsaamsposx5">Option
+						"<varname>FSAAMSPosX5</varname>"
+						"<replaceable class="option">real</replaceable>"
+					</option>
+				</term>
+				<term>
+					<option id="option_fsaamsposy5">Option
+						"<varname>FSAAMSPosY5</varname>"
+						"<replaceable class="option">real</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Use this to customize the 1st, 2nd, ... 6th sample point. Depending on your
+						setting for <link linkend="option_fsaascale"><option>Option
+						"<varname>FSAAScale</varname>"</option></link>, you have to set 2, 4 or all
+						6 points. The pixel size is 1x1, so the range for these values
+						is "<parameter class="option">0..1</parameter>".
+					</para>
+					<note>
+						<para>These options are only relevant, if <link linkend="option_fsaacustomizemspos">
+							<option>Option "<varname>FSAACustomizeMSPos</varname>"</option></link>
+							is enabled.
+						</para>
+					</note>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_fsaascale">Option
+						"<varname>FSAAScale</varname>"
+						"<replaceable class="option">integer</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Set, enable or disable Full Scene Anti Aliasing (<acronym>FSAA</acronym>)
+						for cards using a multi-sampling technique to implement anti-aliasing.
+						Possible values are:
+					</para>
+					<segmentedlist>
+						<!-- <title>Desktop modes</title> -->
+						<segtitle>Parameter</segtitle>
+						<segtitle>Mode</segtitle>
+						<seglistitem>
+							<seg>"<parameter class="option">1</parameter>"</seg>
+							<seg>Disable <acronym>FSAA</acronym> (default).</seg>
+						</seglistitem>
+						<seglistitem>
+							<seg>"<parameter class="option">2</parameter>"</seg>
+							<seg>Uses 2 multi sample points.</seg>
+						</seglistitem>
+						<seglistitem>
+							<seg>"<parameter class="option">4</parameter>"</seg>
+							<seg>Uses 4 multi sample points.</seg>
+						</seglistitem>
+						<seglistitem>
+							<seg>"<parameter class="option">6</parameter>"</seg>
+							<seg>Uses 6 multi sample points.</seg>
+						</seglistitem>
+					</segmentedlist>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_gammacorrection1">Option
+						"<varname>GammaCorrectionI</varname>"
+						"<replaceable class="option">integer</replaceable>"
+					</option>
+				</term>
+				<term>
+					<option id="option_gammacorrection2">Option
+						"<varname>GammaCorrectionII</varname>"
+						"<replaceable class="option">integer</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Adjust the gamma correction factor. This setting can be made individual for each
+						monitor. Normally the first is for the VGA device and the second is for the DVI device.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_hsync2">Option
+						"<varname>HSync2</varname>"
+						"<replaceable class="option">frequency</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Horizontal sync range of the second monitor in e.g. big desktop mode.</para>
+					<note>
+						<para>You can skip this value, if you define an appropriate
+							<option>HorizSync</option> line in the related <option>Section "Monitor"</option>.
+						</para>
+					</note>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_ignoreedid">Option
+						"<varname>IgnoreEDID</varname>"
+						"<replaceable class="option">boolean</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Do not use <acronym>EDID</acronym> data for mode validation,
+						but <acronym>DDC</acronym> is still used for monitor detection. This is
+						different from <link linkend="option_noddc"><option>Option
+						"<varname>NoDDC</varname>"</option></link>. The default
+						is: "<parameter class="option">off</parameter>".
+					</para>
+					<para>If the server is ignoring your modlines, set this option
+						to "<parameter class="option">on</parameter>" and try again.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_kernelmoduleparm">Option
+						"<varname>KernelModuleParm</varname>"
+						"<replaceable class="option">string</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>If you change this option during runtime, you have to remove and reload
+						the <package>&dhname;</package> kernel module with <command>rmmod fglrx
+						&amp;&amp; modprobe fglrx</command> (see <citerefentry>
+							<refentrytitle>modprobe</refentrytitle>
+							<manvolnum>8</manvolnum>
+						</citerefentry>, <citerefentry>
+							<refentrytitle>rmmod</refentrytitle>
+							<manvolnum>8</manvolnum>
+						</citerefentry>). Possible values you can provide with this option are
+						(separate them by semicolon):</para>
+					<segmentedlist>
+						<!-- <title>AGP locked user page modes</title> -->
+						<segtitle>Parameter</segtitle>
+						<segtitle>Mode</segtitle>
+						<!-- found this at rage3d.com:
+						     agpgart=0,1,2
+						     0 = disabled agp
+						     1 = disabled external agp
+						     2 = disabled internal agp
+						     
+						     ... drm_parse_option are valid options
+						     
+						     su_flags removed in 8.10.19?
+						-->
+						<seglistitem>
+							<seg>"<parameter class="option">agplock=0</parameter>"</seg>
+							<seg>Disable AGP locked user pages.</seg>
+						</seglistitem>
+						<seglistitem>
+							<seg>"<parameter class="option">agplock=1</parameter>"</seg>
+							<seg>Enable AGP locked user pages (default).</seg>
+						</seglistitem>
+						<seglistitem>
+							<seg>"<parameter class="option">agpgart=0</parameter>"</seg>
+							<seg>Use built-in AGP <acronym>GART</acronym> support.</seg>
+						</seglistitem>
+						<seglistitem>
+							<seg>"<parameter class="option">agpgart=2</parameter>"</seg>
+							<seg>Same, but only if no agpgart module is loaded.</seg>
+						</seglistitem>
+						<seglistitem>
+							<seg>"<parameter class="option">agpgart=3</parameter>"</seg>
+							<seg>Disable built-in AGP <acronym>GART</acronym> support.</seg>
+						</seglistitem>
+						<seglistitem>
+							<seg>"<parameter class="option">agp_try_unsupported=1</parameter>"</seg>
+							<seg>Try unsupported chipsets [1].</seg>
+						</seglistitem>
+						<seglistitem>
+							<seg>"<parameter class="option">debug=0</parameter>"</seg>
+							<seg>Turn debugging off.</seg>
+						</seglistitem>
+						<seglistitem>
+							<seg>"<parameter class="option">debug=1</parameter>"</seg>
+							<seg>Turn debugging on.</seg>
+						</seglistitem>
+						<seglistitem>
+							<seg>"<parameter class="option">debug=0x00040003</parameter>"</seg>
+							<seg>???</seg>
+						</seglistitem>
+						<seglistitem>
+							<seg>"<parameter class="option">maxlockedmem=256</parameter>"</seg>
+							<seg>Maximum locked DMA (Direct Memory Access) memory in MB.</seg>
+						</seglistitem>
+						<seglistitem>
+							<seg>"<parameter class="option">noauth</parameter>"</seg>
+							<seg>???</seg>
+						</seglistitem>
+						<seglistitem>
+							<seg>"<parameter class="option">su_flags=0xdead0003</parameter>"</seg>
+							<seg>Recognize card as FireGL model and enable 3DNow.</seg>
+						</seglistitem>
+					</segmentedlist>
+					<note>
+						<para>If neither the built-in nor the kernel AGPGart support work, you can use
+							[1] as a fallback.
+						</para>
+					</note>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_maxgartsize">Option
+						"<varname>MaxGARTSize</varname>"
+						"<replaceable class="option">integer</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Configure the ATI AGP <acronym>GART</acronym> (Graphic Address Remapping Table) size.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_mode2">Option
+						"<varname>Mode2</varname>"
+						"<replaceable class="option">resolution1</replaceable>"
+						"<replaceable class="option">resolution2</replaceable>"
+						"<replaceable class="option">...</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>...</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_mtrr">Option
+						"<varname>mtrr</varname>"
+						"<replaceable class="option">boolean</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Enable or disable <acronym>DRI</acronym> Memory Type Range Registers
+						(<acronym>MTRR</acronym>) mapper. Be aware, that the driver has its own
+						code for <acronym>MTRR</acronym>. The default
+						is: "<parameter class="option">off</parameter>".
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_no_accel">Option
+						"<varname>no_accel</varname>"
+						"<replaceable class="option">boolean</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Enables or disables all hardware acceleration (<acronym>XAA</acronym>).
+						The default is: "<parameter class="option">off</parameter>".
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_no_dri">Option
+						"<varname>no_dri</varname>"
+						"<replaceable class="option">boolean</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Enables or disables <acronym>DRI</acronym> extension.
+						The default is: "<parameter class="option">off</parameter>".
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_noddc">Option
+						"<varname>NoDDC</varname>"
+						"<replaceable class="option">boolean</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Disable probing of DDC-information from your monitor.
+						The default is: "<parameter class="option">off</parameter>".
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_notv">Option
+						"<varname>NoTV</varname>"
+						"<replaceable class="option">boolean</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Enable or disable TV-Out for a monitor.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_opengloverlay">Option
+						"<varname>OpenGLOverlay</varname>"
+						"<replaceable class="option">boolean</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>If you enable this option, <link linkend="option_videooverlay"><option>Option
+						"<varname>VideoOverlay</varname>"</option></link> will be disabled automatically.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_pbuffer">Option
+						"<varname>PBuffer</varname>"
+						"<replaceable class="option">integer</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>...</para>
+					<segmentedlist>
+						<!-- <title>PBuffer area sizes</title> -->
+						<segtitle>Parameter</segtitle>
+						<segtitle>PBuffer area size</segtitle>
+						<seglistitem>
+							<seg>"<parameter class="option">0</parameter>"</seg>
+							<seg>PBuffer area disabled.</seg>
+						</seglistitem>
+						<seglistitem>
+							<seg>"<parameter class="option">1</parameter>"</seg>
+							<seg>Size of PBuffer area 1280x1024.</seg>
+						</seglistitem>
+						<seglistitem>
+							<seg>"<parameter class="option">2</parameter>"</seg>
+							<seg>Size of PBuffer area 1600x1200.</seg>
+						</seglistitem>
+						<seglistitem>
+							<seg>"<parameter class="option">3</parameter>"</seg>
+							<seg>Size of PBuffer area 1920x1200.</seg>
+						</seglistitem>
+						<seglistitem>
+							<seg>"<parameter class="option">4</parameter>"</seg>
+							<seg>Size of PBuffer area 2048x1536.</seg>
+						</seglistitem>
+					</segmentedlist>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_powerstate">Option
+						"<varname>PowerState</varname>"
+						"<replaceable class="option">integer</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>...</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_pseudocolorvisuals">Option
+						"<varname>PseudoColorVisuals</varname>"
+						"<replaceable class="option">boolean</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Enabling this options allows the usage of pseudo color visuals at the same time
+						with true color visuals using the overlay technique. The default
+						is: "<parameter class="option">off</parameter>".
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_ringsize">Option
+						"<varname>RingSize</varname>"
+						"<replaceable class="option">integer</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Needs to be documented. (ring buffer size, default = "1", values in MB)</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_screenoverlap">Option
+						"<varname>ScreenOverlap</varname>"
+						"<replaceable class="option">integer</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>This option is intended to allow image overlapping with e.g. two video projectors.
+						It only applies to big desktops (see <link linkend="option_desktopsetup"><option>Option
+						"<varname>DesktopSetup</varname>"</option></link>).
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_silkenmouse">Option
+						"<varname>SilkenMouse</varname>"
+						"<replaceable class="option">boolean</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Enable or disable the hardware cursor to be updated asynchronously by
+						the signal handler associated with mouse events. The default
+						is: "<parameter class="option">on</parameter>".
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_stereo">Option
+						"<varname>Stereo</varname>"
+						"<replaceable class="option">boolean</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>To enable Stereo mode of Quad Buffer Stereo ("Active Stereo") capable cards, 
+						set this value to "<parameter class="option">on</parameter>" and
+						disable <link linkend="option_videooverlay"><option>Option
+						"<varname>VideoOverlay</varname>"</option></link>
+						and <link linkend="option_opengloverlay"><option>Option
+						"<varname>OpenGLOverlay</varname>"</option></link>.
+						The default is: "<parameter class="option">off</parameter>".
+					</para>
+					<para>If you enable Stereo Quad Buffering then you should not use virtual desktops
+						bigger than the selected resolution. Further the stereo feature will only
+						initialize if your adapter is in text-mode when launching X and the respective
+						display mode. The adapter can not switch between multiple resolutions while
+						keeping the stereo setup. For that reason it is highly recommended that you
+						have only one single <option>modes</option> in your config file
+						at <option>Section "Screen"</option> -&gt; <option>SubSection "Display"</option>.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_stereosyncenable">Option
+						"<varname>StereoSyncEnable</varname>"
+						"<replaceable class="option">integer</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>...</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_swcursor">Option
+						"<varname>SWCursor</varname>"
+						"<replaceable class="option">boolean</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Disable or enable the use of a software cursor.
+						The default is: "<parameter class="option">off</parameter>".
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_tmdscoherentmode">Option
+						"<varname>TMDSCoherentMode</varname>"
+						"<replaceable class="option">boolean</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Internal TMDS transmitter can be programmed in 2 different ways to get
+						best signal qualities depending on connected transmitter chips in the panel.
+						The noise must appear in 1600x1200 mode, but can also come up in
+						1280x1024x75Hz. You can enable or disable the coherent mode using this option.
+						The default is: "<parameter class="option">on</parameter>".
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_tvformat">Option
+						"<varname>TVFormat</varname>"
+						"<replaceable class="option">string</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Choose the TV format. Available values are: <simplelist type="inline">
+							<member><parameter class="option">NTSC-JPN</parameter></member>
+							<member><parameter class="option">NTSC-M</parameter></member>
+							<member><parameter class="option">NTSC-N</parameter></member>
+							<member><parameter class="option">PAL-B</parameter></member>
+							<member><parameter class="option">PAL-CN</parameter></member>
+							<member><parameter class="option">PAL-D</parameter></member>
+							<member><parameter class="option">PAL-G</parameter></member>
+							<member><parameter class="option">PAL-H</parameter></member>
+							<member><parameter class="option">PAL-I</parameter></member>
+							<member><parameter class="option">PAL-K</parameter></member>
+							<member><parameter class="option">PAL-K1</parameter></member>
+							<member><parameter class="option">PAL-L</parameter></member>
+							<member><parameter class="option">PAL-M</parameter></member>
+							<member><parameter class="option">PAL-N</parameter></member>
+							<member><parameter class="option">PAL-SCART</parameter></member>
+						</simplelist>
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_tvoverscan">Option
+						"<varname>TVOverscan</varname>"
+						"<replaceable class="option">boolean</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Enable or disable TV overscan. Available values are: <simplelist type="inline">
+							<member><parameter class="option">on</parameter></member>
+							<member><parameter class="option">off</parameter></member>
+						</simplelist>. The default is: "<parameter class="option">on</parameter>".
+					</para>
+					<note>
+						<para>Not all TV formats support overscan. Try to toggle overscan
+							<parameter class="option">off</parameter> before changing
+							<link linkend="option_agpv3mask"><option>Option "<varname>TVFormat</varname>"</option></link>
+							if an error occurs.
+						</para>
+					</note>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_tvstandard">Option
+						"<varname>TVStandard</varname>"
+						"<replaceable class="option">string</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Choose the TV standard. Available values are: <simplelist type="inline">
+							<member><parameter class="option">VIDEO</parameter></member>
+							<member><parameter class="option">SCART</parameter></member>
+							<member><parameter class="option">YUF</parameter></member>
+						</simplelist>
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_tvcoloradj">Option
+						"<varname>TVColorAdj</varname>"
+						"<replaceable class="option">integer</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>...</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_tvhposadj">Option
+						"<varname>TVHPosAdj</varname>"
+						"<replaceable class="option">integer</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Define the horizontal pixel offset from the center of the screen. The
+						range for <parameter class="option">integer</parameter> depends on the
+						<acronym>ASIC</acronym>. Try to use <citerefentry>
+							<refentrytitle>aticonfig</refentrytitle>
+							<manvolnum>1x</manvolnum>
+						</citerefentry> with option <option>--tv-info</option> to get a valid range.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_tvvposadj">Option
+						"<varname>TVVPosAdj</varname>"
+						"<replaceable class="option">integer</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Define the vertical pixel offset from the center of the screen. The
+						range for <parameter class="option">integer</parameter> depends on the
+						<acronym>ASIC</acronym>. Try to use <citerefentry>
+							<refentrytitle>aticonfig</refentrytitle>
+							<manvolnum>1x</manvolnum>
+						</citerefentry> with option <option>--tv-info</option> to get a valid range.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_tvhsizeadj">Option
+						"<varname>TVHSizeAdj</varname>"
+						"<replaceable class="option">integer</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Define the height of the TV geometry (as percentage unit). As a rule of
+						thumb the value is valid in the range of <parameter class="option">[1..100]</parameter>,
+						but it depends on what has been chosen for <link linkend="option_tvformat">
+						<option>Option "<varname>TVFormat</varname>"</option></link>.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_tvvsizeadj">Option
+						"<varname>TVVSizeAdj</varname>"
+						"<replaceable class="option">integer</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Define the width of the TV geometry (as percentage unit). As a rule of
+						thumb the value is valid in the range of <parameter class="option">[1..100]</parameter>,
+						but it depends on what has been chosen for <link linkend="option_tvformat">
+						<option>Option "<varname>TVFormat</varname>"</option></link>.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_tvhstartadj">Option
+						"<varname>TVHStartAdj</varname>"
+						"<replaceable class="option">integer</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>...</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_usefasttls">Option
+						"<varname>UseFastTLS</varname>"
+						"<replaceable class="option">integer</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Use this option to set the method to maintain the so called
+						Thread Local Storage (<acronym>TLS</acronym>) locations.
+						The default is: "<parameter class="option">0</parameter>".
+					</para>
+					<variablelist>
+						<varlistentry>
+							<term>"<parameter class="option">0</parameter>"</term>
+							<listitem>
+								<para>Fast operations. Provides the highest possible OpenGL performance.
+									The method makes use of a quite limited resource. This is the default.
+								</para>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term>"<parameter class="option">1</parameter>"</term>
+							<listitem>
+								<para>Fast operations.</para>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term>"<parameter class="option">2</parameter>"</term>
+							<listitem>
+								<para>Compatible mode. Fast operations are turned off. This method is some
+									10% slower and uses a less limited resource. Preferred for Wine(X),
+									emulators and other VM manipulating programs.
+								</para>
+							</listitem>
+						</varlistentry>
+					</variablelist>
+					<para>If you do spot an immediate segmentation fault after launching a program
+						that makes use of OpenGL and further when the fault can be traced down to
+						the OpenGL implementation of the graphics driver, then you should try to
+						tune the TLS settings.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_useinternalagpgart">Option
+						"<varname>UseInternalAGPGART</varname>"
+						"<replaceable class="option">boolean</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Enable or disable the usage of an internal agpgart module. If you
+						set this option to "<parameter class="option">yes</parameter>", the
+						driver will not use the kernel's AGPGart module. Instead it will make
+						use of the "built-in" AGP support. The default
+						is "<parameter class="option">no</parameter>", as long as the graphics
+						driver's kernel module detects the presence of an agpgart kernel
+						module.
+					</para>
+					<warning>
+						<para>If you set this option to "<parameter class="option">yes</parameter>"
+							you must ensure, that you don't have the kernel AGP support
+							compiled in. Instead compile it as modules.
+						</para>
+					</warning>
+					<para>The AGP support in the driver may not always work, depending on the type of motherboard
+						and/or card that you have. But there is a possibility, which maybe still works. Refer to
+						the "<parameter class="option">agp_try_unsupported=1</parameter>" value
+						for <link linkend="option_kernelmoduleparm"><option>Option
+						"<varname>KernelModuleParm</varname>"</option></link>.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_videooverlay">Option
+						"<varname>VideoOverlay</varname>"
+						"<replaceable class="option">boolean</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>... Video Overlay for the Xv extension ...
+						If you want enable this option, <link linkend="option_opengloverlay"><option>Option
+						"<varname>OpenGLOverlay</varname>"</option></link> must not be enabled.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option id="option_vrefresh2">Option
+						"<varname>VRefresh2</varname>"
+						"<replaceable class="option">frequency</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Vertical refresh rate range for the second monitor in e.g. big desktop mode.</para>
+					<note>
+						<para>You can skip this value, if you define an
+							appropriate <option>VertRefresh</option> line
+							in the related <option>Section "Monitor"</option>.
+						</para>
+					</note>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		<variablelist>
+			<para>The following options are obsolete. Don't use them or use their proper replacement.</para>
+			<varlistentry>
+				<term>
+					<option id="option_enablepageflip">Option
+						"<varname>EnablePageFlip</varname>"
+						"<replaceable class="option">boolean</replaceable>"
+					</option>
+				</term>
+				<listitem>
+					<para>Obsoleted with driver version xxx.</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="diagnostics">
+		<title>DIAGNOSTICS</title>
+		<variablelist>
+			<para>The following diagnostics may be issued
+				in <filename>&dhxserverstring;.0.log</filename>:
+			</para>
+			<varlistentry>
+				<term>
+					<errortext>(II)	fglrx(0): Composite extension enabled, disabling direct rendering</errortext>
+				</term>
+				<listitem>
+					<para>At the moment, the driver will automatically disable direct rendering if you
+						enable the Composite extension. To get 3D acceleration back, simply comment or remove
+						the line in your <citerefentry>
+							<refentrytitle>&dhxserverconf;</refentrytitle>
+							<manvolnum>5x</manvolnum>
+						</citerefentry> that loads the Composite extension..
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<errortext>(WW) fglrx: No matching Device section for instance (BusID PCI:x:x:x) found</errortext>
+				</term>
+				<listitem>
+					<para>You may see this message if you aren't using the secondary monitor connector on
+						your card. X is just saying that you haven't given any configuration details for
+						it, but this doesn't matter if you only have a single monitor in use. Note that
+						the number represented by the "x" will vary depending on your system.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<errortext>(WW) fglrx(0): board is an unknown third party board, chipset is supported</errortext>
+				</term>
+				<listitem>
+					<para>Don't care. The driver detected, that you have a "Powered-by-ATI" and
+						not a "Built-by-ATI" board.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<errortext>(WW) fglrx(0): Direct rendering is not supported when Xinerama is enabled</errortext>
+				</term>
+				<listitem>
+					<para>...</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<errortext>(WW) fglrx(0): Only single display is connected, DesktopOption will be ignored</errortext>
+				</term>
+				<listitem>
+					<para>...</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<errortext>(WW) fglrx(0): Option "..." is not used</errortext>
+				</term>
+				<listitem>
+					<para>Don't care. Some options became obsolete over time. Others are maybe not
+						supported by your hardware.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<errortext>(WW) fglrx(0): Specified desktop setup not supported: 8</errortext>
+				</term>
+				<listitem>
+					<para>...</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<errortext>(WW) fglrx(0): * DRI initialization failed!</errortext>
+				</term>
+				<listitem>
+					<para>... various reasons (e.g. running the driver without the kernel module) ...</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<errortext>(EE) fglrx(0): Failed to initialize UMM driver.</errortext>
+				</term>
+				<listitem>
+					<para>...</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><errortext>(EE) fglrx(0): [agp] unable to acquire AGP, error "xf86_ENODEV"</errortext></term>
+				<term><errortext>(EE) fglrx(0): cannot init AGP</errortext></term>
+				<listitem>
+					<para>This error can have many causes, but the most common is, that
+						AGP support was not compiled into the kernel or it was compiled as module 
+						but not loaded. On 2.6 kernels make sure you've loaded the generic
+						and the specific AGPGart module (see <citerefentry>
+							<refentrytitle>modprobe</refentrytitle>
+							<manvolnum>8</manvolnum>
+						</citerefentry>). For example: If you have
+						a <hardware>VIA motherboard</hardware>, load the
+						"<parameter class="command">agpgart</parameter>" and
+						"<parameter class="command">via-agp</parameter>" modules.
+						If you have a <hardware>nForce board</hardware>, you would load
+						"<parameter class="command">agpgart</parameter>" and
+						"<parameter class="command">nvidia-agp</parameter>"
+						... and so on for the other chipset types.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><errortext>(EE) fglrx(0): [agp] unable to acquire AGP, error "xf86_ENOMEM"</errortext></term>
+				<term><errortext>(EE) fglrx(0): cannot init AGP</errortext></term>
+				<listitem>
+					<para>This error is generally more difficult to diagnose and fix. A few things you could try:
+						<itemizedlist>
+							<listitem>
+								<para>If you are using the kernel <acronym>AGP</acronym> support
+									(<link linkend="option_useinternalagpgart"><option>Option
+									"<varname>UseInternalAGPGART</varname>"</option></link> is set to
+									"<parameter class="option">no</parameter>"), ensure that you have the
+									necessary modules loaded (see also the error message above). If you are not using
+									the kernel <acronym>AGP</acronym> support
+									(<link linkend="option_useinternalagpgart"><option>Option
+									"<varname>UseInternalAGPGART</varname>"</option></link> is set to
+									"<parameter class="option">yes</parameter>"), ensure that you don't
+									have your kernel <acronym>AGP</acronym> settings compiled in.
+								</para>
+							</listitem>
+							<listitem>
+								<para>Set <link linkend="option_usefasttls"><option>Option
+									"<varname>UseFastTLS</varname>"</option></link> to
+									"<parameter class="option">2</parameter>" in your <citerefentry>
+										<refentrytitle>&dhxserverconf;</refentrytitle>
+										<manvolnum>5x</manvolnum>
+									</citerefentry>.
+								</para>
+							</listitem>
+							<listitem>
+								<para>Try <link linkend="option_kernelmoduleparm"><option>Option
+									"<varname>KernelModuleParm</varname>"</option></link> with
+									"<parameter class="option">agplock=0</parameter>" in your <citerefentry>
+										<refentrytitle>&dhxserverconf;</refentrytitle>
+										<manvolnum>5x</manvolnum>
+									</citerefentry>.
+								</para>
+							</listitem>
+							<listitem>
+								<para>Increase your AGP aperture size in the <acronym>BIOS</acronym> (particularly
+									for <hardware>nForce2 boards</hardware>).
+								</para>
+							</listitem>
+							<listitem>
+								<para>Users of <hardware>nForce2 boards</hardware> can also try disabling the AGP 8x support
+									in the <acronym>BIOS</acronym>.
+								</para>
+							</listitem>
+						</itemizedlist>
+					</para>
+					<para>If that all didn't work, check the output of <citerefentry>
+						<refentrytitle>dmesg</refentrytitle>
+						<manvolnum>8</manvolnum>
+					</citerefentry>. Verify, that your kernel configuration is correct and if so,
+					try a newer kernel.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<errortext>(EE) fglrx(0): incompatible kernel module detected [..]</errortext>
+				</term>
+				<listitem>
+					<para>The version of the <package>&dhname;</package> kernel module you have loaded does not
+						match the version of the driver you have installed. This can happen if you change the
+						driver version without unloading and reloading the <package>&dhname;</package> module
+						(or rebooting). To fix this error, you can simply reboot or unload the old module and
+						load the new one: <command>rmmod fglrx &amp;&amp; modprobe fglrx</command>
+						(see <citerefentry>
+							<refentrytitle>modprobe</refentrytitle>
+							<manvolnum>8</manvolnum>
+						</citerefentry>, <citerefentry>
+							<refentrytitle>rmmod</refentrytitle>
+							<manvolnum>8</manvolnum>
+						</citerefentry>).
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><errortext>(EE) AIGLX error: dlsym for __driCreateNewScreen_xxx failed (..)</errortext></term>
+				<term><errortext>(EE) AIGLX: reverting to software rendering</errortext></term>
+				<listitem>
+					<para>This error only occurs for <citerefentry>
+							<refentrytitle>X.org</refentrytitle>
+							<manvolnum>7</manvolnum>
+						</citerefentry> versions, which use <acronym>AIGLX</acronym> rather than <acronym>XGL</acronym>.
+						Disable <acronym>AIGLX</acronym> with <option>Option "<varname>AIGLX</varname>"
+						"<parameter class="option">off</parameter>"</option> in <option>Section
+						"ServerFlags"</option> in your <citerefentry>
+							<refentrytitle>xorg.conf</refentrytitle>
+							<manvolnum>5x</manvolnum>
+						</citerefentry>
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="bugs">
+		<title>BUGS</title>
+		<para>Known issues with the current driver can be found
+			at <ulink url="http://www2.ati.com/drivers/linux/linux_8.32.5.html#183417"/>.
+		</para>
+		<para>Report any further issues
+			to <ulink url="http://support.ati.com"/>. There is also an unofficial <abbrev>BTS</abbrev>
+			at <ulink url="http://ati.cchtml.com"/>, which is known by the ATI driver team.
+		</para>
+	</refsect1>
+	<refsect1 id="see_also">
+		<title>SEE ALSO</title>
+		<para><citerefentry>
+				<refentrytitle>aticonfig</refentrytitle>
+				<manvolnum>1x</manvolnum>
+			</citerefentry>, <citerefentry>
+				<refentrytitle>&dhxserverconfig;</refentrytitle>
+				<manvolnum>1x</manvolnum>
+			</citerefentry>, <citerefentry>
+				<refentrytitle>&dhxserverstring;</refentrytitle>
+				<manvolnum>1x</manvolnum>
+			</citerefentry>, <citerefentry>
+				<refentrytitle>Xserver</refentrytitle>
+				<manvolnum>1x</manvolnum>
+			</citerefentry>, <citerefentry>
+				<refentrytitle>&dhxserverconf;</refentrytitle>
+				<manvolnum>5x</manvolnum>
+			</citerefentry>, <citerefentry>
+				<refentrytitle>X</refentrytitle>
+				<manvolnum>7x</manvolnum>
+			</citerefentry>
+		</para>
+	</refsect1>
+</refentry>
+

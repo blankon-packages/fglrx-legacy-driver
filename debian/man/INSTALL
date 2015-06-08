@@ -1,0 +1,178 @@
+# Document  $WgDD: fglrx_man/INSTALL,v 1.7 2006-11-25 07:59:32 dleidert Exp $
+# Summary   Installation instructions for the fglrx_man project.
+
+
+Installation instructions
+=========================
+
+	1. Basic installation
+	2. Configure options
+	3. Configure variables
+
+
+1. Basic Installation
+---------------------
+
+The simplest way to compile this package is:
+
+  0. If the source directory does not contain the configure-script,
+     aclocal.m4 and several automake files, you must first run
+     `./autogen.sh'. If you want automake to copy the files
+     instead to link them, you can use the `-c|--copy' option. Use
+     `-h|--help' to get an overview about all possible options.
+
+  1. Run `./configure' with your preferred options. Type
+     `./configure --help' for an overview of the supported options.
+
+  2. Type `make' to compile the package and produce the package files.
+
+  3. Type `make install' to install the package files.
+
+  4. To remove installed files, run `make uninstall'.
+  
+  5. To clean the sources type `make clean'. Or if you also want to
+     remove the files produced by `configure' type `make distclean'.
+
+  6. To clean the whole source tree and also remove all files produced
+     by `autogen.sh' type `make maintainer-clean'.
+
+
+2. Configure options
+--------------------
+
+By default, `make install' will install the package's files in
+`/usr/local'. You can specify an installation prefix other than
+`/usr/local' by giving `configure' the option `--prefix=PATH'.
+
+  `-h'
+  `--help'
+     Print a summary of the options to 'configure', and exit.
+
+  `-V'
+  `--version'
+     Print the version of autoconf used to generate the 'configure'
+     script, and exit.
+
+  `--enable-build-checks'
+     Enable the checks in the check-local target of the Makefile. This
+     includes xmllint-checks of the XML sources and man-checks of the
+     resulting manpages. Using this option makes `xmllint' and `man' a
+     build-requirement! 
+
+  `--with-docbook-xsl-dir=DIR'
+     Specify the path to Norman Walsh's XSL stylesheet if it cannot be found
+     automatically (it is then set to an online resource).
+
+  `--with-xserver=STRING'
+     Specify for which X-server you want to build the manpages. STRING
+     can be 'Xorg' or 'XFree86'. This is only necessary if the configure
+     script cannot automatically determine the X-server.
+
+  `--with-xserver-app-man-dir=DIR'
+     The directory in which manpages for X-server applications are installed.
+     The default (which fits X.org 7) is $mandir/man1. So this options lets
+     you specify the path, where these manpages should be installed.
+
+  `--with-xserver-driver-man-dir=DIR'
+     The directory in which manpages for X-server drivers are installed.
+     The default (which fits X.org 7) is $mandir/man4. So this options lets
+     you specify the path, where these manpages should be installed.
+
+  `--with-xserver-file-man-dir=DIR'
+     The directory in which manpages for X-server files are installed.
+     The default (which fits X.org 7) is $mandir/man5. So this options lets
+     you specify the path, where these manpages should be installed.
+
+  `--cache-file=FILE'
+     Enable the cache: use and save the results of the tests in FILE,
+     traditionally `config.cache'.  FILE defaults to `/dev/null' to
+     disable caching.
+
+  `--config-cache'
+  `-C'
+     Alias for `--cache-file=config.cache'.
+
+  `--quiet'
+  `--silent'
+  `-q'
+     Do not print messages saying which checks are being made. To
+     suppress all normal output, redirect it to `/dev/null' (any error
+     messages will still be shown). Only use it, if you are familar with
+     configure.
+
+  `--srcdir=DIR'
+     Look for the package's source code in directory DIR.  Usually
+     `configure' can determine that directory automatically.
+
+`configure' also accepts some other, not widely useful, options.  Run
+`configure --help' for more details.
+
+
+3. Configure variables
+----------------------
+
+There are also some variables, which can be defined dynamically (overwritten
+by the user). These variables are:
+
+  `DRIVER_PACKAGE'
+     The manpages are written for the Debian distribution but apply to other
+     distributions as well. Use this variable to overwrite the manpage header
+     and hit your distribution.
+
+  `LICENSE_FILE'
+     It is possible, that the license file may be found at a different place,
+     when you package the manpages for a distribution [1]. In this case, you
+     can use this variable to overwrite the default place, which is
+     `$datadir/doc/fglrx_man/COPYING'. This is _only_ to change the place, not
+     the license itself.
+     
+     [1] e.g. `/usr/share/doc/$package/copyright` in Debian or just `COPYING'
+         for my webpage distributions
+
+  `MAN'
+     You can use this variable to determine, where the `man' command can be
+     found. This variable MUST contain the full path. `man' is necssary for
+     checking the resulting manpages for format issues and only required by
+     the check target.
+
+  `XMLCATALOG'
+     You can use this variable to determine, where `xmlcatalog' can be found.
+     This variable MUST contain the full path. `xmlcatalog' is necessary for
+     trying to determine the docbook-xsl path via catalog system and only an
+     optional requirement.
+
+  `XML_CATALOG_FILE'
+     You can use this variable to determine, where the systems XML catalog
+     can be found. The default is `/etc/xml/catalog'. Thie catalog is
+     necessary for trying to determine the docbook-xsl path via catalog
+     system and here an requirement for this test, but not for the build
+     process.
+
+  `XMLLINT'
+     You can use this variable to determine, where `xmllint' can be found.
+     This variable MUST contain the full path. `xmllint' is necessary for
+     checking the XML sources and only required by the check target.
+
+  `XMLLINT_FLAGS'
+     Use this variable to specify special options to use for `xmllint'. Be
+     aware that the `--noout' option is used by default. But maybe you want to
+     add the `--nonet' option to the list of options.
+
+  `XSLTPROC'
+     You can use this variable to determine, where `xsltproc' can be found.
+     This variable MUST contain the full path. `xsltproc' is necessary to
+     process the XML sources into manpages and HTML sites and it's a basic
+     requirement.
+
+  `XSLTPROC_FLAGS'
+     Use this variable to specify special options to use for `xsltproc'. Maybe
+     you want to add the `--nonet' option to the list of options.
+
+
+If you do not define them in a site shell script, you need to pass them to
+`configure'. In order to avoid loosing the customized values of these variables,
+you should set them in the `configure' command line, using `VAR=value'.
+For example:
+
+  XMLLINT="/home/user/xmllint" ./configure
+

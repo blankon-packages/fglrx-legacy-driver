@@ -1,0 +1,44 @@
+# Document  $WgDD: fglrx_man/README,v 1.12 2007-06-02 12:51:31 dleidert Exp $
+# Summary   Information about the fglrx_man project.
+
+This project tries to provide manpages for the proprietary ATI Linux driver. It
+was created for the Debian project but applies to other distributions as well.
+
+Copyright (C) 2005-2007 Daniel Leidert <daniel.leidert@wgdd.de>.
+Copyright (C) 2005-2006 Flavio Stanchina <flavio@stanchina.net>.
+All rights reserved.
+
+See the COPYING file for information on your legal rights to this software.
+
+To 'compile' the package, the following packages are necessary:
+
+  - xsltproc (http://xmlsoft.org/XSLT/)
+  (Debian package: xsltproc)
+
+To pass the check target, the following packages are additionally necessary:
+
+  - xmllint [>= 2.6.24] (http://xmlsoft.org/)
+  (Debian package: libxml2-utils and libxml2-dev)
+
+  - man (http://savannah.nongnu.org/projects/man-db/)
+  (Debian package: man-db)
+
+The following packages are necessary if you have don't have access to the net:
+
+  - docbook-xml [>= 4.4] (http://www.docbook.org/xml/4.4/)
+  (Debian package: docbook-xml)
+	
+  - docbook-xsl [>= 1.71.0] (http://docbook.sourceforge.net/projects/xsl/)
+  (Debian package: docbook-xsl)
+
+To try to automatically determine the path for the docbook-xsl utils via the
+systems catalog system, the following packages are necessary:
+
+  - xmlcatalog (http://xmlsoft.org/)
+  (Debian package: libxml2-utils)
+  
+  - /etc/xml/catalog
+  (Debian package: xml-core)
+   
+For detailed installation instructions read the file INSTALL.
+

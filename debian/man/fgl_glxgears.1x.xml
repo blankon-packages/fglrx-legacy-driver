@@ -1,0 +1,266 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+"/usr/share/xml/docbook/schema/dtd/4.4/docbookx.dtd" [
+
+<!--
+  Document  $WgDD: fglrx_man/fgl_glxgears.1x.xml,v 1.30 2007-06-02 12:51:31 dleidert Exp $
+  Summary   Manpage for the fgl_glxgears application.
+
+  Copyright (C) 2005-2006 Daniel Leidert <daniel.leidert@wgdd.de>.
+  All rights reserved.
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+	<!ENTITY dhname    "fgl_glxgears">
+	<!ENTITY dhucname  "FGL_GLXGEARS">
+	<!ENTITY dhsection "1x">
+	
+	<!ENTITY % _fglrx_man_entities SYSTEM "fglrx_man_entities.dtd">
+	%_fglrx_man_entities;
+
+]>
+
+<refentry id="fgl_glxgears_1x" lang="en">
+	<refentryinfo>
+		<title>&dhpackage;</title>
+		<productname>&dhproduct;</productname>
+		<releaseinfo role="version">&dhversion;</releaseinfo>
+		<date>$Date: 2007-06-02 12:51:31 $</date>
+		<authorgroup>
+			<author>
+				<firstname>Daniel</firstname>
+				<surname>Leidert</surname>
+				<affiliation>
+					<address>
+						<email>daniel.leidert@wgdd.de</email>
+					</address>
+				</affiliation>
+			</author>
+		</authorgroup>
+		<copyright>
+			<year>2005</year>
+			<year>2006</year>
+			<holder>Daniel Leidert</holder>
+		</copyright>
+		<legalnotice>
+			<para>&dhlicense;</para>
+		</legalnotice>
+	</refentryinfo>
+	<refmeta>
+		<refentrytitle>&dhucname;</refentrytitle>
+		<manvolnum>&dhsection;</manvolnum>
+	</refmeta>
+	<refnamediv id="name">
+		<refname>&dhname;</refname>
+		<refpurpose>display info about a GLX extension and OpenGL renderer</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="synopsis">
+		<cmdsynopsis>
+			<command>&dhname;</command>
+			<arg choice="opt"><option>-display <replaceable class="option">display</replaceable></option></arg>
+			<arg choice="opt"><option>-loop <replaceable class="option">frames</replaceable></option></arg>
+			<arg choice="opt"><option>-info</option></arg>
+			<arg choice="opt"><option>-fbo</option></arg>
+		</cmdsynopsis>
+		<cmdsynopsis>
+			<command>&dhname;</command>
+			<arg choice="opt"><option>-help</option></arg>
+		</cmdsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="description">
+		<title>DESCRIPTION</title>
+		<para><command>&dhname;</command> is a modified version of the
+			original <citerefentry>
+				<refentrytitle>glxgears</refentrytitle>
+				<manvolnum>1</manvolnum>
+			</citerefentry> demo, which demonstrates the usage of pixel buffers
+			(pbuffers) with an ATI graphics board and a patched version
+			of <filename>libGL.so</filename>.
+		</para>
+		<para>The three gear wheels are rendered to a pbuffer or frame buffer object instead
+			of to a window. The result is texture mapped on the four faces of a cube. Using
+			the arrow keys, you can change the position relative to the gears.
+		</para>
+	</refsect1>
+	<refsect1 id="options">
+		<title>OPTIONS</title>
+		<para>Without an option, <command>&dhname;</command> prints a brief adapter
+			info. To get a more verbose output, you should make use of the following
+			command line options:
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term><option>-display</option> <replaceable>display</replaceable></term>
+				<listitem>
+					<para>Use this option to specify the display, where the output should
+						be redirected. Use the <envar>DISPLAY</envar> environment variable
+						to get the default host, display number and screen (default).
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><option>-loop</option> <replaceable>frames</replaceable></term>
+				<listitem>
+					<para>Exit the application after the defined number of frames.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><option>-info</option></term>
+				<listitem>
+					<para>Print GLX information (vendor etc.) to <filename class="devicefile">stdout</filename>.
+						This cannot be used with <option>-fbo</option> option.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><option>-fbo</option></term>
+				<listitem>
+					<para>Use GL_EXT_framebuffer_object instead of GLX_SGIX_pbuffer.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><option>-help</option></term>
+				<listitem>
+					<para>Print a short summary of options and their usage.</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="diagnostics">
+		<title>DIAGNOSTICS</title>
+		<variablelist>
+			<para>
+				The following diagnostics may be issued:
+			</para>
+			<varlistentry>
+				<term><errortext>fglX11AllocateManagedSurface: __FGLTexMgrCreateObject failed!!</errortext></term>
+				<term><errortext>FGLTexMgr: open of shared memory object failed (..)</errortext></term>
+				<term><errortext>__FGLTexMgrCreateObject: __FGLTexMgrSHMmalloc failed!!!</errortext></term>
+				<listitem>
+					<para>You don't have <acronym>POSIX</acronym> shared memory enabled on your
+						system. Please refer to your kernel documentation and <citerefentry>
+							<refentrytitle>mount</refentrytitle>
+							<manvolnum>8</manvolnum>
+						</citerefentry> for information about how to enable <acronym>POSIX</acronym>
+						shared memory support.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><errortext>FGLTexMgr: open of shared memory object failed (Permission denied)</errortext></term>
+				<listitem>
+					<para>The file <filename>/dev/shm/ATISHM00</filename> already exists and you simply
+						lack permission to overwrite it or the directory has bad permissions. Fix the one
+						or the other.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<errortext>Error: couldn't get fbconfig</errortext>
+				</term>
+				<listitem>
+					<para>This error occurs if there is a problem with ATI's version of
+						<filename class="libraryfile">libGL.so</filename>. Maybe the diversion does not
+						work properly or you did overwrite this library with the one derived
+						from <acronym>DRI</acronym> or you have conflicting versions installed.
+						Try <citerefentry>
+							<refentrytitle>updatedb</refentrytitle>
+							<manvolnum>1</manvolnum>
+						</citerefentry>, <citerefentry>
+							<refentrytitle>locate</refentrytitle>
+							<manvolnum>1</manvolnum>
+						</citerefentry> and <citerefentry>
+							<refentrytitle>dpkg-divert</refentrytitle>
+							<manvolnum>1</manvolnum>
+						</citerefentry>. See also the following warning.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><errortext>fglrx: libGL version undetermined - OpenGL module is using glapi fallback</errortext></term>
+				<listitem>
+					<para>See above.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><errortext>libGL error: XF86DRIQueryDirectRenderingCapable returned false</errortext></term>
+				<listitem>
+					<para>Ensure you are loading the correct modules for your <acronym>AGP</acronym>
+						chipset before you load the <citerefentry>
+							<refentrytitle>fglrx</refentrytitle>
+							<manvolnum>4x</manvolnum>
+						</citerefentry> kernel module. To determine
+						which modules you'll need, check <command>lspci | grep -i agp</command>.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><errortext>libGL error: failed to open DRM: Operation not permitted</errortext></term>
+				<term><errortext>libGL error: reverting to (slow) indirect rendering</errortext></term>
+				<listitem>
+					<para>You probably simply miss the permission to open a <acronym>DRM</acronym>
+						device. Check <option>Section "DRI"</option> of your <citerefentry>
+							<refentrytitle>&dhxserverconf;</refentrytitle>
+							<manvolnum>5x</manvolnum>
+						</citerefentry>.
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="environment">
+		<title>ENVIRONMENT</title>
+		<variablelist>
+			<varlistentry>
+				<term><envar>DISPLAY</envar></term>
+				<listitem>
+					<para>To get the default host, display number and screen.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><envar>LIBGL_DEBUG</envar></term>
+				<listitem>
+					<para>Set this variable to <parameter>verbose</parameter> to print more
+						diagnostic messages, e.g. if the <acronym>DRI</acronym> driver fails to
+						load. This could be useful if you observe problems with your 3D
+						acceleration. Any error message printed should be (hopefully)
+						self-explanatory.
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="see_also">
+		<title>SEE ALSO</title>
+		<para><citerefentry>
+				<refentrytitle>glxgears</refentrytitle>
+				<manvolnum>1x</manvolnum>
+			</citerefentry>, <citerefentry>
+				<refentrytitle>glxinfo</refentrytitle>
+				<manvolnum>1x</manvolnum>
+			</citerefentry>, <citerefentry>
+				<refentrytitle>fglrxinfo</refentrytitle>
+				<manvolnum>1x</manvolnum>
+			</citerefentry>
+		</para>
+	</refsect1>
+</refentry>
+

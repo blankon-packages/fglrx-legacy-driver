@@ -1,0 +1,277 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE revhistory PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+"/usr/share/xml/docbook/schema/dtd/4.4/docbookx.dtd">
+
+<!--
+  Document  $WgDD: fglrx_man/fglrx_man_history.xml,v 1.9 2007-06-26 11:58:23 dleidert Exp $
+  Summary   Revision history for the proprietary ATI driver and the manpages.
+-->
+
+<!--
+  Note: This file should also contain information, when and which options became obsolet
+-->
+<revhistory id="fglrx_man_history" lang="en">
+	<revision>
+		<revnumber>8.32.5</revnumber>
+		<date>2006-12-13</date>
+		<authorinitials>dale</authorinitials>
+		<author><othername>ATI Technologies Inc.</othername></author>
+		<revdescription>
+			<anchor id="revision_8_32_5"/>
+			<para>New upstream release <ulink url="http://www2.ati.com/drivers/linux/linux_8.32.5.html">ATI Proprietary Linux Driver Version 8.32.5</ulink>.</para>
+			<itemizedlist>
+				<listitem>
+					<para>See the file <filename>ChangeLog</filename>.</para>
+				</listitem>
+			</itemizedlist>
+		</revdescription>
+	</revision>
+	<revision>
+		<revnumber>8.28.8</revnumber>
+		<date>2006-08-18</date>
+		<authorinitials>dale</authorinitials>
+		<author><othername>ATI Technologies Inc.</othername></author>
+		<revdescription>
+			<anchor id="revision_8_28_8"/>
+			<para>New upstream release <ulink url="http://www2.ati.com/drivers/linux/linux_8.28.8.html">ATI Proprietary Linux Driver Version 8.28.8</ulink>.</para>
+			<para>Because I did not made manpage releases for ATI Proprietary Linux Driver Versions <link linkend="revision_8_25_18">8.25.18</link>, <link linkend="revision_8_26_18">8.26.18</link> and <link linkend="revision_8_27_10">8.27.10</link>, this ChangeLog is quite long.</para>
+			<important>
+				<para><emphasis role="bold">Be aware, that this driver is the last with support for <productname class="registered">RADEON</productname> 8500/9000/9100/9200/9250, <productname class="trade">MOBILITY</productname> <productname class="registered">RADEON</productname> 9000/9100/9200 and <productname class="registered">RADEON</productname> IGP 9000/9100/9200 chipsets.</emphasis></para>
+			</important>
+			<itemizedlist>
+				<para>General changes:</para>
+				<listitem>
+					<para><emphasis role="bold">The license has changed to a MIT license.</emphasis></para>
+				</listitem>
+				<listitem>
+					<para>Updated the list of supported chipsets.</para>
+				</listitem>
+				<listitem>
+					<para>Fixed many build issues and improved the build system in several ways.</para>
+				</listitem>
+				<listitem>
+					<para>Added a XML-based revision history and dropped the plain-text based one (this means, that there is still a text version, but it's created from the XML file and a HTML version was added).</para>
+				</listitem>
+				<listitem>
+					<para>Fixed format issues in all manpages, that clashed with the format recommendations of manpages.</para>
+				</listitem>
+				<listitem>
+					<para>Fixed many markup issues in <citerefentry><refentrytitle>aticonfig</refentrytitle><manvolnum>1x</manvolnum></citerefentry>, <citerefentry><refentrytitle>fgl_glxgears</refentrytitle><manvolnum>1x</manvolnum></citerefentry>, <citerefentry><refentrytitle>fglrxinfo</refentrytitle><manvolnum>1x</manvolnum></citerefentry>, <citerefentry><refentrytitle>fglrx_xgamma</refentrytitle><manvolnum>1x</manvolnum></citerefentry> and <citerefentry><refentrytitle>fglrx</refentrytitle><manvolnum>4x</manvolnum></citerefentry>.</para>
+				</listitem>
+				<listitem>
+					<para>Fixed several typos in <citerefentry><refentrytitle>aticonfig</refentrytitle><manvolnum>1x</manvolnum></citerefentry> and <citerefentry><refentrytitle>fglrx</refentrytitle><manvolnum>4x</manvolnum></citerefentry>.</para>
+				</listitem>
+				<listitem>
+					<para>The HTML form of the manpages now uses HTML 4.01 transitional.</para>
+				</listitem>
+			</itemizedlist>
+			<itemizedlist>
+				<para>Special changes for <citerefentry><refentrytitle>aticonfig</refentrytitle><manvolnum>1x</manvolnum></citerefentry>:</para>
+				<listitem>
+					<para>Fixed copyright.</para>
+				</listitem>
+				<listitem>
+					<para>Added some information if and how options affect the configuration file (taken from <command>aticonfig --help</command> output).</para>
+				</listitem>
+				<listitem>
+					<para>Added some general section descriptions based on the information given by the <option>--help</option> of <citerefentry><refentrytitle>aticonfig</refentrytitle><manvolnum>1x</manvolnum></citerefentry>.</para>
+				</listitem>
+				<listitem>
+					<para>Added the description for the newly introduced options: <simplelist type="vert">
+							<member><option>--add-pairmode</option></member>
+							<member><option>--enable-monitor</option></member>
+							<member><option>--list-pairmode</option></member>
+							<member><option>--locked-userpages</option></member>
+							<member><option>--max-gart-size</option></member>
+							<member><option>--nobackup</option></member>
+							<member><option>--query-monitor</option></member>
+							<member><option>--remove-pairmode</option></member>
+							<member><option>--swap-monitor</option></member>
+							<member><option>--set-policy</option></member>
+							<member><option>--tv-geometry</option></member>
+							<member><option>--tv-info</option></member>
+							<member><option>--tv-overscan</option></member>
+						</simplelist> with descriptions.
+					</para>
+				</listitem>
+				<listitem>
+					<para>Improved and updated the description for the options: <simplelist type="vert">
+							<member><option>--initial</option></member>
+							<member><option>--tvf</option>,<option>--tv-format-type</option></member>
+							<member><option>-o</option>, <option>--output</option></member>
+						</simplelist>
+					</para>
+				</listitem>
+				<listitem>
+					<para>Removed the description for the no longer available options: <simplelist type="vert">
+							<member><option>--agpl</option>, <option>--agp-locked-userpages</option></member>
+							<member><option>--dw</option>,<option>--disable-workstation</option></member>
+							<member><option>--iagp</option>, <option>--internal-agp</option></member>
+						</simplelist>
+					</para>
+				</listitem>
+				<listitem>
+					<para>Removed solved or obsolete bugs: <itemizedlist>
+							<listitem>
+								<para>The <option>--tv-format-type</option> option does not longer try to manipulate the <option>Option "TVStandard"</option> value of <citerefentry><refentrytitle>fglrx</refentrytitle><manvolnum>4x</manvolnum></citerefentry>.</para>
+							</listitem>
+							<listitem>
+								<para>Trying to use <option>--dw timmo-extreme</option> returns the following error message: <quote><errortext>aticonfig: parsing the command-line failed</errortext></quote>.</para>
+							</listitem>
+						</itemizedlist>
+					</para>
+					<para>Added newly observed bugs: <itemizedlist>
+							<listitem>
+								<para>The <option>--tvf</option> option does not accept all values mentioned in the <option>--help</option> output.</para>
+							</listitem>
+							<listitem>
+								<para>The <option>--tv-info</option> option could freeze with 100% CPU usage.</para>
+							</listitem>
+							<listitem>
+								<para>The <option>--tv-geometry</option> may break the configuration file or output a wrong error message.</para>
+							</listitem>
+							<listitem>
+								<para>The <option>--help</option> output is wrong in a few cases.</para>
+							</listitem>
+						</itemizedlist>
+					</para>
+					<para>Check the <quote>BUGS</quote> section of <citerefentry><refentrytitle>aticonfig</refentrytitle><manvolnum>1x</manvolnum></citerefentry> for more information.</para>
+				</listitem>
+			</itemizedlist>
+			<itemizedlist>
+				<para>Special changes for <citerefentry><refentrytitle>fglrx</refentrytitle><manvolnum>4x</manvolnum></citerefentry>:</para>
+				<listitem>
+					<para>Fixed copyright.</para>
+				</listitem>
+				<listitem>
+					<para>Updated, sorted and reorganized the list of supported chipsets and their supported features.</para>
+				</listitem>
+				<listitem>
+					<para>Added new explanations for the options: <simplelist type="vert">
+							<member><option>Option "MaxGARTSize"</option></member>
+							<member><option>Option "TVOverscan"</option></member>
+						</simplelist>
+					</para>
+					<para>Updated and improved explanations for the options: <simplelist type="vert">
+							<member><option>Option "ForceMonitors"</option></member>
+							<member><option>Option "TVFormat"</option></member>
+							<member><option>Option "TVHPosAdj"</option></member>
+							<member><option>Option "TVHSizeAdj"</option></member>
+							<member><option>Option "TVVPosAdj"</option></member>
+							<member><option>Option "TVVSizeAdj"</option></member>
+						</simplelist>
+					</para>
+				</listitem>
+			</itemizedlist>
+			<itemizedlist>
+				<para>Special changes for <citerefentry><refentrytitle>fglrxrc</refentrytitle><manvolnum>5</manvolnum></citerefentry>:</para>
+				<listitem>
+					<para>Added the involved files, this manpage is about.</para>
+				</listitem>
+			</itemizedlist>
+			<para>New driver options (may be incomplete): <simplelist type="vert">
+					<member><option>Option "EnableMonitor"</option></member>
+					<member><option>Option "MaxGARTSize"</option></member>
+					<member><option>Option "PairModes"</option></member>
+					<member><option>Option "TVOverscan"</option></member>
+				</simplelist>
+			</para>
+			<para>Obsoleted driver options (may be incomplete): unknown</para>
+		</revdescription>
+	</revision>
+	<revision>
+		<revnumber>8.27.10</revnumber>
+		<date>2006-07-27</date>
+		<author><othername>ATI Technologies Inc.</othername></author>
+		<revdescription>
+			<anchor id="revision_8_27_10"/>
+			<para>New upstream release <ulink url="http://www2.ati.com/drivers/linux/linux_8.27.10.html">ATI Proprietary Linux Driver Version 8.27.10</ulink>.</para>
+		</revdescription>
+	</revision>
+	<revision>
+		<revnumber>8.26.18</revnumber>
+		<date>2006-06-26</date>
+		<author><othername>ATI Technologies Inc.</othername></author>
+		<revdescription>
+			<anchor id="revision_8_26_18"/>
+			<para>New upstream release <ulink url="http://www2.ati.com/drivers/linux/linux_8.26.18.html">ATI Proprietary Linux Driver Version 8.26.18</ulink>.</para>
+		</revdescription>
+	</revision>
+	<revision>
+		<revnumber>8.25.18</revnumber>
+		<date>2006-05-24</date>
+		<author><othername>ATI Technologies Inc.</othername></author>
+		<revdescription>
+			<anchor id="revision_8_25_18"/>
+			<para>New upstream release <ulink url="http://www2.ati.com/drivers/linux/linux_8.25.18.html">ATI Proprietary Linux Driver Version 8.25.18</ulink>.</para>
+		</revdescription>
+	</revision>
+	<revision>
+		<revnumber>8.24.8</revnumber>
+		<date>2006-04-12</date>
+		<authorinitials>dale</authorinitials>
+		<author><othername>ATI Technologies Inc.</othername></author>
+		<revdescription>
+			<anchor id="revision_8_24_8"/>
+			<para>New upstream release <ulink url="http://www2.ati.com/drivers/linux/linux_8.24.8.html">ATI Proprietary Linux Driver Version 8.24.8</ulink>.</para>
+			<itemizedlist>
+				<para>Changes:</para>
+				<listitem>
+					<para>Added newly supported chipsets for RADEON X1x000 products to <citerefentry><refentrytitle>fglrx</refentrytitle><manvolnum>4x</manvolnum></citerefentry>.</para>
+				</listitem>
+				<listitem>
+					<para>Removed <citerefentry><refentrytitle>fglrxconfig</refentrytitle><manvolnum>1x</manvolnum></citerefentry> from Makefile. This file is not longer shipped with the driver. All references to this application were removed.</para>
+				</listitem>
+				<listitem>
+					<para>Make it compatible with <package>X.org</package> 7 (left the suffixes as suggested by the <ulink url="http://webcvs.freedesktop.org/xorg/util/macros/xorg-macros.m4"/>	macro).</para>
+				</listitem>
+			</itemizedlist>
+		</revdescription>
+	</revision>
+	<revision>
+		<revnumber>8.23.7</revnumber>
+		<date>2006-03-08</date>
+		<authorinitials>dale</authorinitials>
+		<author><othername>ATI Technologies Inc.</othername></author>
+		<revdescription>
+			<anchor id="revision_8_23_7"/>
+			<para>New upstream release <ulink url="http://www2.ati.com/drivers/linux/linux_8.23.7.html">ATI Proprietary Linux Driver Version 8.23.7</ulink>.</para>
+			<itemizedlist>
+				<para>Changes:</para>
+				<listitem>
+					<para>Added newly supported chipsets to <citerefentry><refentrytitle>fglrx</refentrytitle><manvolnum>4x</manvolnum></citerefentry>.</para>
+				</listitem>
+			</itemizedlist>
+		</revdescription>
+	</revision>
+	<revision>
+		<revnumber>8.22.5</revnumber>
+		<date>2006-02-08</date>
+		<author><othername>ATI Technologies Inc.</othername></author>
+		<revdescription>
+			<anchor id="revision_8_22_5"/>
+			<para>New upstream release <ulink url="http://www2.ati.com/drivers/linux/linux_8.22.5.html">ATI Proprietary Linux Driver Version 8.22.5</ulink>.</para>
+		</revdescription>
+	</revision>
+	<revision>
+		<revnumber>8.21.7</revnumber>
+		<date>2006-01-18</date>
+		<author><othername>ATI Technologies Inc.</othername></author>
+		<revdescription>
+			<anchor id="revision_8_21_7"/>
+			<para>New upstream release <ulink url="http://www2.ati.com/drivers/linux/linux_8.21.7.html">ATI Proprietary Linux Driver Version 8.21.7</ulink>.</para>
+		</revdescription>
+	</revision>
+	<revision>
+		<revnumber>8.20.8</revnumber>
+		<date>2005-12-08</date>
+		<authorinitials>dale</authorinitials>
+		<author><othername>ATI Technologies Inc.</othername></author>
+		<revdescription>
+			<anchor id="revision_8_20_8"/>
+			<para>New upstream release <ulink url="http://www2.ati.com/drivers/linux/linux_8.20.8.html">ATI Proprietary Linux Driver Version 8.20.8</ulink>.</para>
+		<para>This is the first official release of the manpages.</para>
+		</revdescription>
+	</revision>
+</revhistory>
+

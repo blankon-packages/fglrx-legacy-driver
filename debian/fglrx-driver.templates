@@ -1,0 +1,26 @@
+Template: fglrx-driver/needs-xorg-conf-to-enable
+Type: note
+_Description: Manual configuration required to enable fglrx driver
+ The fglrx driver is not yet configured.
+ Please consider using /usr/bin/aticonfig to create a
+ working xorg.conf configuration.
+ .
+ For example, "sudo aticonfig --initial" should
+ be sufficient for most use cases.
+
+Template: fglrx-driver/check-xorg-conf-on-removal
+Type: boolean
+Default: true
+Description: for internal use
+ Can be preseeded. If set to false, does not warn about fglrx still being
+ enabled in xorg.conf(.d/) when removing the package.
+
+Template: fglrx-driver/removed-but-enabled-in-xorg-conf
+Type: note
+#flag:translate!:3
+_Description: Fglrx driver is still enabled in xorg.conf
+ The fglrx driver was just removed, but it is still enabled in the
+ Xorg configuration. X cannot be (re-)started successfully until fglrx
+ is disabled in the following config file(s):
+ .
+ ${config-files}

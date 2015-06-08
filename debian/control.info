@@ -1,0 +1,3 @@
+FGLRX / AMD Catalyst is the non-free proprietary display driver for the
+ATI/AMD RadeonHD and FireGL graphics cards. As an alternative, you may try
+the newest free driver xserver-xorg-video-radeon.

@@ -1,0 +1,175 @@
+Revision History
+Revision 8.32.5         2006-12-13      dale, ATI Technologies Inc.
+New upstream release ATI Proprietary Linux Driver Version 8.32.5.
+
+  ● See the file ChangeLog.
+
+Revision 8.28.8         2006-08-18      dale, ATI Technologies Inc.
+New upstream release ATI Proprietary Linux Driver Version 8.28.8.
+
+Because I did not made manpage releases for ATI Proprietary Linux Driver
+Versions 8.25.18, 8.26.18 and 8.27.10, this ChangeLog is quite long.
+
+[Important] Important
+            Be aware, that this driver is the last with support for RADEON®
+            8500/9000/9100/9200/9250, MOBILITY™ RADEON® 9000/9100/9200 and
+            RADEON® IGP 9000/9100/9200 chipsets.
+
+General changes:
+
+  ● The license has changed to a MIT license.
+
+  ● Updated the list of supported chipsets.
+
+  ● Fixed many build issues and improved the build system in several ways.
+
+  ● Added a XML-based revision history and dropped the plain-text based one
+    (this means, that there is still a text version, but it's created from the
+    XML file and a HTML version was added).
+
+  ● Fixed format issues in all manpages, that clashed with the format
+    recommendations of manpages.
+
+  ● Fixed many markup issues in aticonfig(1x), fgl_glxgears(1x), fglrxinfo(1x),
+    fglrx_xgamma(1x) and fglrx(4x).
+
+  ● Fixed several typos in aticonfig(1x) and fglrx(4x).
+
+  ● The HTML form of the manpages now uses HTML 4.01 transitional.
+
+Special changes for aticonfig(1x):
+
+  ● Fixed copyright.
+
+  ● Added some information if and how options affect the configuration file
+    (taken from aticonfig --help output).
+
+  ● Added some general section descriptions based on the information given by
+    the --help of aticonfig(1x).
+
+  ● Added the description for the newly introduced options:
+
+    --add-pairmode
+    --enable-monitor
+    --list-pairmode
+    --locked-userpages
+    --max-gart-size
+    --nobackup
+    --query-monitor
+    --remove-pairmode
+    --swap-monitor
+    --set-policy
+    --tv-geometry
+    --tv-info
+    --tv-overscan
+
+with descriptions.
+
+  ● Improved and updated the description for the options:
+
+    --initial
+    --tvf,--tv-format-type
+    -o, --output
+
+  ● Removed the description for the no longer available options:
+
+    --agpl, --agp-locked-userpages
+    --dw,--disable-workstation
+    --iagp, --internal-agp
+
+  ● Removed solved or obsolete bugs:
+
+      ○ The --tv-format-type option does not longer try to manipulate the
+        Option "TVStandard" value of fglrx(4x).
+
+      ○ Trying to use --dw timmo-extreme returns the following error message:
+        “aticonfig: parsing the command-line failed”.
+
+    Added newly observed bugs:
+
+      ○ The --tvf option does not accept all values mentioned in the --help
+        output.
+
+      ○ The --tv-info option could freeze with 100% CPU usage.
+
+      ○ The --tv-geometry may break the configuration file or output a wrong
+        error message.
+
+      ○ The --help output is wrong in a few cases.
+
+    Check the “BUGS” section of aticonfig(1x) for more information.
+
+Special changes for fglrx(4x):
+
+  ● Fixed copyright.
+
+  ● Updated, sorted and reorganized the list of supported chipsets and their
+    supported features.
+
+  ● Added new explanations for the options:
+
+    Option "MaxGARTSize"
+    Option "TVOverscan"
+
+    Updated and improved explanations for the options:
+
+    Option "ForceMonitors"
+    Option "TVFormat"
+    Option "TVHPosAdj"
+    Option "TVHSizeAdj"
+    Option "TVVPosAdj"
+    Option "TVVSizeAdj"
+
+Special changes for fglrxrc(5):
+
+  ● Added the involved files, this manpage is about.
+
+New driver options (may be incomplete):
+
+Option "EnableMonitor"
+Option "MaxGARTSize"
+Option "PairModes"
+Option "TVOverscan"
+
+Obsoleted driver options (may be incomplete): unknown
+
+Revision 8.27.10        2006-07-27      ATI Technologies Inc.
+New upstream release ATI Proprietary Linux Driver Version 8.27.10.
+
+Revision 8.26.18        2006-06-26      ATI Technologies Inc.
+New upstream release ATI Proprietary Linux Driver Version 8.26.18.
+
+Revision 8.25.18        2006-05-24      ATI Technologies Inc.
+New upstream release ATI Proprietary Linux Driver Version 8.25.18.
+
+Revision 8.24.8         2006-04-12      dale, ATI Technologies Inc.
+New upstream release ATI Proprietary Linux Driver Version 8.24.8.
+
+Changes:
+
+  ● Added newly supported chipsets for RADEON X1x000 products to fglrx(4x).
+
+  ● Removed fglrxconfig(1x) from Makefile. This file is not longer shipped with
+    the driver. All references to this application were removed.
+
+  ● Make it compatible with X.org 7 (left the suffixes as suggested by the
+    http://webcvs.freedesktop.org/xorg/util/macros/xorg-macros.m4 macro).
+
+Revision 8.23.7         2006-03-08      dale, ATI Technologies Inc.
+New upstream release ATI Proprietary Linux Driver Version 8.23.7.
+
+Changes:
+
+  ● Added newly supported chipsets to fglrx(4x).
+
+Revision 8.22.5         2006-02-08      ATI Technologies Inc.
+New upstream release ATI Proprietary Linux Driver Version 8.22.5.
+
+Revision 8.21.7         2006-01-18      ATI Technologies Inc.
+New upstream release ATI Proprietary Linux Driver Version 8.21.7.
+
+Revision 8.20.8         2005-12-08      dale, ATI Technologies Inc.
+New upstream release ATI Proprietary Linux Driver Version 8.20.8.
+
+This is the first official release of the manpages.
+

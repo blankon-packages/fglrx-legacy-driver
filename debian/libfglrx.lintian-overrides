@@ -1,0 +1,18 @@
+no-upstream-changelog
+[i386]: binary-file-built-without-LFS-support
+hardening-no-fortify-functions
+hardening-no-relro
+package-name-doesnt-match-sonames libatiuki1 libfglrx-dm1.0
+spelling-error-in-binary usr/lib*/dri/fglrx_dri.so ouput output
+spelling-error-in-binary usr/lib*/dri/fglrx_dri.so UNKOWN UNKNOWN
+[amd64]: spelling-error-in-binary usr/lib*/dri/fglrx_dri.so teH the
+[i386]: spelling-error-in-binary usr/lib*/dri/fglrx_dri.so nam name
+[i386]: spelling-error-in-binary usr/lib*/libaticalcl.so nam name
+[i386]: spelling-error-in-binary usr/lib*/libaticalrt.so nam name
+spelling-error-in-binary
+sharedobject-in-library-directory-missing-soname usr/lib*/libatiadlxx.so
+sharedobject-in-library-directory-missing-soname usr/lib*/libaticalcl.so
+sharedobject-in-library-directory-missing-soname usr/lib*/libaticaldd.so
+sharedobject-in-library-directory-missing-soname usr/lib*/libaticalrt.so
+no-symbols-control-file usr/lib*/libatiuki.so.1.0
+no-symbols-control-file usr/lib*/libfglrx_dm.so.1.0

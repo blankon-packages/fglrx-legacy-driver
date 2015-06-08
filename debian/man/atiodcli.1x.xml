@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+"/usr/share/xml/docbook/schema/dtd/4.4/docbookx.dtd" [
+
+<!--
+  Summary   Manpage for the atiode command-line tool.
+
+  Copyright (C) 2009 Michael S. Gilbert <michael.s.gilbert>.
+  All rights reserved.
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+	<!ENTITY dhname    "atiodcli">
+	<!ENTITY dhucname  "atiodcli">
+	<!ENTITY dhsection "1x">
+	
+	<!ENTITY % _fglrx_man_entities SYSTEM "fglrx_man_entities.dtd">
+	%_fglrx_man_entities;
+	
+]>
+
+<refentry id="atiode_4x" lang="en">
+	<refentryinfo>
+		<title>&dhpackage;</title>
+		<productname>&dhproduct;</productname>
+		<releaseinfo role="version">&dhversion;</releaseinfo>
+		<date>$Date: 2009-10-12 12:51:31 $</date>
+		<authorgroup>
+			<author>
+				<firstname>Michael</firstname>
+				<surname>Gilbert</surname>
+				<affiliation>
+					<address>
+						<email>michael.s.gilbert@gmail.com</email>
+					</address>
+				</affiliation>
+			</author>
+		</authorgroup>
+		<copyright>
+			<year>2009</year>
+			<holder>Michael S Gilbert</holder>
+		</copyright>
+		<legalnotice>
+			<para>&dhlicense;</para>
+		</legalnotice>
+	</refentryinfo>
+	<refmeta>
+		<refentrytitle>&dhucname;</refentrytitle>
+		<manvolnum>&dhsection;</manvolnum>
+	</refmeta>
+	<refnamediv id="name">
+		<refname>&dhname;</refname>
+		<refpurpose>System tray support for the ATI RADEON and FireGL control center</refpurpose>
+	</refnamediv>
+	<refsect1 id="description">
+		<title>DESCRIPTION</title>
+		<para><command>&dhname;</command> provides a system tray applet for
+			Microsoft <productname class="registered">Windows</productname>.  It is compiled and
+			provided as part of ATI fglrx driver for Linux; however, there
+			is currently no known use this platform.  It is provided for
+			completeness since it is part of the upstream driver package.
+		</para>
+	</refsect1>
+	<refsect1 id="options">
+		<title>OPTIONS</title>
+		<para><command>&dhname;</command> has no known options.</para>
+	</refsect1>
+	<refsect1>
+		<title>OUTPUT</title>
+		<para>The command only returns error code 3 as output.  You can
+		read stderr with the echo command:
+		</para>
+		<cmdsynopsis>
+			<command>echo</command><arg choice="plain"><option>$?</option></arg>
+		</cmdsynopsis>
+	</refsect1>
+	<refsect1 id="bugs">
+		<title>BUGS</title>
+		<para>Known issues with the current driver can be found
+			at <ulink url="http://www2.ati.com/drivers/linux/linux_8.32.5.html#183417"/>.
+		</para>
+		<para>Report any further issues
+			to <ulink url="http://support.ati.com"/>. There is also an unofficial <abbrev>BTS</abbrev>
+			at <ulink url="http://ati.cchtml.com"/>, which is known by the ATI driver team.
+		</para>
+	</refsect1>
+	<refsect1 id="see_also">
+		<title>SEE ALSO</title>
+		<para><citerefentry>
+				<refentrytitle>aticonfig</refentrytitle>
+				<manvolnum>1x</manvolnum>
+			</citerefentry>, <citerefentry>
+				<refentrytitle>&dhxserverconfig;</refentrytitle>
+				<manvolnum>1x</manvolnum>
+			</citerefentry>, <citerefentry>
+				<refentrytitle>&dhxserverstring;</refentrytitle>
+				<manvolnum>1x</manvolnum>
+			</citerefentry>, <citerefentry>
+				<refentrytitle>Xserver</refentrytitle>
+				<manvolnum>1x</manvolnum>
+			</citerefentry>, <citerefentry>
+				<refentrytitle>&dhxserverconf;</refentrytitle>
+				<manvolnum>5x</manvolnum>
+			</citerefentry>, <citerefentry>
+				<refentrytitle>X</refentrytitle>
+				<manvolnum>7x</manvolnum>
+			</citerefentry>
+		</para>
+	</refsect1>
+</refentry>
+

@@ -1,0 +1,25 @@
+<?xml version='1.0'?>
+
+<!--
+  Document  $WgDD: fglrx_man/fglrx_html_stylesheet.xsl.in,v 1.3 2006-03-14 01:59:43 dleidert Exp $
+  Summary   XSLT stylesheet that contains the path to Norman Walsh's
+            html stylesheet and admonition graphics.
+  
+  Copyright (C) 2006 Daniel Leidert <daniel.leidert@wgdd.de>.
+
+  This file is free software. The copyright owner gives unlimited
+  permission to copy, distribute and modify it.
+-->
+
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                version="1.0"
+                xmlns="http://www.w3.org/TR/xhtml1/transitional"
+                exclude-result-prefixes="#default">
+
+	<!-- import Norman Walsh's stylesheets -->
+	<xsl:import href="@PATH_DOCBOOK_XSL@/html/docbook.xsl"/>
+
+	<!-- now we have the path for the graphics -->
+	<xsl:param name="admon.graphics.path">@PATH_DOCBOOK_XSL@/images/</xsl:param>
+
+</xsl:stylesheet>

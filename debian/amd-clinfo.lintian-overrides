@@ -1,0 +1,4 @@
+no-upstream-changelog
+hardening-no-fortify-functions
+hardening-no-relro
+spelling-error-in-binary usr/bin/clinfo endianess endianness

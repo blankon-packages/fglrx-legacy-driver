@@ -1,0 +1,3 @@
+arch/_ARCH_/usr/X11R6/_LIB_/libXvBAW.so.1.0	_LIBDIR_/
+arch/_ARCH_/usr/X11R6/_LIB_/libAMDXvBA.so.1.0	_LIBDIR_/
+arch/_ARCH_/usr/X11R6/_LIB_/AMDXvBA*.cap	usr/lib/

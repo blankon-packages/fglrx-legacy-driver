@@ -1,0 +1,19 @@
+no-upstream-changelog
+[i386]: binary-file-built-without-LFS-support
+hardening-no-fortify-functions
+hardening-no-relro
+spelling-error-in-binary usr/bin/aticonfig dependant dependent
+spelling-error-in-binary usr/bin/aticonfig informations information
+spelling-error-in-binary usr/bin/aticonfig commited committed
+spelling-error-in-binary usr/bin/aticonfig overriden overridden
+spelling-error-in-binary usr/bin/aticonfig fuctions functions
+spelling-error-in-binary usr/bin/aticonfig Sucessfully Successfully
+spelling-error-in-binary usr/lib/fglrx/fglrx_drv.so avaiable available
+spelling-error-in-binary usr/lib/fglrx/fglrx_drv.so paramter parameter
+spelling-error-in-binary usr/lib/fglrx/fglrx_drv.so childs children
+spelling-error-in-binary usr/lib/fglrx/fglrx_drv.so recieved received
+spelling-error-in-binary usr/lib/fglrx/fglrx_drv.so seperate separate
+[i386]: spelling-error-in-binary usr/lib/fglrx/fglrx_drv.so Teh The
+[amd64]: spelling-error-in-binary usr/lib/fglrx/fglrx_drv.so teH the
+[amd64]: spelling-error-in-binary usr/lib/xorg/modules/glesx.so tEH the
+spelling-error-in-binary

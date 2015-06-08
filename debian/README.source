@@ -1,0 +1,47 @@
+How to create the original Debian tarball:
+------------------------------------------
+* There is an easy way to get and generate the Debian original tarball from a
+  release.
+  For example to get and repackage version 11-1 you have to enter:
+    DEB_BUILD_OPTIONS="VER=11-1" debian/rules get-orig-source
+
+  This will wget version 11-1 of fglrx-driver from the upstream download
+  resource, and repackage it under "../".
+
+* Sometimes the (beta) release does not contain a signature which will
+  result in displaying an unwanted watermark. The signature file needs to
+  be obtained by other means (...) and placed in "debian/import/signature".
+  Setting SIGNATURE_VERSION in debian/rules.def to the current upstream
+  version will use the imported signature file instead of the shipped one.
+
+
+Backporting to squeeze
+======================
+
+For squeeze backports the following changes have to be made:
+ - reduce Build-Depends: debhelper and compat level to 8
+ - disable MULTIARCH variable in debian/rules
+ - remove Multi-Arch: lines from debian/control
+These steps and the creation of an initial bpo-changelog entry have been
+automated via
+    debian/rules prepare-squeeze-backport
+
+ -- Andreas Beckmann <debian@abeckmann.de>  Tue, 09 Aug 2011 00:06:35 +0200
+
+
+Backporting to lenny - xserver < 1.5:
+=====================================
+
+Backports to lenny are no longer supported.
+
+
+Building modules on 32bit userland with 64bit kernel:
+=====================================================
+
+There is a way to build the fglrx Linux module with a 64bit kernel on 32bit
+userland, but we will not include it, because the X11 part of fglrx does not
+work it (not fixable).
+AMD developers acknowledged that it will never be supported (so it will never
+work).
+Since there is no sane way to conflict against such setups it should be enough
+to add those notes.

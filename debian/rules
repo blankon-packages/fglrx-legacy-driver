@@ -1,0 +1,254 @@
+#!/usr/bin/make -f
+
+#export DH_VERBOSE=1
+
+packagename		:= $(shell dpkg-parsechangelog | sed -nr '/^Source:/s/Source: (.*)/\1/p')
+upstream_version	:= $(shell dpkg-parsechangelog | sed -nr '/^Version:/s/Version: (.*:)?(.*)-(.*)/\2/p')
+
+DEB_HOST_ARCH		?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
+DEB_HOST_MULTIARCH	?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
+
+include debian/rules.defs
+MULTIARCH		?=
+SIGNATURE_VERSION	?=
+variant			?=
+variant_desc_suffix	?=
+fglrx			?= fglrx$(variant)
+XORG_ABI_LIST		?=
+
+ifeq ($(DEB_HOST_ARCH),amd64)
+arch=x86_64
+xpic=xpic_64a
+lib=lib64
+cap=AMDXvBAx64.cap
+else
+arch=x86
+xpic=xpic
+lib=lib
+cap=AMDXvBAx86.cap
+endif
+
+libdir		 = usr/lib$(if $(MULTIARCH),/$(DEB_HOST_MULTIARCH))
+sigdir		 = $(if $(filter $(upstream_version),$(SIGNATURE_VERSION)),debian/import,common/etc/ati)
+xorg_depends	 = $(foreach abi, $(XORG_ABI_LIST), xorg-video-abi-$(abi) |)
+
+CONTROL_PREFIXES = fglrx libfglrx libgl1-fglrx amd-opencl-icd
+ALL_CONTROL	:= $(wildcard $(patsubst %,debian/%*,$(CONTROL_PREFIXES)))
+VARIANT_CONTROL	:= $(wildcard $(patsubst %,debian/%$(variant)*,$(CONTROL_PREFIXES)))
+RENAME_CONTROL	 = $(filter-out $(VARIANT_CONTROL),$(ALL_CONTROL))
+RENAMED_CONTROL	 = $(patsubst debian/fglrx%,debian/$(fglrx)%,\
+			$(patsubst debian/libfglrx%,debian/lib$(fglrx)%,\
+			$(patsubst debian/libgl1-fglrx%,debian/libgl1-$(fglrx)%,\
+			$(patsubst debian/amd-opencl-icd%,debian/amd-opencl-icd$(variant)%,\
+				$(RENAME_CONTROL)))))
+export DH_ALWAYS_EXCLUDE=.in
+TEMPLATES	:= $(wildcard debian/*.in debian/module/*.in)
+AUTOGEN		+= $(patsubst %.in,%,$(TEMPLATES))
+AUTOGEN		+= $(fglrx).ids
+AUTOGEN		+= debian/switchlibglx
+AUTOGEN		+= $(patsubst %.in,%,$(RENAMED_CONTROL))
+AUTOKEEP	 =
+AUTOCLEAN	 = $(filter-out $(AUTOKEEP),$(AUTOGEN))
+
+%:: %.in debian/rules debian/rules.defs
+	sed -r -e 's%_VERSION_%$(upstream_version)%g' \
+	       -e 's%_FGLRX_%$(fglrx)%g' \
+	       -e 's%_VARIANT_%$(variant)%g' \
+	       -e 's%_ARCH_%$(arch)%g' \
+	       -e 's%_XPIC_%$(xpic)%g' \
+	       -e 's%_LIB_%$(lib)%g' \
+	       -e 's%_LIBDIR_%$(libdir)%g' \
+	       -e 's%_SIGDIR_%$(sigdir)%g' \
+	       < $< > $@
+
+%:
+	dh $@ --with dkms
+
+override_dh_auto_clean:
+	test ! -f debian/man/Makefile || $(MAKE) -C debian/man maintainer-clean
+	rm -f LICENSE.txt
+	rm -f $(AUTOCLEAN)
+	rm -f debian/shlibs.local
+	rm -f arch/x86/usr/X11R6/lib/AMDXvBAx86.cap
+	rm -f arch/x86_64/usr/X11R6/lib64/AMDXvBAx64.cap
+	debconf-updatepo
+
+# Reformat the LICENSE to the format needed for debian/copyright.
+LICENSE.txt: LICENSE.TXT
+	sed -e 's/ *$$//; s/^$$/./; s/^/ /;' $< > $@
+
+# Compare the license in debian/copyright with the LICENSE shipped in the archive.
+compare-copyright-license: LICENSE.txt
+	sed -e '1,/^License: other-AMD-FGLRX$$/d; /^$$/,$$d; /^ .$$/d' debian/copyright \
+	    > copyright.tmp
+	sed -e '/^ .$$/d' LICENSE.txt > LICENSE.tmp
+	diff -w copyright.tmp LICENSE.tmp
+	rm -f copyright.tmp LICENSE.tmp
+
+$(fglrx).ids: common/lib/modules/fglrx/build_mod/fglrxko_pci_ids.h
+	cat $< | sed -n -r -e '/FGL_ASIC_ID/ s/.*\(0x(.{4})\).*/1002\1/p' \
+		| tr a-z A-Z | sort -u > $@
+
+debian/switchlibglx: debian/switchlibGL
+	ln $< $@
+
+# Renaming control files for packaging driver variants
+define rename-template
+$2%: $1%
+	cp -a $$< $$@
+endef
+ifneq (,$(variant))
+$(foreach p,$(CONTROL_PREFIXES),$(eval $(call rename-template,$p,$(if $(filter %fglrx,$p),$(patsubst %fglrx,%$$(fglrx),$p),$p$$(variant)))))
+endif
+
+.PHONY: autogen prepare
+autogen: $(AUTOGEN)
+
+prepare: autogen compare-copyright-license
+
+override_dh_auto_configure: prepare
+	cd debian/man && ./autogen.sh --copy
+	cd debian/man && ./configure --prefix=/usr --mandir=/usr/share/man \
+	    --with-xserver=Xorg
+
+override_dh_auto_build:
+	ln arch/x86/usr/X11R6/lib/libAMDXvBA.cap arch/x86/usr/X11R6/lib/AMDXvBAx86.cap
+	ln arch/x86_64/usr/X11R6/lib64/libAMDXvBA.cap arch/x86_64/usr/X11R6/lib64/AMDXvBAx64.cap
+	$(MAKE) -C debian/man
+
+# On amd64, AMD hardcoded some paths to /usr/lib64/fglrx/switchlibgl*, and
+# prevents working around this with symlinks because they check the files
+# with lstat() and thereafter complain about world writability.
+badlib64files	 = debian/$(fglrx)-driver/usr/lib/fglrx/fglrx_drv.so
+badlib64files	+= debian/$(fglrx)-atieventsd/usr/sbin/atieventsd
+badlib64files	+= debian/$(fglrx)-control/usr/bin/amdcccle
+badlib64files	+= debian/$(fglrx)-driver/usr/bin/aticonfig
+
+override_dh_install:
+	dh_install
+	! grep UNSIGNED debian/$(fglrx)-driver/etc/ati/signature
+	chrpath -d -k debian/$(fglrx)-control/usr/bin/amdcccle
+	test ! -f debian/libgl1-$(fglrx)-glx/$(libdir)/fglrx/fglrx-libGL.so.1.2 || \
+		rpl -e	'/usr/X11R6/lib/modules/dri\0' \
+			'$${ORIGIN}/dri\0!!!!!!!!!!!!\0' \
+			debian/libgl1-$(fglrx)-glx/$(libdir)/fglrx/fglrx-libGL.so.1.2
+	rpl -e	'/usr/lib64/fglrx' \
+		'/usr/lib///fglrx' \
+		$(badlib64files)
+	test ! -f debian/lib$(fglrx)-amdxvba1/$(libdir)/libAMDXvBA.so.1.0 || \
+		rpl -e 'libAMDXvBA.cap' '$(cap)' debian/lib$(fglrx)-amdxvba1/$(libdir)/libAMDXvBA.so.1.0
+	chmod a+x debian/$(fglrx)-source/usr/src/modules/$(fglrx)/debian/rules
+	tar cfj debian/$(fglrx)-source/usr/src/$(fglrx).tar.bz2 \
+		--owner=root --group=src --remove-files \
+		--directory debian/$(fglrx)-source/usr/src/ modules
+
+override_dh_installinit:
+	dh_installinit -p$(fglrx)-atieventsd --name=fglrx-atieventsd
+	dh_installinit --remaining-packages
+
+override_dh_dkms:
+	dh_dkms -V $(upstream_version)
+
+# Install reportbug files in all binary packages
+override_dh_bugfiles:
+	dh_bugfiles -A
+
+# Redirect shlibs for libGL.so.1 to libgl1-mesa-glx | libgl1.
+override_dh_makeshlibs:
+	dh_makeshlibs
+	test ! -f debian/libgl1-$(fglrx)-glx/DEBIAN/shlibs || \
+	    sed -i '/^libGL 1 /s/.*/libGL 1 libgl1-mesa-glx | libgl1/' \
+	    debian/libgl1-$(fglrx)-glx/DEBIAN/shlibs
+	test ! -f debian/lib$(fglrx)-amdxvba1/DEBIAN/shlibs || \
+	    sed -i '/^libxvbaw 1 /s/.*/libxvbaw 1 libxvbaw1/' \
+	    debian/lib$(fglrx)-amdxvba1/DEBIAN/shlibs
+
+override_dh_shlibdeps:
+	cat debian/*.shlibs > debian/shlibs.local
+	dh_shlibdeps
+
+override_dh_gencontrol:
+	dh_gencontrol -- \
+		-V'fglrx=$(fglrx)' \
+		-V'fglrx:XorgDepends=$(xorg_depends)' \
+		-V'fglrx:Version=$(subst ~,-,$(upstream_version))' \
+		-V'fglrx:Variant=$(variant)' \
+		-V'fglrx:VariantDescSuffix=$(variant_desc_suffix)' \
+		-Vfglrx:Info="`cat debian/control.info`" \
+		-Vfglrx:Models="`cat debian/control.models`"
+
+override_dh_builddeb:
+	        dh_builddeb -- -Zxz
+
+############################################################################
+
+prepare-squeeze-backport:
+	echo 8 > debian/compat
+	sed -i -e '/^MULTIARCH/ s/^/#/' debian/rules.defs
+	sed -i -e 's/debhelper (>= 9.*)/debhelper (>= 8.1.0~)/' \
+	       -e '/^Multi-Arch:/ d' debian/control
+	sed -i -e '/fglrx_dri.so/ s/^/#/' debian/fglrx-driver.links.in
+	debchange --bpo "Disable multiarch build."
+	debchange "Reduce Build-Depends: debhelper and compat level to 8."
+
+############################################################################
+
+ifneq (,$(filter VER=%,$(DEB_BUILD_OPTIONS)))
+INSTALLER_PREFIX	?= amd-catalyst
+INSTALLER_SUFFIX	?= linux-x86.x86_64
+INSTALLER		?= $(INSTALLER_PREFIX)-$(RUN_UPSTREAM_VERSION)-$(INSTALLER_SUFFIX).run
+INSTALLER_ZIP		?= $(INSTALLER_PREFIX)-$(ZIP_UPSTREAM_VERSION)-$(INSTALLER_SUFFIX).zip
+URL_PATH		?= www2.ati.com/drivers/$(if $(findstring beta,$(NEW_UPSTREAM_VERSION)),beta,linux)
+CACHEDIR		?= /tmp
+NEW_UPSTREAM_VERSION	?= $(patsubst VER=%,%,$(filter VER=%,$(DEB_BUILD_OPTIONS)))
+ZIP_UPSTREAM_VERSION	?= $(or $(patsubst ZVER=%,%,$(filter ZVER=%,$(DEB_BUILD_OPTIONS))),$(NEW_UPSTREAM_VERSION))
+RUN_UPSTREAM_VERSION	?= $(or $(patsubst RVER=%,%,$(filter RVER=%,$(DEB_BUILD_OPTIONS))),$(NEW_UPSTREAM_VERSION))
+INTERNAL_VERSION	:= $(shell test ! -s $(INSTALLER) || sh $(INSTALLER) --info | sed -n '/^Identification:/ s/[^0-9]*//p')
+REAL_UPSTREAM_VERSION	?= $(subst -,.,$(subst -beta,~beta,$(NEW_UPSTREAM_VERSION)))
+
+get-orig-source-checks:
+	test -z "$(NEW_UPSTREAM_VERSION)" && echo "Version not defined" && exit 1 || true
+	test ! -e debian/rules && echo "Run this command from the root of the package" && exit 1 || true
+
+$(INSTALLER):
+	# Make sure the .run package is in the proper place,
+	# but first try to look in the "cache".
+	[ -s $(CACHEDIR)/$(INSTALLER) ] || [ -s $(CACHEDIR)/$(INSTALLER_ZIP) ] || \
+	    wget $(URL_PATH)/$(INSTALLER) -c -O $(CACHEDIR)/$(INSTALLER) || \
+	    wget $(URL_PATH)/$(INSTALLER_ZIP) -c -O $(CACHEDIR)/$(INSTALLER_ZIP) || \
+	[ -s $(CACHEDIR)/$(INSTALLER) ] || [ -s $(CACHEDIR)/$(INSTALLER_ZIP) ]
+	[ ! -s $(CACHEDIR)/$(INSTALLER) ] || cp -a $(CACHEDIR)/$(INSTALLER) .
+	[ -s $(INSTALLER) ] || unzip $(CACHEDIR)/$(INSTALLER_ZIP)
+
+../$(packagename)_$(REAL_UPSTREAM_VERSION).orig.tar.xz: $(INSTALLER) debian/rules
+	rm -fr $(packagename)-$(REAL_UPSTREAM_VERSION).orig
+	sh $(INSTALLER) --extract $(packagename)-$(REAL_UPSTREAM_VERSION).orig
+	@set -x ; \
+	    cd $(packagename)-$(REAL_UPSTREAM_VERSION).orig \
+	    && rm -f README.distro *.sh *.exp cimle-xdgsu installer_creation_policy \
+	    && rm -rf packages setup.data \
+	    && rm -rf x4* x6* \
+	    && rm -f arch/*/lib/modules/fglrx/fglrx.*.o \
+	    && chmod -R a-sx,u=rwX,go=rX . \
+	    && find . -type f \( -path '*/bin/*' -o -path '*/sbin/*' -o -name '*.sh' \) -exec chmod a+x {} +
+	# Create the tarball.
+	tar -cJf $(packagename)_$(REAL_UPSTREAM_VERSION).orig.tar.xz \
+	    --owner=root --group=src \
+	    $(packagename)-$(REAL_UPSTREAM_VERSION).orig
+	mv $(packagename)_$(REAL_UPSTREAM_VERSION).orig.tar.xz ../
+	# Cleanup.
+	rm -fr $(packagename)-$(REAL_UPSTREAM_VERSION).orig
+
+get-orig-source: get-orig-source-checks $(INSTALLER)
+	$(MAKE) -f debian/rules repack_upstream_archive
+	rm -f $(INSTALLER)
+
+repack_upstream_archive: ../$(packagename)_$(REAL_UPSTREAM_VERSION).orig.tar.xz
+else
+get-orig-source:
+	# This target needs DEB_BUILD_OPTIONS to contain the version specification
+	# in the following form: VER=some.version.number
+	# In case AMD tried yet another funny naming scheme, ZVER and RVER can be
+	# used to override the version number for the .zip and .run files.
+endif
+.PHONY: get-orig-source repack_upstream_archive

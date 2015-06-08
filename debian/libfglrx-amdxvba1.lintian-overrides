@@ -1,0 +1,8 @@
+no-upstream-changelog
+[i386]: binary-file-built-without-LFS-support
+package-name-doesnt-match-sonames libAMDXvBA1 libXvBAW1
+hardening-no-fortify-functions
+hardening-no-relro
+no-symbols-control-file usr/lib*/libXvBAW.so.1.0
+no-symbols-control-file usr/lib*/libAMDXvBA.so.1.0
+[i386]: spelling-error-in-binary usr/lib*/libAMDXvBA.so.1.0 tAHt that

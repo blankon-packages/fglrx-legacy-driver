@@ -1,0 +1,74 @@
+#!/bin/sh
+
+PATH="/sbin:$PATH"
+CONFIG_DIR=/etc/X11
+XORGCONFIG="$CONFIG_DIR/xorg.conf"
+
+exec >&3
+
+printf "Full fglrx package list:\n"
+dpkg -l|grep fglrx
+
+printf "\n"
+
+if which lspci > /dev/null 2>&1; then
+    printf "VGA-compatible devices on PCI bus:\n"
+    LC_ALL=C lspci | grep 'VGA compatible controller:'
+    LC_ALL=C lspci -n | grep 'Class 0300:'
+else
+    printf "The lspci command was not found; not including PCI data.\n"
+fi
+
+printf "\n"
+
+if [ -x /bin/dmesg ]; then
+	printf "DRM and fglrx Informations from dmesg:\n"
+	dmesg | egrep -i 'drm|agp|fglrx'
+fi
+
+printf "\n"
+
+if [ -e "$XORGCONFIG" ]; then
+    printf "Xorg X server configuration file status:\n"
+    ls -dl "$XORGCONFIG"
+    printf "\n"
+    printf "Contents of $XORGCONFIG:\n"
+    iconv -c -t ascii "$XORGCONFIG"
+    printf "\n"
+else
+    printf "$XORGCONFIG does not exist.\n"
+fi
+
+printf "\n"
+
+XORG_LOGS=$(ls -dt /var/log/Xorg.*.log 2>/dev/null)
+
+if [ -n "$XORG_LOGS" ]; then
+    printf "Xorg X server log files on system:\n"
+    ls -dlrt /var/log/Xorg.*.log 2>/dev/null
+    printf "\n"
+    for LOG in $XORG_LOGS; do
+        if [ -f "$LOG" ]; then
+            printf "Contents of most recent Xorg X server log file\n"
+            printf "%s:\n" "$LOG"
+            cat "$LOG"
+            # the log files are large; only show the most recent
+            break
+        fi
+    done
+else
+    printf "No Xorg X server log files found.\n"
+fi
+
+printf "\n"
+
+for package in glx-alternative-fglrx
+do
+	if [ -x /usr/share/bug/$package/script ]; then
+		printf "Bug script output from package $package:\n"
+		/usr/share/bug/$package/script 3>&1
+		printf "\n"
+	fi
+done
+
+printf "\n"

@@ -1,0 +1,12 @@
+# Document  $WgDD: fglrx_man/THANKS,v 1.1 2006-04-14 14:52:01 dleidert Exp $
+# Summary   Contributors of the fglrx_man project.
+
+Thanks to those people:
+
+  Matthijs Kooijman <m.kooijman@student.utwente.nl>.
+    Debian bug reports #360819 and #360822.
+
+  Wedge_ (the Gentoo ATI Radeon FAQ maintainer)
+    Information taken from the Gentoo ATI Radeon FAQ by kind courtesy of
+    Wedge_.
+

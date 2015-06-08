@@ -1,0 +1,9 @@
+no-upstream-changelog
+[i386]: binary-file-built-without-LFS-support
+hardening-no-fortify-functions
+hardening-no-relro
+shlib-calls-exit usr/lib*/fglrx/fglrx-libGL.so.1.2
+[i386]: shlib-with-non-pic-code usr/lib*/fglrx/fglrx-libGL.so.1.2
+shlibs-declares-dependency-on-other-package libgl1-mesa-glx | libgl1
+postrm-has-useless-call-to-ldconfig
+postinst-has-useless-call-to-ldconfig

@@ -1,0 +1,315 @@
+Source: fglrx-legacy-driver
+Section: non-free/x11
+Priority: extra
+Maintainer: Fglrx packaging team <pkg-fglrx-devel@lists.alioth.debian.org>
+Uploaders: Patrick Matthäi <pmatthaei@debian.org>,
+ Michael Gilbert <mgilbert@debian.org>,
+ Andreas Beckmann <anbe@debian.org>,
+Build-Depends:
+ debhelper (>= 9),
+ bzip2,
+ libxrandr2,
+ libxext6,
+ libgl1-mesa-glx,
+ libqtgui4,
+ libxcursor1,
+ libxinerama1,
+ xsltproc,
+ docbook-xml,
+ docbook-xsl,
+ chrpath,
+ automake,
+ rpl,
+ dkms (>= 2.1.1.1),
+ po-debconf,
+Standards-Version: 3.9.5
+Vcs-Svn: svn://anonscm.debian.org/pkg-fglrx/fglrx-legacy-driver/trunk
+Vcs-Browser: http://anonscm.debian.org/viewvc/pkg-fglrx/fglrx-legacy-driver/trunk/
+XS-Autobuild: yes
+Homepage: http://support.amd.com/us/gpudownload/linux/legacy/Pages/legacy-radeon_linux.aspx
+
+# ${fglrx}-driver
+Package: fglrx-legacy-driver
+Architecture: i386 amd64
+Depends:
+ lib${fglrx} (= ${binary:Version}),
+ ${fglrx:XorgDepends},
+ xserver-xorg-core,
+ glx-alternative-fglrx (>= 0.3),
+ ${shlibs:Depends},
+ ${misc:Depends}
+Recommends:
+ ${fglrx}-modules-dkms (= ${binary:Version}) | fglrx-kernel-${fglrx:Version},
+ libgl1-${fglrx}-glx (= ${binary:Version}),
+ libgl1-${fglrx}-glx-i386 [amd64],
+ ${fglrx}-atieventsd,
+Suggests:
+ ${fglrx}-control,
+ xvba-va-driver,
+ amd-opencl-icd${fglrx:Variant},
+Provides:
+ xorg-driver-video,
+ xserver-xorg-video-fglrx,
+Conflicts:
+ xserver-xorg-video-fglrx,
+Breaks:
+ libgl1-${fglrx}-glx (<< ${binary:Version}),
+ libgl1-${fglrx}-glx (>> ${binary:Version}),
+Replaces:
+ xserver-xorg-video-fglrx,
+Description: non-free ATI/AMD RadeonHD display driver${fglrx:VariantDescSuffix}
+ ${fglrx:Info}
+ .
+ .
+ ${fglrx:Models}
+ .
+ This package provides display drivers and hardware accelerated OpenGL for
+ X.Org. For 3D acceleration to work, you will need to compile the fglrx kernel
+ module for your kernel: see the ${fglrx}-modules-dkms
+ package. Note that the driver will work without the kernel module, but 3D
+ acceleration will be disabled.
+ .
+ The driver can work with plain MESA libGL, but some applications may require
+ the proprietary libGL. This library is shipped in the
+ libgl1-${fglrx}-glx package.
+
+# lib${fglrx}
+Package: libfglrx-legacy
+Section: non-free/libs
+Architecture: i386 amd64
+Multi-Arch: same
+Pre-Depends:
+ ${misc:Pre-Depends}
+Depends:
+ ${shlibs:Depends},
+ ${misc:Depends}
+Recommends:
+ lib${fglrx}-amdxvba1 (= ${binary:Version}),
+Provides:
+ libfglrx-virtual,
+Conflicts:
+ libfglrx-virtual,
+ libfglrx-ia32,
+Replaces:
+ libfglrx-virtual,
+ libfglrx-ia32,
+Description: non-free ATI/AMD RadeonHD display driver (runtime libraries)${fglrx:VariantDescSuffix}
+ ${fglrx:Info}
+ .
+ .
+ ${fglrx:Models}
+ .
+ This package contains the runtime libraries.
+ The proprietary libGL library is shipped in the
+ libgl1-${fglrx}-glx package.
+
+# lib${fglrx}-amdxvba1
+Package: libfglrx-legacy-amdxvba1
+Section: non-free/libs
+Architecture: i386 amd64
+Multi-Arch: same
+Pre-Depends:
+ ${misc:Pre-Depends}
+Depends:
+ libgl1-${fglrx}-glx (= ${binary:Version}),
+ ${shlibs:Depends},
+ ${misc:Depends}
+Provides:
+ libxvbaw1,
+Conflicts:
+ libxvbaw1,
+Replaces:
+ libxvbaw1,
+Description: AMD XvBA (X-Video Bitstream Acceleration) runtime libraries${fglrx:VariantDescSuffix}
+ X-Video Bitstream Acceleration (XvBA), designed by AMD for its (ATI) Radeon GPU
+ and Fusion APU, is an arbitrary extension of the X video extension (Xv) for the
+ X Window System on Linux operating-systems. XvBA API allows video programs to
+ offload portions of the video decoding process to the GPU video-hardware.
+ Currently, the portions designed to be offloaded by XvBA onto the GPU are
+ motion compensation (MC) and inverse discrete cosine transform (IDCT), and
+ variable-length decoding (VLD) for MPEG-2, MPEG-4 AVC (H.264) and VC-1 encoded
+ video.
+ .
+ This package contains the runtime libraries.
+
+# libgl1-${fglrx}-glx
+Package: libgl1-fglrx-legacy-glx
+Section: non-free/libs
+Architecture: i386 amd64
+Multi-Arch: same
+Pre-Depends:
+ ${misc:Pre-Depends}
+Depends:
+ lib${fglrx} (= ${binary:Version}),
+ glx-alternative-fglrx,
+ ${shlibs:Depends},
+ ${misc:Depends}
+Provides:
+ libgl1-fglrx-glx-virtual,
+ libgl1-${fglrx}-glx-i386 [i386],
+Conflicts:
+ libgl1-fglrx-glx-virtual,
+ fglrx-glx,
+ fglrx-glx-ia32,
+Breaks:
+ ia32-libs (<< 1:0),
+Replaces:
+ libgl1-fglrx-glx-virtual,
+ fglrx-glx,
+ fglrx-glx-ia32,
+Description: proprietary libGL for the non-free ATI/AMD RadeonHD display driver${fglrx:VariantDescSuffix}
+ ${fglrx:Info}
+ .
+ .
+ ${fglrx:Models}
+ .
+ This package provides the proprietary libGL shipped by ATI/AMD.
+
+# ${fglrx}-modules-dkms
+Package: fglrx-legacy-modules-dkms
+Section: non-free/kernel
+Architecture: i386 amd64
+Depends:
+ dkms (>= 2.1),
+ ${misc:Depends}
+Suggests:
+ ${fglrx}-driver,
+Provides:
+ fglrx-kernel-dkms,
+ fglrx-kernel-${fglrx:Version},
+Conflicts:
+ fglrx-kernel-dkms,
+Breaks:
+ make (= 3.82-1),
+Replaces:
+ fglrx-kernel-dkms,
+Description: dkms module source for the non-free ATI/AMD RadeonHD display driver${fglrx:VariantDescSuffix}
+ ${fglrx:Info}
+ .
+ .
+ ${fglrx:Models}
+ .
+ This package provides the kernel build environment and the fglrx modules,
+ which are necessary to have accelerated 3D support within the ATI/AMD
+ proprietary display driver.
+ .
+ This package contains the source for the fglrx kernel module, packaged with
+ appropriate configuration for DKMS to build new modules dynamically.
+
+# ${fglrx}-source
+Package: fglrx-legacy-source
+Section: non-free/kernel
+Architecture: i386 amd64
+Depends:
+ debhelper (>= 8),
+ make,
+ bzip2,
+ ${misc:Depends}
+Recommends:
+ module-assistant | kernel-package,
+Suggests:
+ ${fglrx}-driver,
+Conflicts:
+ fglrx-kernel-src,
+Breaks:
+ make (= 3.82-1),
+Description: kernel module source for the non-free ATI/AMD RadeonHD display driver${fglrx:VariantDescSuffix}
+ ${fglrx:Info}
+ .
+ .
+ ${fglrx:Models}
+ .
+ This package provides the kernel build environment and the fglrx modules,
+ which are necessary to have accelerated 3D support within the ATI/AMD
+ proprietary display driver.
+ .
+ This package contains the source for the fglrx kernel module for use with
+ module-assistant or make-kpkg or other manual build methods.
+
+# ${fglrx}-control
+Package: fglrx-legacy-control
+Architecture: i386 amd64
+Depends:
+ ${fglrx}-driver (= ${binary:Version}),
+ ${shlibs:Depends},
+ ${misc:Depends}
+Provides:
+ fglrx-control-virtual,
+Conflicts:
+ fglrx-control-virtual,
+Replaces:
+ fglrx-control-virtual,
+Description: control panel for the non-free ATI/AMD RadeonHD display driver${fglrx:VariantDescSuffix}
+ ${fglrx:Info}
+ .
+ .
+ ${fglrx:Models}
+ .
+ Control panel for the ATI/AMD RadeonHD and FireGL graphics cards.
+ .
+ The control panel shows detailed information on your display adapter
+ and allows you to set dual screen options, adjust gamma correction
+ and set TV out options.
+
+# ${fglrx}-atieventsd
+Package: fglrx-legacy-atieventsd
+Architecture: i386 amd64
+Depends:
+ lsb-base,
+ glx-alternative-fglrx,
+ ${shlibs:Depends},
+ ${misc:Depends}
+Recommends:
+ ${fglrx}-driver (= ${binary:Version}),
+ acpid,
+Provides:
+ fglrx-atieventsd-virtual,
+Conflicts:
+ fglrx-atieventsd-virtual,
+Replaces:
+ fglrx-atieventsd-virtual,
+Description: events daemon for the non-free ATI/AMD RadeonHD display driver${fglrx:VariantDescSuffix}
+ ${fglrx:Info}
+ .
+ .
+ ${fglrx:Models}
+ .
+ The ATI External Events Daemon atieventsd is a user-level application
+ that monitors various system events such as ACPI or hotplug, then
+ notifies the driver via the X extensions interface that the event has
+ occured.
+ .
+ This package provides the atieventsd daemon.
+
+Package: amd-opencl-icd-legacy
+Architecture: i386 amd64
+Multi-Arch: same
+Pre-Depends:
+ ${misc:Pre-Depends}
+Depends:
+ libopencl1,
+ ${shlibs:Depends},
+ ${misc:Depends}
+Enhances:
+ libopencl1,
+Provides:
+ amd-opencl-icd-virtual,
+ opencl-icd,
+Conflicts:
+ amd-opencl-icd-virtual,
+ amd-opencl-icd-ia32,
+ amd-app,
+Replaces:
+ amd-opencl-icd-virtual,
+Homepage: http://developer.amd.com/zones/openclzone/pages/default.aspx
+Description: AMD OpenCL ICD${fglrx:VariantDescSuffix}
+ OpenCL (Open Computing Language) is a multivendor open standard for
+ general-purpose parallel programming of heterogeneous systems that include
+ CPUs, GPUs and other processors.
+ .
+ .
+ This package provides the AMD installable client driver (ICD) for OpenCL
+ which supports AMD GPUs (requires the fglrx driver) as well as CPUs (from
+ any vendor, no driver required).
+ .
+ ${fglrx:Models}

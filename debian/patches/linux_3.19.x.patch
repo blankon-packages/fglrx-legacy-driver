@@ -1,8 +1,7 @@
-[34mSat Dec 20 19:20:07 2014 +0100[m [33m7be2802[32m[m [34mchanges for kernel 3.19.X [35m [Krzysztof Kolasa][m
-diff --git a/firegl_public.c b/firegl_public.c
+diff --git fglrx-8.97.100.7/firegl_public.c fglrx-8.97.100.7-b/firegl_public.c
 index 4af42c9..400ef43 100644
---- a/firegl_public.c
-+++ b/firegl_public.c
+--- a/common/lib/modules/fglrx/build_mod/firegl_public.c
++++ b/common/lib/modules/fglrx/build_mod/firegl_public.c
 @@ -260,7 +260,7 @@ module_param(firegl, charp, 0);
  
  #ifdef MODULE_LICENSE

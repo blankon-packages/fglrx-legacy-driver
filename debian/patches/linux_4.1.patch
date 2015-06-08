@@ -1,8 +1,7 @@
-[34mMon Apr 27 19:33:33 2015 +0200[m [33mccac775[32m (HEAD, origin/master, origin/HEAD, master)[m [34mChanges for kernel 4.1.0, remove IRQF_DISABLED [35m [Krzysztof Kolasa][m
-diff --git a/firegl_public.c b/firegl_public.c
+diff --git fglrx-8.97.100.7/firegl_public.c fglrx-8.97.100.7-b/firegl_public.c
 index 7fe3c13..8627ad1 100644
---- a/firegl_public.c
-+++ b/firegl_public.c
+--- a/common/lib/modules/fglrx/build_mod/firegl_public.c
++++ b/common/lib/modules/fglrx/build_mod/firegl_public.c
 @@ -3006,7 +3006,12 @@ int ATI_API_CALL KCL_InstallInterruptHandler(
  #else
          //when MSI enabled. keep irq disabled when calling the action handler,

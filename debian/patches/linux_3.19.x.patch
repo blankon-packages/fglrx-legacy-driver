@@ -1,17 +1,6 @@
-diff --git fglrx-8.97.100.7/firegl_public.c fglrx-8.97.100.7-b/firegl_public.c
-index 4af42c9..400ef43 100644
---- a/common/lib/modules/fglrx/build_mod/firegl_public.c
-+++ b/common/lib/modules/fglrx/build_mod/firegl_public.c
-@@ -260,7 +260,7 @@ module_param(firegl, charp, 0);
- 
- #ifdef MODULE_LICENSE
- 
--#if LINUX_VERSION_CODE < KERNEL_VERSION(3,12,0)
-+#if LINUX_VERSION_CODE < KERNEL_VERSION(3,19,0)
- MODULE_LICENSE("Proprietary. (C) 2002 - ATI Technologies, Starnberg, GERMANY");
- #else
- MODULE_LICENSE("GPL\0Proprietary. (C) 2002 - ATI Technologies, Starnberg, GERMANY");
-@@ -4354,9 +4354,13 @@ static unsigned long kasSetExecutionLevel(unsigned long level)
+--- 14.12/common/lib/modules/fglrx/build_mod/firegl_public.c	2014-12-11 00:15:11.000000000 +0100
++++ 14.12/common/lib/modules/fglrx/build_mod/firegl_public.c	2015-01-01 21:39:40.471543282 +0100
+@@ -4823,8 +4823,13 @@
  {
      unsigned long orig_level;
  
@@ -21,12 +10,11 @@ index 4af42c9..400ef43 100644
 +#else
      orig_level = __get_cpu_var(kasExecutionLevel);
      __get_cpu_var(kasExecutionLevel) = level;
--
 +#endif
+ 
      return orig_level;
  }
- 
-@@ -4367,7 +4371,11 @@ static unsigned long kasSetExecutionLevel(unsigned long level)
+@@ -4836,7 +4841,11 @@
   */
  static unsigned long kas_GetExecutionLevel(void)
  {
